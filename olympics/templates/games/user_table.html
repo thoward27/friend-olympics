@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Leaderboard</h2>
+    <div id="leaderboard" 
+         hx-get="{% url 'htmx:table--user' %}?{{ request.GET.urlencode }}"
+         hx-trigger="load,every 1s"
+    >
+        <div>
+            <progress />
+        </div>
+    </div>
+{% endblock %}

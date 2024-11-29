@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Games</h2>
+    <div id="games" 
+         hx-get="{% url 'htmx:table--game' %}?{{ request.GET.urlencode }}"
+         hx-trigger="load,every 60s"
+    >
+        <div>
+            <progress />
+        </div>
+    </div>
+{% endblock %}

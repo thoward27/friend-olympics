@@ -1,0 +1,40 @@
+[
+  {
+    "fields": {
+      "date_joined": "2024-11-29T17:55:57.794Z",
+      "email": "olympics@tomhoward.codes",
+      "first_name": "Tom",
+      "groups": [],
+      "is_active": true,
+      "is_staff": true,
+      "is_superuser": true,
+      "last_login": "2024-11-30T02:17:31.322Z",
+      "last_name": "Howard",
+      "password": "pbkdf2_sha256$870000$5rYcP7rR664AyEkfb0iY6s$JKSsntpqFWO7047TwtccTD/kHvQl/Zy2IBeKkcR36j4=",
+      "score": 1054,
+      "user_permissions": [],
+      "username": "tom"
+    },
+    "model": "games.user",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "date_joined": "2024-11-29T21:46:20.379Z",
+      "email": "",
+      "first_name": "Taylor",
+      "groups": [],
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "last_login": null,
+      "last_name": "Howard",
+      "password": "pbkdf2_sha256$870000$EOKFWzlLGIWFoHs8b6VkMg$vA0iDUZyPv+sNLd1skeAZkaCgrsindJvnylam2uDCvs=",
+      "score": 946,
+      "user_permissions": [],
+      "username": "tay"
+    },
+    "model": "games.user",
+    "pk": 2
+  }
+]

@@ -6,12 +6,55 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "bcrypt>=4.2.1",
+    "django-stubs[compatible-mypy]>=5.1.1",
+    "django>=5.1.3",
     "pytest>=8.3.3",
     "python-fasthtml>=0.10.0",
     "sqlmodel>=0.0.22",
+    "pytest-django>=4.9.0",
+    "django-tables2>=2.7.0",
 ]
 
 [dependency-groups]
 dev = [
+    "model-bakery>=1.20.0",
+    "mypy>=1.13.0",
+    "pytest-env>=1.1.5",
     "ruff>=0.8.0",
 ]
+
+[tool.pytest_env]
+DJANGO_SETTINGS_MODULE = "olympics.settings"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "PT",
+    "EM101",
+    "D100",
+    "D101",
+    "D102",
+    "D106",
+    "D105",
+    "D104",
+    "D203",
+    "D213",
+    "TRY003",
+    "S101",
+    "ANN002",
+    "ANN003",
+    "RUF012",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D", "ANN"]
+"**/migrations/*" = ["E", "RUF", "D"]
+
+[tool.mypy]
+plugins = ["mypy_django_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "olympics.settings"

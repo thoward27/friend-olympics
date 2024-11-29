@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    >
+    <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
+    <title>Friend Olympics</title>
+</head>
+<body>
+    <main class="container">
+        <nav>
+            <ul>
+                <li><strong>Friend Olympics</strong></li>
+            </ul>
+            <ul>
+                <li><a href="{% url 'users:table' %}" class="{% if request.resolver_match.view_name == 'users:table' %}contrast{% endif %}">Leaderboard</a></li>
+                <li><a href="{% url 'games:table' %}" class="{% if request.resolver_match.view_name == 'games:table' %}contrast{% endif %}">Games</a></li>
+                <li><a href="{% url 'fixtures:table' %}" class="{% if request.resolver_match.view_name == 'fixtures:table' %}contrast{% endif %}">Fixtures</a></li>
+                {% if user.is_staff %}
+                <li><a href="{% url 'admin:index' %}">Admin</a></li>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                <li>
+                    <a href="{% url 'login' %}">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>

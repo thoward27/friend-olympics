@@ -1,0 +1,46 @@
+[
+  {
+    "fields": {
+      "decay": 0.6,
+      "estimated_duration": 45,
+      "minimum_players": 2,
+      "name": "Ticket to Ride",
+      "ranked": true
+    },
+    "model": "games.game",
+    "pk": "92ec86fa-612a-48dd-8edb-47bd608e5277"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
+      "estimated_duration": 12,
+      "minimum_players": 2,
+      "name": "Exploding Kittens",
+      "ranked": false
+    },
+    "model": "games.game",
+    "pk": "9efa1db1-b323-46a2-9470-8f81e9edeaa4"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
+      "estimated_duration": 30,
+      "minimum_players": 2,
+      "name": "Beer Pong",
+      "ranked": false
+    },
+    "model": "games.game",
+    "pk": "c7c5aaba-e0d1-4ff1-b26c-22a20c66af17"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
+      "estimated_duration": 30,
+      "minimum_players": 2,
+      "name": "Dominion",
+      "ranked": true
+    },
+    "model": "games.game",
+    "pk": "d9d5db3d-60ea-4771-858f-c66ffd7af2b3"
+  }
+]

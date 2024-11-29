@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <nav>
+        <ul>
+            <li>
+                <h2>{% if fixture.ended %}Played{% else %}Playing{% endif %}: {{ fixture.game.name }}</h2>
+            </li>
+        </ul>
+        <ul>
+            {% if not fixture.applied %}
+            <li>
+                <a href="{% url 'admin:games_fixture_change' fixture.pk %}">Edit</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    <h3>Players</h3>
+    <ol>
+        {% for rank in fixture.rank_set.all %}
+            <li>{{ rank.user.username }} {% if rank.team %}(team: {{ rank.team }}){% endif %}</li>
+        {% endfor %}
+    </ol>
+{% endblock %}
