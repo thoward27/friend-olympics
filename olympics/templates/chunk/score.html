@@ -1,0 +1,5 @@
+<div hx-ext="ws" ws-connect="/ws/users/{{ record.username }}/score">
+    <div ws-send hx-trigger="every 120s,click" style="cursor: pointer;">
+        <div id="{{ record.username }}-score" class="score">{{ record.score }}</div>
+    </div>
+</div>

@@ -31,6 +31,7 @@ ALLOWED_HOSTS: list[str] = []
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -72,6 +73,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "olympics.wsgi.application"
+ASGI_APPLICATION = "olympics.asgi.application"
+CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}}
 
 
 # Database

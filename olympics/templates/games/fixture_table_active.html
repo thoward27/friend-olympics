@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load render_table from django_tables2 %}
 
 {% block content %}
     <nav>
@@ -11,12 +12,5 @@
             </li>
         </ul>
     </nav>
-    <div id="fixtures" 
-         hx-get="{% url 'htmx:table--fixture-active' %}?{{ request.GET.urlencode }}"
-         hx-trigger="load,every 1s"
-    >
-        <div>
-            <progress />
-        </div>
-    </div>
+    {% render_table table %}
 {% endblock %}

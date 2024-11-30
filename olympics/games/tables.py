@@ -8,6 +8,8 @@ from olympics.games import models
 
 
 class UserTable(tables.Table):
+    score = tables.columns.TemplateColumn(template_name="chunk/score.html")
+
     class Meta:
         model = models.User
         fields = ("username", "score")
@@ -49,11 +51,11 @@ class FixtureTableChunk(views.SingleTableView):
     template_name = "table.html"
 
 
-class FixtureActiveTableChunk(FixtureTableChunk):
+class FixtureTableActiveChunk(FixtureTableChunk):
     def get_queryset(self) -> QuerySet[views.Any]:
         return super().get_queryset().filter(ended__isnull=True)
 
 
-class FixtureEndedTableChunk(FixtureTableChunk):
+class FixtureTableEndedChunk(FixtureTableChunk):
     def get_queryset(self) -> QuerySet[views.Any]:
         return super().get_queryset().filter(ended__isnull=False)

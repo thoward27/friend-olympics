@@ -8,10 +8,10 @@
       "is_active": true,
       "is_staff": true,
       "is_superuser": true,
-      "last_login": "2024-11-30T03:55:13.970Z",
+      "last_login": "2024-11-30T14:17:24.207Z",
       "last_name": "Howard",
       "password": "pbkdf2_sha256$870000$5rYcP7rR664AyEkfb0iY6s$JKSsntpqFWO7047TwtccTD/kHvQl/Zy2IBeKkcR36j4=",
-      "score": 1027,
+      "score": 1006,
       "user_permissions": [],
       "username": "tom"
     },
@@ -20,7 +20,7 @@
   },
   {
     "fields": {
-      "date_joined": "2024-11-29T21:46:20.379Z",
+      "date_joined": "2024-11-29T21:46:20Z",
       "email": "",
       "first_name": "Taylor",
       "groups": [],
@@ -30,7 +30,7 @@
       "last_login": null,
       "last_name": "Howard",
       "password": "pbkdf2_sha256$870000$EOKFWzlLGIWFoHs8b6VkMg$vA0iDUZyPv+sNLd1skeAZkaCgrsindJvnylam2uDCvs=",
-      "score": 973,
+      "score": 1005,
       "user_permissions": [],
       "username": "tay"
     },

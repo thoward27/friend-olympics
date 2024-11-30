@@ -2,26 +2,26 @@
 from django.contrib.auth import mixins
 from django.views import generic
 
-from olympics.games import forms, models
+from olympics.games import forms, models, tables
 
 
-class UserTableView(generic.TemplateView):
+class UserTableView(tables.UserTableChunk):
     template_name = "games/user_table.html"
 
 
-class GameTableView(generic.TemplateView):
+class GameTableView(tables.GameTableChunk):
     template_name = "games/game_table.html"
 
 
-class FixtureTableView(generic.TemplateView):
+class FixtureTableView(tables.FixtureTableChunk):
     template_name = "games/fixture_table.html"
 
 
-class FixtureTableActiveView(generic.TemplateView):
+class FixtureTableActiveView(tables.FixtureTableActiveChunk):
     template_name = "games/fixture_table_active.html"
 
 
-class FixtureTableEndedView(generic.TemplateView):
+class FixtureTableEndedView(tables.FixtureTableEndedChunk):
     template_name = "games/fixture_table_ended.html"
 
 

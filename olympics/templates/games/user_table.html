@@ -1,13 +1,28 @@
 {% extends "base.html" %}
+{% load render_table from django_tables2 %}
 
 {% block content %}
     <h2>Leaderboard</h2>
-    <div id="leaderboard" 
-         hx-get="{% url 'htmx:table--user' %}?{{ request.GET.urlencode }}"
-         hx-trigger="load,every 1s"
-    >
-        <div>
-            <progress />
-        </div>
+    <div _="on htmx:wsAfterMessage call sortTable()">
+        {% render_table table %}
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        function sortTable() {
+            console.log('Sorting table');
+            const table = document.getElementsByTagName('tbody')[0]; 
+            const rows = Array.from(table.rows);
+
+            rows.sort((a, b) => {
+                const scoreA = parseInt(a.querySelector('.score').innerHTML, 10);
+                const scoreB = parseInt(b.querySelector('.score').innerHTML, 10);
+                return scoreB - scoreA; // Sort in descending order
+            });
+
+            rows.forEach(row => table.appendChild(row));
+        }
+        sortTable();
+    </script>
 {% endblock %}

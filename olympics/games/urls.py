@@ -1,7 +1,7 @@
 from django import urls
 from django.views import generic
 
-from olympics.games import tables, views
+from olympics.games import consumers, tables, views
 
 fixture_patterns = [
     urls.path("", views.FixtureTableView.as_view(), name="all"),
@@ -25,12 +25,12 @@ htmx_patterns = [
     urls.path("table/fixture/", tables.FixtureTableChunk.as_view(), name="table--fixture"),
     urls.path(
         "table/fixture/active",
-        tables.FixtureActiveTableChunk.as_view(),
+        tables.FixtureTableActiveChunk.as_view(),
         name="table--fixture-active",
     ),
     urls.path(
         "table/fixture/ended",
-        tables.FixtureEndedTableChunk.as_view(),
+        tables.FixtureTableEndedChunk.as_view(),
         name="table--fixture-ended",
     ),
 ]
@@ -41,4 +41,12 @@ urlpatterns = [
     urls.path("games/", urls.include((game_patterns, "games"))),
     urls.path("fixtures/", urls.include((fixture_patterns, "fixtures"))),
     urls.path("htmx/", urls.include((htmx_patterns, "htmx"))),
+]
+
+websocket_urlpatterns = [
+    urls.re_path(
+        r"ws/users/(?P<username>\w+)/score$",
+        consumers.UserScoreConsumer.as_asgi(),
+        name="ws--user-score",
+    ),
 ]
