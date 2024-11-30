@@ -1,3 +1,4 @@
+from django.db.models.query import QuerySet
 from django_tables2 import (  # type: ignore[import]
     tables,
     views,
@@ -10,6 +11,7 @@ class UserTable(tables.Table):
     class Meta:
         model = models.User
         fields = ("username", "score")
+        order_by = "-score"
 
 
 class UserTableChunk(views.SingleTableView):
@@ -45,3 +47,13 @@ class FixtureTableChunk(views.SingleTableView):
     model = models.Fixture
     table_class = FixtureTable
     template_name = "table.html"
+
+
+class FixtureActiveTableChunk(FixtureTableChunk):
+    def get_queryset(self) -> QuerySet[views.Any]:
+        return super().get_queryset().filter(ended__isnull=True)
+
+
+class FixtureEndedTableChunk(FixtureTableChunk):
+    def get_queryset(self) -> QuerySet[views.Any]:
+        return super().get_queryset().filter(ended__isnull=False)

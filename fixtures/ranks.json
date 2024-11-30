@@ -1,0 +1,42 @@
+[
+  {
+    "fields": {
+      "fixture": "ce17b0c4-ad23-4b17-baa3-b6e37e61063e",
+      "rank": null,
+      "team": "",
+      "user": 2
+    },
+    "model": "games.rank",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "fixture": "ce17b0c4-ad23-4b17-baa3-b6e37e61063e",
+      "rank": null,
+      "team": "",
+      "user": 1
+    },
+    "model": "games.rank",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "fixture": "3b21f189-70b8-4e2b-a510-4a68779b7328",
+      "rank": 1,
+      "team": "",
+      "user": 2
+    },
+    "model": "games.rank",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "fixture": "3b21f189-70b8-4e2b-a510-4a68779b7328",
+      "rank": 2,
+      "team": "",
+      "user": 1
+    },
+    "model": "games.rank",
+    "pk": 4
+  }
+]

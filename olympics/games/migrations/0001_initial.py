@@ -78,6 +78,9 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
+            options={
+                "ordering": ("name",),
+            },
         ),
         migrations.CreateModel(
             name="User",
@@ -175,9 +178,7 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
-                "verbose_name": "user",
-                "verbose_name_plural": "users",
-                "abstract": False,
+                "ordering": ("username",),
             },
             managers=[
                 ("objects", django.contrib.auth.models.UserManager()),

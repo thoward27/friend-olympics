@@ -4,7 +4,9 @@ from django.views import generic
 from olympics.games import tables, views
 
 fixture_patterns = [
-    urls.path("", views.FixtureTableView.as_view(), name="table"),
+    urls.path("", views.FixtureTableView.as_view(), name="all"),
+    urls.path("active/", views.FixtureTableActiveView.as_view(), name="active"),
+    urls.path("ended/", views.FixtureTableEndedView.as_view(), name="ended"),
     urls.path("create/", views.FixtureCreateView.as_view(), name="create"),
     urls.path("view/<uuid:pk>/", views.FixtureDetailView.as_view(), name="detail"),
 ]
@@ -18,9 +20,19 @@ user_patterns = [
 ]
 
 htmx_patterns = [
-    urls.path("table/user", tables.UserTableChunk.as_view(), name="table--user"),
-    urls.path("table/game", tables.GameTableChunk.as_view(), name="table--game"),
-    urls.path("table/fixture", tables.FixtureTableChunk.as_view(), name="table--fixture"),
+    urls.path("table/user/", tables.UserTableChunk.as_view(), name="table--user"),
+    urls.path("table/game/", tables.GameTableChunk.as_view(), name="table--game"),
+    urls.path("table/fixture/", tables.FixtureTableChunk.as_view(), name="table--fixture"),
+    urls.path(
+        "table/fixture/active",
+        tables.FixtureActiveTableChunk.as_view(),
+        name="table--fixture-active",
+    ),
+    urls.path(
+        "table/fixture/ended",
+        tables.FixtureEndedTableChunk.as_view(),
+        name="table--fixture-ended",
+    ),
 ]
 
 urlpatterns = [

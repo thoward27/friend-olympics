@@ -24,5 +24,3 @@ class FixtureCreateForm(forms.ModelForm):
                 ),
             )
         return cast(dict, super().clean())
-
-

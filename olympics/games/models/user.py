@@ -27,3 +27,6 @@ class User(AbstractUser):
     available: "models.QuerySet[User]" = AvailableManager()  # type: ignore[assignment]
 
     fixture_set: "QuerySet[Fixture]"
+
+    class Meta:
+        ordering = ("username",)

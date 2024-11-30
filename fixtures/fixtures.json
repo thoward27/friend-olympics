@@ -1,0 +1,22 @@
+[
+  {
+    "fields": {
+      "applied": true,
+      "ended": "2024-11-30T03:26:48Z",
+      "game": "9efa1db1-b323-46a2-9470-8f81e9edeaa4",
+      "started": "2024-11-30T03:26:31.345Z"
+    },
+    "model": "games.fixture",
+    "pk": "3b21f189-70b8-4e2b-a510-4a68779b7328"
+  },
+  {
+    "fields": {
+      "applied": false,
+      "ended": null,
+      "game": "92ec86fa-612a-48dd-8edb-47bd608e5277",
+      "started": "2024-11-30T03:45:27.231Z"
+    },
+    "model": "games.fixture",
+    "pk": "ce17b0c4-ad23-4b17-baa3-b6e37e61063e"
+  }
+]

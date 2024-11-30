@@ -17,6 +17,14 @@ class FixtureTableView(generic.TemplateView):
     template_name = "games/fixture_table.html"
 
 
+class FixtureTableActiveView(generic.TemplateView):
+    template_name = "games/fixture_table_active.html"
+
+
+class FixtureTableEndedView(generic.TemplateView):
+    template_name = "games/fixture_table_ended.html"
+
+
 class FixtureDetailView(generic.DetailView):
     model = models.Fixture
     template_name = "games/fixture_detail.html"
@@ -26,4 +34,3 @@ class FixtureCreateView(mixins.LoginRequiredMixin, generic.CreateView):
     model = models.Fixture
     form_class = forms.FixtureCreateForm
     template_name = "games/fixture_create.html"
-

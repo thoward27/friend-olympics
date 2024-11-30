@@ -3,16 +3,16 @@
 {% block content %}
     <nav>
         <ul>
-            <li><h2>All Fixtures</h2></li>
+            <li><h2>Active Games</h2></li>
         </ul>
         <ul>
-            <li><a href="{% url 'fixtures:create' %}">
-                Create
-            </a></li>
+            <li>
+                <a href="{% url 'fixtures:create' %}">Create</a>
+            </li>
         </ul>
     </nav>
     <div id="fixtures" 
-         hx-get="{% url 'htmx:table--fixture' %}?{{ request.GET.urlencode }}"
+         hx-get="{% url 'htmx:table--fixture-active' %}?{{ request.GET.urlencode }}"
          hx-trigger="load,every 1s"
     >
         <div>

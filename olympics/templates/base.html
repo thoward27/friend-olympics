@@ -20,7 +20,8 @@
             <ul>
                 <li><a href="{% url 'users:table' %}" class="{% if request.resolver_match.view_name == 'users:table' %}contrast{% endif %}">Leaderboard</a></li>
                 <li><a href="{% url 'games:table' %}" class="{% if request.resolver_match.view_name == 'games:table' %}contrast{% endif %}">Games</a></li>
-                <li><a href="{% url 'fixtures:table' %}" class="{% if request.resolver_match.view_name == 'fixtures:table' %}contrast{% endif %}">Fixtures</a></li>
+                <li><a href="{% url 'fixtures:active' %}" class="{% if request.resolver_match.view_name == 'fixtures:active' %}contrast{% endif %}">Active Games</a></li>
+                <li><a href="{% url 'fixtures:ended' %}" class="{% if request.resolver_match.view_name == 'fixtures:ended' %}contrast{% endif %}">Results</a></li>
                 {% if user.is_staff %}
                 <li><a href="{% url 'admin:index' %}">Admin</a></li>
                 {% endif %}
