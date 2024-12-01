@@ -70,6 +70,40 @@
   {
     "fields": {
       "decay": 0.6,
+      "estimated_duration": 20,
+      "gameplay": "Rolling the Dice: Players take turns rolling the dice. To move a pawn from the starting area onto the board, a player must roll a 5 (either a single die showing 5 or the sum of both dice showing 5).\r\n\r\nMoving Pawns: On each turn, players roll the dice and move their pawns according to the numbers rolled. A player can move one pawn the total number of both dice or split the dice to move two pawns. For example, if a player rolls a 4 and a 3, they can move one pawn 7 spaces or one pawn 4 spaces and another pawn 3 spaces.\r\n\r\nCapturing Pawns: If a player’s pawn lands on a space occupied by an opponent's pawn, the opponent’s pawn is sent back to its starting area, and the capturing player earns a bonus move.\r\n\r\nSafe Spaces: The board has some safe spaces where pawns cannot be captured. These are usually marked with a circle or specific color.\r\n\r\nEntering Home: To enter the home area, a player must move a pawn to the exact count of spaces needed to reach home. Once all four pawns are in the home area, that player wins the game.\r\n\r\nBlockades: If two pawns of the same color occupy the same space, they form a blockade, which other pawns cannot pass.\r\n\r\nBonus Moves: Capturing an opponent’s pawn or moving all four pawns into the home area may result in bonus moves, often governed by the specific rules of the game edition.\r\n\r\nThe first player to get all four pawns into their home area wins the game.",
+      "maximum_players": 4,
+      "minimum_players": 2,
+      "name": "Parcheesi",
+      "objective": "The goal is to be the first player to move all four of your pawns from the start position, around the board, and into your home area.",
+      "randomness": 0.2,
+      "ranked": false,
+      "setup": "Board and Pieces: Place the Parcheesi board in the center. Each player chooses a set of four pawns of the same color and places them in their respective starting area.\r\n\r\nDice: Use two dice to determine movement.\r\n\r\nPlayers: Parcheesi is best played with 2-4 players.",
+      "tips_and_strategies": ""
+    },
+    "model": "games.game",
+    "pk": "2c89b67a-9dd9-4d9e-a989-2d7182f1d835"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
+      "estimated_duration": 10,
+      "gameplay": "Turn Order: Decide who goes first. Players take turns moving one marble per turn.\r\n\r\nMoving Marbles: On your turn, you can move one of your marbles in the following ways:\r\n\r\nSingle Step: Move one marble to an adjacent empty space.\r\n\r\nJump: Move one marble by jumping over an adjacent marble (of any color) into an empty space directly on the other side. You can chain multiple jumps in a single turn if there are consecutive empty spaces and marbles to jump over.\r\n\r\nGoal: Move your marbles into the triangle directly opposite your starting position.\r\n\r\nRules\r\nNo Capture: Unlike some games, you do not remove marbles from the board.\r\n\r\nOccupying Points: Multiple marbles can occupy the points along the sides of the triangles.\r\n\r\nFinishing: When all 10 of your marbles reach the target triangle, you have completed the game.\r\n\r\nWinning the Game\r\nThe first player to move all their marbles into the opposite triangle wins the game.",
+      "maximum_players": 6,
+      "minimum_players": 2,
+      "name": "Chinese Checkers",
+      "objective": "The goal is to be the first player to move all your marbles from your starting triangle to the opposite triangle on the board.",
+      "randomness": 0.0,
+      "ranked": false,
+      "setup": "Board: The board is a star-shaped, six-pointed star with each point being a triangle containing 10 spaces.\r\n\r\nMarbles: Each player has 10 marbles of a distinct color, placed in the triangle closest to them.\r\n\r\nPlayers: 2 to 6 players can play. For a balanced game, try to have the same number of players on opposite points.",
+      "tips_and_strategies": "Plan Ahead: Think several moves ahead to maximize jumps and minimize wasted moves.\r\n\r\nBlock Opponents: Use your marbles strategically to block your opponents’ paths.\r\n\r\nChain Jumps: Look for opportunities to make long chains of jumps to quickly move across the board."
+    },
+    "model": "games.game",
+    "pk": "3a91da49-1077-45df-870f-e3f4555fa480"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
       "estimated_duration": 50,
       "gameplay": "Taking Turns: Players take turns rolling the dice and moving their tokens around the board. You can move horizontally or vertically but not diagonally.\r\n\r\nMaking Suggestions: When you enter a room, you can make a suggestion to determine the suspect, weapon, and room. For example, \"I suggest it was Mr. Green in the Library with the Candlestick.\" Move the suspect and weapon tokens into that room.\r\n\r\nDisproving Suggestions: Other players must try to disprove the suggestion by showing you one of the cards you mentioned if they have it. This helps you eliminate possibilities.\r\n\r\nMaking Accusations: When you're confident you know the solution, you can make an accusation. State your guess about the suspect, weapon, and room. Then, secretly look at the cards in the case file envelope.\r\n\r\nWinning the Game: If your accusation is correct, you win the game. If it's incorrect, you're out of the game, but you must continue disproving other players' suggestions.",
       "maximum_players": 6,
@@ -83,6 +117,40 @@
     },
     "model": "games.game",
     "pk": "4bdeaaea-e0cc-4173-9822-3651b44fa4bd"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
+      "estimated_duration": 10,
+      "gameplay": "Starting the Game: Choose who goes first. On your turn, pick up all the seeds from one of your pits.\r\n\r\nSowing: Moving counterclockwise, place one seed in each pit, including your own mancala but skipping your opponent's mancala.\r\n\r\nCapture: If the last seed you place lands in an empty pit on your side, and the opposite pit (on your opponent's side) has seeds, you capture those seeds and the last seed placed. Move them to your mancala.\r\n\r\nFree Turn: If your last seed lands in your mancala, you get another turn.\r\n\r\nTurn Alternation: Play alternates between players.\r\n\r\nThe game ends when one player's side of the board is empty. The other player then moves all remaining seeds from their side to their mancala. The player with the most seeds in their mancala wins.",
+      "maximum_players": 2,
+      "minimum_players": 2,
+      "name": "Mancala",
+      "objective": "The goal is to capture the most seeds (or stones) by the end of the game.",
+      "randomness": 0.0,
+      "ranked": false,
+      "setup": "Board: The board consists of two rows of six pits, with a larger storage pit (called the \"mancala\") at each end.\r\n\r\nSeeds: Place 4 seeds (stones, beads, etc.) in each of the 12 small pits. The mancala pits start empty.\r\n\r\nPlayers: The game is for 2 players. Each player controls the 6 pits on their side of the board and their mancala.",
+      "tips_and_strategies": "Plan Ahead: Think several moves ahead to maximize your captures and minimize your opponent's opportunities.\r\n\r\nControl: Try to control the flow of the game to ensure you have more seeds in your pits, providing more opportunities for strategic play."
+    },
+    "model": "games.game",
+    "pk": "4c94c2df-852d-4146-a31d-d85060fb3474"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
+      "estimated_duration": 10,
+      "gameplay": "Rolling Dice: On each turn, a player rolls both dice and moves their checkers according to the numbers rolled. For example, if you roll a 3 and a 5, you can move one checker 3 spaces and another checker 5 spaces, or move one checker 8 spaces.\r\n\r\nLegal Moves: You can only move a checker to an open point, which is a point not occupied by two or more of your opponent’s checkers.\r\n\r\nHitting: If you move a checker to a point occupied by a single opponent’s checker (a blot), you hit and remove that checker from the board. The opponent must re-enter the checker on their next turn.\r\n\r\nRe-entering: To re-enter a checker, the opponent must roll a number corresponding to an open point in your home board.\r\n\r\nBearing Off: Once all your checkers are in your home board, you can start bearing them off. You remove checkers from the board according to the numbers rolled on the dice.\r\n\r\nThe first player to bear off all their checkers wins the game.",
+      "maximum_players": 2,
+      "minimum_players": 2,
+      "name": "Backgammon",
+      "objective": "The goal is to be the first player to move all your checkers into your home board and then bear them off (remove them from the board).",
+      "randomness": 0.5,
+      "ranked": false,
+      "setup": "Board: Place the board between the two players. Each player has 15 checkers in their color (usually white and black or red and white).\r\n\r\nCheckers: Arrange the checkers as follows:\r\n\r\nTwo on the 24-point.\r\n\r\nFive on the 13-point.\r\n\r\nThree on the 8-point.\r\n\r\nFive on the 6-point.\r\n\r\nDice: Each player has two dice, and there is one doubling cube.\r\n\r\nStarting Roll: Each player rolls one die to determine who goes first. The player with the higher number moves first using the numbers rolled. If both players roll the same number, they roll again.",
+      "tips_and_strategies": "Build Blocks: Create blocks of two or more checkers to prevent your opponent from advancing.\r\n\r\nHit Blots: Take advantage of opportunities to hit your opponent’s blots and send them back to the start.\r\n\r\nBear Off Wisely: When bearing off, consider the distribution of your checkers to avoid leaving blots."
+    },
+    "model": "games.game",
+    "pk": "504b97f8-9f9a-413d-8354-410629061f8e"
   },
   {
     "fields": {
@@ -104,7 +172,7 @@
   {
     "fields": {
       "decay": 0.6,
-      "estimated_duration": 1,
+      "estimated_duration": 20,
       "gameplay": "Drawing Tiles: The first player draws two letter tiles from the bag and shows them to all players.\r\n\r\nWord Challenge: Either players race to shout out a word that starts with the first letter and ends with the second letter shown on the tiles. For example, if the tiles show \"B\" and \"T,\" players might shout out \"bat,\" \"bit,\" or \"but.\" Or, players write down their words, the one with the most words at the end of 60 seconds wins.\r\n\r\nWinning the Tiles: Either the first player to correctly shout out a valid word wins the tiles or the player with the most words wins.\r\n\r\nTurns: Play passes to the next player, who then draws two new tiles and repeats the process.\r\n\r\nWinning the Game: The game continues until a predetermined number of rounds or until a player collects a set number of tiles. The player with the most tiles at the end of the game wins.",
       "maximum_players": null,
       "minimum_players": 2,
@@ -138,7 +206,7 @@
   {
     "fields": {
       "decay": 0.6,
-      "estimated_duration": 1,
+      "estimated_duration": 30,
       "gameplay": "Starting Player: Choose a starting player. This player makes a \"Never Have I Ever\" statement. For example, \"Never have I ever gone skydiving.\"\r\n\r\nResponses: Players who have done the action mentioned must take a drink (if playing as a drinking game) or put a finger down (if playing with points).\r\n\r\nNext Player: The turn passes clockwise to the next player, who makes a new \"Never Have I Ever\" statement.\r\n\r\nElimination (Optional): If playing with points, players who put down all their fingers are out of the game. The last player remaining wins.",
       "maximum_players": 12,
       "minimum_players": 4,
@@ -151,6 +219,23 @@
     },
     "model": "games.game",
     "pk": "7010e0b1-6a94-4032-bc3c-91200dceb242"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
+      "estimated_duration": 10,
+      "gameplay": "Starting the Game: The player with the highest double (a tile with the same number on both ends, like 6-6) goes first. If no player has a double, the highest tile (like 6-5) goes first.\r\n\r\nPlacing Tiles: The starting player places their tile in the center. Players take turns placing a tile that matches the number of pips on one end of the previously played tile.\r\n\r\nMatching Tiles: Tiles must be placed so that the numbers on adjacent tiles match. For example, if the last tile played is a 6-3, the next tile must have a 6 on one end.\r\n\r\nDrawing from the Boneyard: If a player cannot play a matching tile, they must draw tiles from the boneyard until they draw a playable tile or the boneyard is empty. If no playable tiles are left, the player passes their turn.\r\n\r\nBlocking: The game continues until one player has played all their tiles, or until no player can make a valid move (the game is \"blocked\").\r\n\r\nScoring\r\nWinning a Round: The first player to play all their tiles wins the round and scores points based on the remaining tiles in the opponents' hands.\r\n\r\nBlocked Game: If the game is blocked, the player with the fewest points in their hand scores the total points remaining in the opponents' hands minus the points in their own hand.\r\n\r\nWinning the Game: The game continues with multiple rounds until one player reaches the agreed-upon score, usually 100 or 200 points.",
+      "maximum_players": 4,
+      "minimum_players": 2,
+      "name": "Block Dominoes",
+      "objective": "The goal is to be the first player to score a set number of points, or to have the fewest points remaining when the game ends.",
+      "randomness": 0.0,
+      "ranked": false,
+      "setup": "Domino Set: Use a standard double-six domino set, which contains 28 tiles. Each tile has two ends, each with a number of pips (dots) ranging from 0 to 6.\r\n\r\nPlayers: 2 to 4 players.\r\n\r\nDrawing Tiles: Shuffle the tiles face down. Each player draws a certain number of tiles:\r\n\r\n2 players: 7 tiles each.\r\n\r\n3 or 4 players: 5 tiles each.\r\n\r\nRemaining Tiles: Place the remaining tiles face down in a \"boneyard.\"",
+      "tips_and_strategies": "Play High-Value Tiles Early: Try to play tiles with high numbers early in the game to avoid being stuck with high points at the end.\r\n\r\nControl the Board: Pay attention to the tiles that have been played to predict your opponents' moves and block them when possible.\r\n\r\nKeep Track: Remember which tiles have been played to make informed decisions on your next moves."
+    },
+    "model": "games.game",
+    "pk": "79227e63-1aa8-444e-9868-3d3932b5ec62"
   },
   {
     "fields": {
@@ -236,6 +321,23 @@
     },
     "model": "games.game",
     "pk": "aa874bd1-e71d-417a-a3e4-0f1459763091"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
+      "estimated_duration": 20,
+      "gameplay": "Turn Order: Decide who goes first by having each player roll the die. The player with the highest roll starts the game. Play proceeds clockwise.\r\n\r\nRolling the Die: On your turn, roll the die and move your token forward the number of squares shown on the die.\r\n\r\nLadders: If you land on a square with the bottom of a ladder, move your token up to the top of the ladder.\r\n\r\nSnakes: If you land on a square with the head of a snake, move your token down to the tail of the snake.\r\n\r\nExact Roll: To win, you must roll the exact number needed to land on the final square (usually square 100). If you roll a number higher than what you need to reach the final square, you remain in your current position and wait for your next turn.\r\n\r\nThe first player to reach the last square on the board wins the game.",
+      "maximum_players": 6,
+      "minimum_players": 2,
+      "name": "Snakes and Ladders",
+      "objective": "The goal is to be the first player to reach the last square on the board, which is typically the 100th square.",
+      "randomness": 0.2,
+      "ranked": true,
+      "setup": "Board: Place the Snakes and Ladders board on a flat surface. The board is a grid of numbered squares, usually from 1 to 100, with some squares containing ladders and others containing snakes.\r\n\r\nPlayers: Each player chooses a token and places it on the starting square (square 1).\r\n\r\nDice: You need one die for the game.",
+      "tips_and_strategies": "Use Two Dice: For a faster game, you can use two dice instead of one.\r\n\r\nAdd Challenges: Create additional rules for landing on specific squares, such as answering a trivia question or performing a fun task."
+    },
+    "model": "games.game",
+    "pk": "af1fd594-1281-46c9-a648-d0751b3225c9"
   },
   {
     "fields": {
