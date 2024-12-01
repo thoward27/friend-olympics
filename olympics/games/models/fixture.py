@@ -122,6 +122,11 @@ def _elo_delta(
         # If the ranks are more than one apart, then the decay rate is applied.
         update_one *= game.decay**diff
         update_two *= game.decay**diff
+    # A game's weight is reduced if the outcome is based on chance.
+    # IE, a coinflip game should have a lower weight than a game of darts.
+    if game.randomness:
+        update_one *= 1 - game.randomness
+        update_two *= 1 - game.randomness
     update_one = math.trunc(update_one)
     update_two = math.trunc(update_two)
     assert update_one + update_two == 0, f"{update_one=} {update_two=}"

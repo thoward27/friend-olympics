@@ -56,6 +56,18 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
+                    "maximum_players",
+                    models.PositiveSmallIntegerField(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        validators=[
+                            django.core.validators.MinValueValidator(2),
+                            django.core.validators.MaxValueValidator(50),
+                        ],
+                    ),
+                ),
+                (
                     "estimated_duration",
                     models.PositiveSmallIntegerField(
                         default=1,
@@ -75,6 +87,41 @@ class Migration(migrations.Migration):
                             django.core.validators.MinValueValidator(0.0),
                             django.core.validators.MaxValueValidator(1.0),
                         ],
+                    ),
+                ),
+                (
+                    "randomness",
+                    models.FloatField(
+                        default=0.0,
+                        help_text="The randomness factor for ranked ELO calculations.",
+                        validators=[
+                            django.core.validators.MinValueValidator(0.0),
+                            django.core.validators.MaxValueValidator(1.0),
+                        ],
+                    ),
+                ),
+                (
+                    "objective",
+                    models.TextField(
+                        blank=True,
+                        default="",
+                        help_text="The objective of the game.",
+                    ),
+                ),
+                (
+                    "setup",
+                    models.TextField(blank=True, default="", help_text="The setup of the game."),
+                ),
+                (
+                    "gameplay",
+                    models.TextField(blank=True, default="", help_text="The gameplay of the game."),
+                ),
+                (
+                    "tips_and_strategies",
+                    models.TextField(
+                        blank=True,
+                        default="",
+                        help_text="Tips and strategies for playing the game.",
                     ),
                 ),
             ],

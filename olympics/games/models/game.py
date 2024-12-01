@@ -25,6 +25,15 @@ class Game(models.Model):
             validators.MaxValueValidator(50),
         ],
     )
+    maximum_players = models.PositiveSmallIntegerField(
+        default=None,
+        null=True,
+        blank=True,
+        validators=[
+            validators.MinValueValidator(2),
+            validators.MaxValueValidator(50),
+        ],
+    )
     estimated_duration = models.PositiveSmallIntegerField(
         help_text="The estimated duration of a game in minutes.",
         default=1,
@@ -40,6 +49,38 @@ class Game(models.Model):
             validators.MinValueValidator(0.0),
             validators.MaxValueValidator(1.0),
         ),
+    )
+    randomness = models.FloatField(
+        default=0.0,
+        help_text="The randomness factor for ranked ELO calculations.",
+        validators=(
+            validators.MinValueValidator(0.0),
+            validators.MaxValueValidator(1.0),
+        ),
+    )
+    objective = models.TextField(
+        blank=True,
+        null=False,
+        default="",
+        help_text="The objective of the game.",
+    )
+    setup = models.TextField(
+        blank=True,
+        null=False,
+        default="",
+        help_text="The setup of the game.",
+    )
+    gameplay = models.TextField(
+        blank=True,
+        null=False,
+        default="",
+        help_text="The gameplay of the game.",
+    )
+    tips_and_strategies = models.TextField(
+        blank=True,
+        null=False,
+        default="",
+        help_text="Tips and strategies for playing the game.",
     )
 
     class Meta:

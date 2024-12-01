@@ -20,7 +20,15 @@ class FixtureAdmin(admin.ModelAdmin):
 @admin.register(Game)
 class GameAdmin(admin.ModelAdmin):
     ordering = ("name",)
-    list_display = ("name", "minimum_players", "ranked", "estimated_duration", "decay")
+    list_display = (
+        "name",
+        "minimum_players",
+        "maximum_players",
+        "ranked",
+        "estimated_duration",
+        "decay",
+        "randomness",
+    )
 
 
 @admin.register(User)
