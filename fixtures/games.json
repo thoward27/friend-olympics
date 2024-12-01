@@ -2,10 +2,35 @@
   {
     "fields": {
       "decay": 0.6,
+      "estimated_duration": 15,
+      "gameplay": "Players: Two players, each chooses a color.\r\n\r\nTurn Order: Players take turns dropping one of their colored discs from the top into any of the seven columns.\r\n\r\nDropping Discs: The disc will fall down and occupy the lowest available space within the column.\r\n\r\nWinning the Game: The game ends when one player forms a line of four of their own discs. The line can be horizontal, vertical, or diagonal.\r\n\r\nDraw: If the board fills up completely without any player forming a line of four, the game is a draw.",
+      "instructions": "",
+      "maximum_players": 2,
+      "minimum_players": 2,
+      "name": "Connect Four",
+      "objective": "The goal is to be the first player to connect four of your own colored discs in a row – horizontally, vertically, or diagonally.",
+      "randomness": 0.0,
+      "ranked": false,
+      "setup": "Game Board: The board is a vertical grid with 6 rows and 7 columns.\r\n\r\nDiscs: Each player has a set of colored discs (traditionally red and yellow).",
+      "tips_and_strategies": "Block Your Opponent: Always be on the lookout for potential winning moves your opponent might make and block them.\r\n\r\nCreate Multiple Opportunities: Try to create multiple ways to connect four, forcing your opponent to block in two places at once.\r\n\r\nControl the Center: Dominating the center column gives you more opportunities to create connecting lines."
+    },
+    "model": "games.game",
+    "pk": "1f7bf6cf-460e-4ef6-8b77-bb92f0acaa5b"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
       "estimated_duration": 45,
+      "gameplay": "Turn Phases: Each turn consists of three phases: draw two train cards, claim a route, and draw destination tickets.\r\n\r\nDraw Two Train Cards: You can either take the top card from the face-up cards or draw from the deck. If you take a face-up card, replace it with a new card from the deck.\r\n\r\nClaim a Route: Use your train cards to claim a route between two cities on the board. The number of cards you use must match the number of spaces in the route.\r\n\r\nDraw Destination Tickets: Draw two more destination tickets and keep at least one.\r\n\r\nWinning the Game: The game ends when one player has 2 or fewer train cards left in the deck or when a player has claimed 8 routes. Players then count their points from completed destination tickets and the longest continuous path.",
+      "instructions": "",
+      "maximum_players": 5,
       "minimum_players": 2,
       "name": "Ticket to Ride",
-      "ranked": true
+      "objective": "The goal is to connect cities on the map by claiming railway routes and score points based on the length of your routes and completed destination tickets.",
+      "randomness": 0.0,
+      "ranked": true,
+      "setup": "Board: Place the game board in the center of the table.\r\n\r\nTrains: Each player chooses a color and takes the corresponding set of train cars.\r\n\r\nTrain Cards: Shuffle the train cards and deal 4 cards to each player. Place the remaining deck face down.\r\n\r\nFace-Up Cards: Turn the top 5 cards of the deck face up.\r\n\r\nDestination Tickets: Shuffle the destination ticket cards and deal 3 to each player. Players must keep at least 2 tickets and return the rest to the deck.",
+      "tips_and_strategies": "Plan Ahead: Think about your destination tickets and plan your routes accordingly.\r\n\r\nBlock Opponents: Claim routes that might block your opponents from completing their tickets.\r\n\r\nUse Locomotives"
     },
     "model": "games.game",
     "pk": "92ec86fa-612a-48dd-8edb-47bd608e5277"
@@ -14,9 +39,16 @@
     "fields": {
       "decay": 0.6,
       "estimated_duration": 12,
+      "gameplay": "Taking Turns: Players take turns drawing a card from the deck.\r\n\r\nDrawing Cards: If you draw a card that is not an Exploding Kitten, you can play any card from your hand or discard it.\r\n\r\nExploding Kittens: If you draw an Exploding Kitten, you must either play a Defuse card to neutralize it or you are out of the game.\r\n\r\nPlaying Cards: Some cards have special actions, such as skipping a turn, forcing another player to draw two cards, or peeking at the top cards of the deck.\r\n\r\nWinning the Game: The last player remaining who hasn't drawn an Exploding Kitten wins the game.",
+      "instructions": "",
+      "maximum_players": 5,
       "minimum_players": 2,
       "name": "Exploding Kittens",
-      "ranked": false
+      "objective": "The goal is to avoid drawing an Exploding Kitten card and be the last player remaining in the game.",
+      "randomness": 0.1,
+      "ranked": false,
+      "setup": "Remove Exploding Kittens: Take out all the Exploding Kitten cards (usually 4) and set them aside.\r\n\r\nDeal Defuse Cards: Give each player one Defuse card (usually 6 Defuse cards in total). These cards can be used to neutralize an Exploding Kitten2.\r\n\r\nShuffle and Deal: Shuffle the remaining deck and deal 7 cards to each player.\r\n\r\nPlace Exploding Kittens Back: Put the Exploding Kittens back into the deck, one fewer than the number of players. For example, if there are 4 players, put 3 Exploding Kittens back into the deck2.",
+      "tips_and_strategies": "Strategic Use of Defuse Cards: Save your Defuse cards for when you draw an Exploding Kitten.\r\n\r\nUse Action Cards Wisely"
     },
     "model": "games.game",
     "pk": "9efa1db1-b323-46a2-9470-8f81e9edeaa4"
@@ -24,10 +56,35 @@
   {
     "fields": {
       "decay": 0.6,
+      "estimated_duration": 25,
+      "gameplay": "Starting the Game: The player to the left of the dealer goes first. Players take turns in a clockwise direction.\r\n\r\nPlaying a Card: On your turn, you can play a card from your hand that matches the rank or suit of the top card on the discard pile. For example, if the top card is a 6 of hearts, you can play any 6 or any heart.\r\n\r\nSpecial Card - Crazy Eights: Playing an 8 is special because it allows you to change the current suit to any suit you choose. You do not have to match the rank or suit of the previous card.\r\n\r\nDrawing a Card: If you cannot play a card, you must draw one card from the draw pile. If the drawn card can be played, you can play it immediately. If not, your turn ends.\r\n\r\nWinning the Game: The first player to get rid of all their cards wins the game. If the draw pile is exhausted and no player has won, reshuffle the discard pile to form a new draw pile and continue playing.",
+      "instructions": "",
+      "maximum_players": 5,
+      "minimum_players": 2,
+      "name": "Crazy Eights",
+      "objective": "The goal of Crazy Eights is to be the first player to get rid of all your cards.",
+      "randomness": 0.0,
+      "ranked": false,
+      "setup": "Use a standard 52-card deck.\r\n\r\nPlayers: 2 to 5 players.\r\n\r\nDealing: Deal 5 cards to each player if there are 4 or more players. If there are 2 or 3 players, deal 7 cards each. Place the remaining deck face down to form the draw pile, and turn the top card of the draw pile face up to start the discard pile.",
+      "tips_and_strategies": "Keep Track of Eights: Save your eights for strategic moments when you need to change the suit.\r\n\r\nMultiple Decks: For larger groups, you can use multiple decks to ensure everyone has enough cards.\r\n\r\nScoring: Some variations include scoring based on the cards left in players' hands when one player goes out."
+    },
+    "model": "games.game",
+    "pk": "c3b21e83-0d53-4236-b344-406e3e60ef7e"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
       "estimated_duration": 30,
+      "gameplay": "Teams: Divide into two teams of two players each. Each team stands behind their row of cups.\r\n\r\nStarting the Game:\r\n\r\nDecide which team goes first. This can be done with a coin toss, rock-paper-scissors, or \"eye-to-eye\" where one player from each team attempts to make eye contact while shooting. The first to sink a cup starts the game.\r\n\r\nShooting:\r\n\r\nPlayers take turns throwing the ping pong ball at the opponent's cups. Each player gets one shot per turn. The aim is to land the ball into one of the opponent’s cups.\r\n\r\nScoring:\r\n\r\nIf the ball lands in a cup, the opposing team must drink the contents of that cup and then remove the cup from the table.\r\n\r\nIf both players on a team make their shots, they get \"balls back\" and take another turn.\r\n\r\nRe-Racking:\r\n\r\nTeams can request to have the cups rearranged into a more compact formation. Typically, each team is allowed to re-rack the cups once per game.\r\n\r\nWinning:\r\n\r\nThe game continues until one team has eliminated all of the opponent's cups. The losing team must then drink the remaining cups on the winning team's side.\r\n\r\nThe winning team has the option of starting the next game as the first shooters.\r\n\r\nHouse Rules\r\nMany variations and house rules can be added to Beer Pong, such as:\r\n\r\nBouncing: If the ball bounces before landing in a cup, it counts as two cups removed, but the opposing team can swat the ball away.\r\n\r\nRedemption: After the last cup is hit, the opposing team gets a chance to shoot until they miss.\r\n\r\nCelebrity Shot: Allowing a guest to take a shot on behalf of a player.",
+      "instructions": "",
+      "maximum_players": 4,
       "minimum_players": 2,
       "name": "Beer Pong",
-      "ranked": false
+      "objective": "The goal of Beer Pong is to throw a ping pong ball across the table and land it in one of your opponent's cups. The first team to eliminate all of the other team's cups wins.",
+      "randomness": 0.0,
+      "ranked": false,
+      "setup": "Equipment:\r\n\r\nA standard beer pong table or a regular table (about 8 feet long).\r\n\r\n20 plastic cups (10 for each team).\r\n\r\nPing pong balls (at least 2).\r\n\r\nBeer or another beverage of your choice.\r\n\r\nArrangement:\r\n\r\nSet up 10 cups in a pyramid shape (4-3-2-1) at each end of the table. Fill each cup with a desired amount of beer.",
+      "tips_and_strategies": ""
     },
     "model": "games.game",
     "pk": "c7c5aaba-e0d1-4ff1-b26c-22a20c66af17"
@@ -36,11 +93,36 @@
     "fields": {
       "decay": 0.6,
       "estimated_duration": 30,
+      "gameplay": "Turn Phases: Each turn consists of three phases: Action, Buy, and Clean-up.\r\n\r\nAction Phase: Play Action cards from your hand. These cards allow you to draw more cards, gain coins, attack other players, or manipulate your deck.\r\n\r\nBuy Phase: Use Treasure cards to buy cards from the Supply piles. You can only buy one card per turn1.\r\n\r\nClean-up Phase: Discard your hand and draw 5 new cards.\r\n\r\nWinning the Game: The game ends when either the Provinces pile is empty or three Supply piles (including Treasure or Victory piles) are empty. Count your victory points from the cards in your deck, and the player with the most points wins1.",
+      "instructions": "",
+      "maximum_players": 6,
       "minimum_players": 2,
       "name": "Dominion",
-      "ranked": true
+      "objective": "The goal is to have the most victory points in your deck at the end of the game.",
+      "randomness": 0.1,
+      "ranked": true,
+      "setup": "Shuffle Kingdom Cards: Shuffle the Kingdom cards and place 10 face-up cards in the center of the table. These are the available Supply piles1.\r\n\r\nStarting Decks: Each player starts with a deck of 7 cards (usually 3 Estates and 4 Coppers). Shuffle your deck and draw 5 cards to form your starting hand2.\r\n\r\nSupply Piles: Set aside Treasure cards (Copper, Silver, Gold) and Victory cards (Estates, Duchies, Provinces) in separate piles. Leave the Curse cards face down for now1.",
+      "tips_and_strategies": "Strategic Buying: Focus on buying cards that synergize well with each other.\r\n\r\nAction Cards: Use Action cards to gain more buying power and control over your deck.\r\n\r\nExpansions: Dominion has many expansions that introduce new Kingdom cards with unique abilities, adding variety and replayability to the game."
     },
     "model": "games.game",
     "pk": "d9d5db3d-60ea-4771-858f-c66ffd7af2b3"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
+      "estimated_duration": 25,
+      "objective": "The goal of Battleship is to sink all of your opponent's ships before they sink yours.",
+      "instructions": "",
+      "maximum_players": 2,
+      "minimum_players": 2,
+      "name": "Battleship",
+      "gameplay": "Taking Turns: Players take turns calling out a grid coordinate (e.g., \"B5\") to try and hit their opponent's ships.\r\n\r\nRecording Hits and Misses:\r\n\r\nIf the called coordinate contains a part of an opponent's ship, it's a hit. The opponent says \"hit\" and marks it on their primary grid.\r\n\r\nIf the coordinate does not contain a ship, it's a miss. The opponent says \"miss.\"\r\n\r\nThe attacking player marks the result on their tracking grid.\r\n\r\nSinking Ships: When all the coordinates of a ship have been hit, the opponent announces which ship has been sunk (e.g., \"You sank my battleship!\").\r\n\r\nWinning the Game: The game continues until one player sinks all of the opponent's ships, thus winning the game.",
+      "randomness": 0.0,
+      "ranked": false,
+      "setup": "Game Board: Each player has two grids: a primary grid to place their ships and a tracking grid to mark their hits and misses on the opponent's grid.\r\n\r\nShips: Each player places the following ships on their primary grid:\r\n\r\nCarrier (5 spaces)\r\n\r\nBattleship (4 spaces)\r\n\r\nCruiser (3 spaces)\r\n\r\nSubmarine (3 spaces)\r\n\r\nDestroyer (2 spaces)\r\n\r\nPlacement: Ships can be placed horizontally or vertically but not diagonally. Ships cannot overlap or extend beyond the grid.",
+      "tips_and_strategies": "Strategic Placement: Place your ships in a scattered and unpredictable manner to make it harder for your opponent to find them.\r\n\r\nPatterned Attacks: Use systematic search patterns when calling out coordinates to efficiently locate and sink your opponent's ships."
+    },
+    "model": "games.game",
+    "pk": "ddebbeee-ecef-4ad1-b9c4-a301889a9387"
   }
 ]
