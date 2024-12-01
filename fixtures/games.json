@@ -3,8 +3,24 @@
     "fields": {
       "decay": 0.6,
       "estimated_duration": 15,
+      "gameplay": "Host's Turn: The host secretly writes a five-letter word on their secret word board and flips it over.\r\n\r\nGuessing: Each player secretly writes a guess on their board.\r\n\r\nClue Marking: The host marks each guess with green chips for correct letters in the correct position, yellow chips for correct letters in the wrong position, and leaves letters not in the word unmarked.\r\n\r\nAnnouncement: The host announces the number of green and yellow chips for each guess but does not reveal specific letters.\r\n\r\nAdditional Guesses: Players can make additional guesses based on the clues given.\r\n\r\nWinning: The first player to correctly guess the word wins the round.\r\n\r\nPoints: Players earn 1 point for each guess they make.\r\n\r\nWinning: The player with the fewest points at the end of the game wins.",
+      "maximum_players": 4,
+      "minimum_players": 2,
+      "name": "Wordle",
+      "objective": "The goal is to guess the five-letter word chosen by the host in as few guesses as possible.",
+      "randomness": 0.0,
+      "ranked": true,
+      "setup": "Players: Gather 3 or more players.\r\n\r\nMaterials: Each player needs a board, a dry-erase marker, and a shield to hide their guesses from other players.\r\n\r\nHost: Choose one player to be the host for the first round.",
+      "tips_and_strategies": "Time Limit: You can add a time limit for each guess to speed up the game.\r\n\r\nFast Mode: Players race to solve the word first, with the first correct guess earning 1 point and others earning 0 points."
+    },
+    "model": "games.game",
+    "pk": "10016005-dd83-4692-81b3-56e6359c702a"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
+      "estimated_duration": 15,
       "gameplay": "Players: Two players, each chooses a color.\r\n\r\nTurn Order: Players take turns dropping one of their colored discs from the top into any of the seven columns.\r\n\r\nDropping Discs: The disc will fall down and occupy the lowest available space within the column.\r\n\r\nWinning the Game: The game ends when one player forms a line of four of their own discs. The line can be horizontal, vertical, or diagonal.\r\n\r\nDraw: If the board fills up completely without any player forming a line of four, the game is a draw.",
-      "instructions": "",
       "maximum_players": 2,
       "minimum_players": 2,
       "name": "Connect Four",
@@ -20,9 +36,25 @@
   {
     "fields": {
       "decay": 0.6,
+      "estimated_duration": 50,
+      "gameplay": "Taking Turns: Players take turns rolling the dice and moving their tokens around the board. You can move horizontally or vertically but not diagonally.\r\n\r\nMaking Suggestions: When you enter a room, you can make a suggestion to determine the suspect, weapon, and room. For example, \"I suggest it was Mr. Green in the Library with the Candlestick.\" Move the suspect and weapon tokens into that room.\r\n\r\nDisproving Suggestions: Other players must try to disprove the suggestion by showing you one of the cards you mentioned if they have it. This helps you eliminate possibilities.\r\n\r\nMaking Accusations: When you're confident you know the solution, you can make an accusation. State your guess about the suspect, weapon, and room. Then, secretly look at the cards in the case file envelope.\r\n\r\nWinning the Game: If your accusation is correct, you win the game. If it's incorrect, you're out of the game, but you must continue disproving other players' suggestions.",
+      "maximum_players": 6,
+      "minimum_players": 2,
+      "name": "Clue",
+      "objective": "The goal is to determine who committed the murder, with what weapon, and in which room.",
+      "randomness": 0.1,
+      "ranked": false,
+      "setup": "Game Board: Place the game board in the center of the table. It represents the floor plan of a mansion with various rooms.\r\n\r\nCards: Separate the cards into three piles: suspects, weapons, and rooms. Shuffle each pile separately.\r\n\r\nCase File: Randomly select one card from each pile (suspect, weapon, and room) and place them in the case file envelope without looking at them. These cards represent the solution to the murder.\r\n\r\nDeal Cards: Shuffle the remaining cards together and deal them to the players.\r\n\r\nPlayer Tokens: Each player chooses a character token and places it on the corresponding starting space on the board.\r\n\r\nWeapons: Place the weapon tokens in different rooms on the board.",
+      "tips_and_strategies": "Take Notes: Use the provided detective notepad to keep track of the clues and eliminate possibilities.\r\n\r\nBe Observant: Pay attention to the cards shown by other players and deduce the hidden cards.\r\n\r\nStrategic Movement: Move to rooms strategically to make suggestions and gather information."
+    },
+    "model": "games.game",
+    "pk": "4bdeaaea-e0cc-4173-9822-3651b44fa4bd"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
       "estimated_duration": 45,
       "gameplay": "Turn Phases: Each turn consists of three phases: draw two train cards, claim a route, and draw destination tickets.\r\n\r\nDraw Two Train Cards: You can either take the top card from the face-up cards or draw from the deck. If you take a face-up card, replace it with a new card from the deck.\r\n\r\nClaim a Route: Use your train cards to claim a route between two cities on the board. The number of cards you use must match the number of spaces in the route.\r\n\r\nDraw Destination Tickets: Draw two more destination tickets and keep at least one.\r\n\r\nWinning the Game: The game ends when one player has 2 or fewer train cards left in the deck or when a player has claimed 8 routes. Players then count their points from completed destination tickets and the longest continuous path.",
-      "instructions": "",
       "maximum_players": 5,
       "minimum_players": 2,
       "name": "Ticket to Ride",
@@ -40,13 +72,12 @@
       "decay": 0.6,
       "estimated_duration": 12,
       "gameplay": "Taking Turns: Players take turns drawing a card from the deck.\r\n\r\nDrawing Cards: If you draw a card that is not an Exploding Kitten, you can play any card from your hand or discard it.\r\n\r\nExploding Kittens: If you draw an Exploding Kitten, you must either play a Defuse card to neutralize it or you are out of the game.\r\n\r\nPlaying Cards: Some cards have special actions, such as skipping a turn, forcing another player to draw two cards, or peeking at the top cards of the deck.\r\n\r\nWinning the Game: The last player remaining who hasn't drawn an Exploding Kitten wins the game.",
-      "instructions": "",
       "maximum_players": 5,
       "minimum_players": 2,
       "name": "Exploding Kittens",
       "objective": "The goal is to avoid drawing an Exploding Kitten card and be the last player remaining in the game.",
-      "randomness": 0.1,
-      "ranked": false,
+      "randomness": 0.2,
+      "ranked": true,
       "setup": "Remove Exploding Kittens: Take out all the Exploding Kitten cards (usually 4) and set them aside.\r\n\r\nDeal Defuse Cards: Give each player one Defuse card (usually 6 Defuse cards in total). These cards can be used to neutralize an Exploding Kitten2.\r\n\r\nShuffle and Deal: Shuffle the remaining deck and deal 7 cards to each player.\r\n\r\nPlace Exploding Kittens Back: Put the Exploding Kittens back into the deck, one fewer than the number of players. For example, if there are 4 players, put 3 Exploding Kittens back into the deck2.",
       "tips_and_strategies": "Strategic Use of Defuse Cards: Save your Defuse cards for when you draw an Exploding Kitten.\r\n\r\nUse Action Cards Wisely"
     },
@@ -58,13 +89,12 @@
       "decay": 0.6,
       "estimated_duration": 25,
       "gameplay": "Starting the Game: The player to the left of the dealer goes first. Players take turns in a clockwise direction.\r\n\r\nPlaying a Card: On your turn, you can play a card from your hand that matches the rank or suit of the top card on the discard pile. For example, if the top card is a 6 of hearts, you can play any 6 or any heart.\r\n\r\nSpecial Card - Crazy Eights: Playing an 8 is special because it allows you to change the current suit to any suit you choose. You do not have to match the rank or suit of the previous card.\r\n\r\nDrawing a Card: If you cannot play a card, you must draw one card from the draw pile. If the drawn card can be played, you can play it immediately. If not, your turn ends.\r\n\r\nWinning the Game: The first player to get rid of all their cards wins the game. If the draw pile is exhausted and no player has won, reshuffle the discard pile to form a new draw pile and continue playing.",
-      "instructions": "",
       "maximum_players": 5,
       "minimum_players": 2,
       "name": "Crazy Eights",
       "objective": "The goal of Crazy Eights is to be the first player to get rid of all your cards.",
       "randomness": 0.0,
-      "ranked": false,
+      "ranked": true,
       "setup": "Use a standard 52-card deck.\r\n\r\nPlayers: 2 to 5 players.\r\n\r\nDealing: Deal 5 cards to each player if there are 4 or more players. If there are 2 or 3 players, deal 7 cards each. Place the remaining deck face down to form the draw pile, and turn the top card of the draw pile face up to start the discard pile.",
       "tips_and_strategies": "Keep Track of Eights: Save your eights for strategic moments when you need to change the suit.\r\n\r\nMultiple Decks: For larger groups, you can use multiple decks to ensure everyone has enough cards.\r\n\r\nScoring: Some variations include scoring based on the cards left in players' hands when one player goes out."
     },
@@ -74,9 +104,25 @@
   {
     "fields": {
       "decay": 0.6,
+      "estimated_duration": 25,
+      "gameplay": "Asking Questions: The Question Reader draws a question card and reads the question aloud.\r\n\r\nWriting Answers: Players write their guesses on their dry-erase boards. Answers are always numerical.\r\n\r\nPlacing Bets: Players place their chips on the betting mat to indicate their confidence in their own answer or someone else's. You can bet on your own answer or on another player's answer.\r\n\r\nRevealing Answers: After the time limit (usually 30 seconds), players reveal their answers.\r\n\r\nSorting Answers: The answers are arranged in order from lowest to highest.\r\n\r\nPayouts: Players who bet on the correct answer win chips based on the odds marked on the betting mat. The player with the most chips at the end of the game wins.",
+      "maximum_players": 5,
+      "minimum_players": 3,
+      "name": "Witts and Wagers",
+      "objective": "The goal is to earn the most chips by making accurate guesses and placing smart bets.",
+      "randomness": 0.0,
+      "ranked": true,
+      "setup": "Players: 3 to 7 players.\r\n\r\nComponents: Each player gets a dry-erase board, a marker, and a set of chips.\r\n\r\nQuestion Reader: Choose one player to be the Question Reader for the first round.",
+      "tips_and_strategies": "Know Your Strengths: Bet on questions that you feel confident about.\r\n\r\nRead the Room: Pay attention to other players' guesses and bet on answers that seem reasonable but not too extreme.\r\n\r\nSpread Your Bets: Don't put all your chips on one guess; spread them out to increase your chances of winning."
+    },
+    "model": "games.game",
+    "pk": "c71b2730-1959-4450-a35c-d561bfe5f496"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
       "estimated_duration": 30,
       "gameplay": "Teams: Divide into two teams of two players each. Each team stands behind their row of cups.\r\n\r\nStarting the Game:\r\n\r\nDecide which team goes first. This can be done with a coin toss, rock-paper-scissors, or \"eye-to-eye\" where one player from each team attempts to make eye contact while shooting. The first to sink a cup starts the game.\r\n\r\nShooting:\r\n\r\nPlayers take turns throwing the ping pong ball at the opponent's cups. Each player gets one shot per turn. The aim is to land the ball into one of the opponent’s cups.\r\n\r\nScoring:\r\n\r\nIf the ball lands in a cup, the opposing team must drink the contents of that cup and then remove the cup from the table.\r\n\r\nIf both players on a team make their shots, they get \"balls back\" and take another turn.\r\n\r\nRe-Racking:\r\n\r\nTeams can request to have the cups rearranged into a more compact formation. Typically, each team is allowed to re-rack the cups once per game.\r\n\r\nWinning:\r\n\r\nThe game continues until one team has eliminated all of the opponent's cups. The losing team must then drink the remaining cups on the winning team's side.\r\n\r\nThe winning team has the option of starting the next game as the first shooters.\r\n\r\nHouse Rules\r\nMany variations and house rules can be added to Beer Pong, such as:\r\n\r\nBouncing: If the ball bounces before landing in a cup, it counts as two cups removed, but the opposing team can swat the ball away.\r\n\r\nRedemption: After the last cup is hit, the opposing team gets a chance to shoot until they miss.\r\n\r\nCelebrity Shot: Allowing a guest to take a shot on behalf of a player.",
-      "instructions": "",
       "maximum_players": 4,
       "minimum_players": 2,
       "name": "Beer Pong",
@@ -94,7 +140,6 @@
       "decay": 0.6,
       "estimated_duration": 30,
       "gameplay": "Turn Phases: Each turn consists of three phases: Action, Buy, and Clean-up.\r\n\r\nAction Phase: Play Action cards from your hand. These cards allow you to draw more cards, gain coins, attack other players, or manipulate your deck.\r\n\r\nBuy Phase: Use Treasure cards to buy cards from the Supply piles. You can only buy one card per turn1.\r\n\r\nClean-up Phase: Discard your hand and draw 5 new cards.\r\n\r\nWinning the Game: The game ends when either the Provinces pile is empty or three Supply piles (including Treasure or Victory piles) are empty. Count your victory points from the cards in your deck, and the player with the most points wins1.",
-      "instructions": "",
       "maximum_players": 6,
       "minimum_players": 2,
       "name": "Dominion",
@@ -111,12 +156,11 @@
     "fields": {
       "decay": 0.6,
       "estimated_duration": 25,
-      "objective": "The goal of Battleship is to sink all of your opponent's ships before they sink yours.",
-      "instructions": "",
+      "gameplay": "Taking Turns: Players take turns calling out a grid coordinate (e.g., \"B5\") to try and hit their opponent's ships.\r\n\r\nRecording Hits and Misses:\r\n\r\nIf the called coordinate contains a part of an opponent's ship, it's a hit. The opponent says \"hit\" and marks it on their primary grid.\r\n\r\nIf the coordinate does not contain a ship, it's a miss. The opponent says \"miss.\"\r\n\r\nThe attacking player marks the result on their tracking grid.\r\n\r\nSinking Ships: When all the coordinates of a ship have been hit, the opponent announces which ship has been sunk (e.g., \"You sank my battleship!\").\r\n\r\nWinning the Game: The game continues until one player sinks all of the opponent's ships, thus winning the game.",
       "maximum_players": 2,
       "minimum_players": 2,
       "name": "Battleship",
-      "gameplay": "Taking Turns: Players take turns calling out a grid coordinate (e.g., \"B5\") to try and hit their opponent's ships.\r\n\r\nRecording Hits and Misses:\r\n\r\nIf the called coordinate contains a part of an opponent's ship, it's a hit. The opponent says \"hit\" and marks it on their primary grid.\r\n\r\nIf the coordinate does not contain a ship, it's a miss. The opponent says \"miss.\"\r\n\r\nThe attacking player marks the result on their tracking grid.\r\n\r\nSinking Ships: When all the coordinates of a ship have been hit, the opponent announces which ship has been sunk (e.g., \"You sank my battleship!\").\r\n\r\nWinning the Game: The game continues until one player sinks all of the opponent's ships, thus winning the game.",
+      "objective": "The goal of Battleship is to sink all of your opponent's ships before they sink yours.",
       "randomness": 0.0,
       "ranked": false,
       "setup": "Game Board: Each player has two grids: a primary grid to place their ships and a tracking grid to mark their hits and misses on the opponent's grid.\r\n\r\nShips: Each player places the following ships on their primary grid:\r\n\r\nCarrier (5 spaces)\r\n\r\nBattleship (4 spaces)\r\n\r\nCruiser (3 spaces)\r\n\r\nSubmarine (3 spaces)\r\n\r\nDestroyer (2 spaces)\r\n\r\nPlacement: Ships can be placed horizontally or vertically but not diagonally. Ships cannot overlap or extend beyond the grid.",
