@@ -9,6 +9,7 @@ fixture_patterns = [
     urls.path("ended/", views.FixtureTableEndedView.as_view(), name="ended"),
     urls.path("create/", views.FixtureCreateView.as_view(), name="create"),
     urls.path("view/<uuid:pk>/", views.FixtureDetailView.as_view(), name="detail"),
+    urls.path("update/<uuid:pk>/", views.FixtureUpdateView.as_view(), name="update"),
 ]
 
 game_patterns = [

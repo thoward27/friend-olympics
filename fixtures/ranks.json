@@ -2,7 +2,7 @@
   {
     "fields": {
       "fixture": "ce17b0c4-ad23-4b17-baa3-b6e37e61063e",
-      "rank": null,
+      "rank": 1,
       "team": "",
       "user": 2
     },
@@ -12,7 +12,7 @@
   {
     "fields": {
       "fixture": "ce17b0c4-ad23-4b17-baa3-b6e37e61063e",
-      "rank": null,
+      "rank": 2,
       "team": "",
       "user": 1
     },
@@ -38,5 +38,65 @@
     },
     "model": "games.rank",
     "pk": 4
+  },
+  {
+    "fields": {
+      "fixture": "962944ba-7fa0-4984-874b-257675dd9467",
+      "rank": 1,
+      "team": "",
+      "user": 1
+    },
+    "model": "games.rank",
+    "pk": 5
+  },
+  {
+    "fields": {
+      "fixture": "962944ba-7fa0-4984-874b-257675dd9467",
+      "rank": 2,
+      "team": "",
+      "user": 2
+    },
+    "model": "games.rank",
+    "pk": 6
+  },
+  {
+    "fields": {
+      "fixture": "6074ca58-12ee-44fe-b4cb-3e25900e047e",
+      "rank": 1,
+      "team": "",
+      "user": 1
+    },
+    "model": "games.rank",
+    "pk": 7
+  },
+  {
+    "fields": {
+      "fixture": "6074ca58-12ee-44fe-b4cb-3e25900e047e",
+      "rank": 2,
+      "team": "",
+      "user": 2
+    },
+    "model": "games.rank",
+    "pk": 8
+  },
+  {
+    "fields": {
+      "fixture": "859d3860-7410-4790-8298-62b264e26ab9",
+      "rank": null,
+      "team": "",
+      "user": 1
+    },
+    "model": "games.rank",
+    "pk": 9
+  },
+  {
+    "fields": {
+      "fixture": "859d3860-7410-4790-8298-62b264e26ab9",
+      "rank": null,
+      "team": "",
+      "user": 2
+    },
+    "model": "games.rank",
+    "pk": 10
   }
 ]

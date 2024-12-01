@@ -11,8 +11,38 @@
   },
   {
     "fields": {
+      "applied": true,
+      "ended": "2024-12-01T10:35:00Z",
+      "game": "c7c5aaba-e0d1-4ff1-b26c-22a20c66af17",
+      "started": "2024-12-01T15:28:30.300Z"
+    },
+    "model": "games.fixture",
+    "pk": "6074ca58-12ee-44fe-b4cb-3e25900e047e"
+  },
+  {
+    "fields": {
       "applied": false,
       "ended": null,
+      "game": "c7c5aaba-e0d1-4ff1-b26c-22a20c66af17",
+      "started": "2024-12-01T15:52:46.371Z"
+    },
+    "model": "games.fixture",
+    "pk": "859d3860-7410-4790-8298-62b264e26ab9"
+  },
+  {
+    "fields": {
+      "applied": true,
+      "ended": "2024-12-01T10:20:00Z",
+      "game": "c7c5aaba-e0d1-4ff1-b26c-22a20c66af17",
+      "started": "2024-12-01T15:19:05.153Z"
+    },
+    "model": "games.fixture",
+    "pk": "962944ba-7fa0-4984-874b-257675dd9467"
+  },
+  {
+    "fields": {
+      "applied": true,
+      "ended": "2024-12-01T10:17:00Z",
       "game": "92ec86fa-612a-48dd-8edb-47bd608e5277",
       "started": "2024-11-30T03:45:27.231Z"
     },

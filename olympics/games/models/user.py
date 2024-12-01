@@ -19,7 +19,7 @@ class AvailableManager(models.Manager):
         queryset = super().get_queryset()
         return queryset.filter(
             models.Q(fixture__isnull=True) | models.Q(fixture__ended__isnull=False),
-        )
+        ).distinct()
 
 
 class User(AbstractUser):

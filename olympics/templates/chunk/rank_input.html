@@ -1,0 +1,14 @@
+<ol class="sortable" id="rank">
+    {% for rank in ranks %}
+        <li>
+            <span class="material-symbols-outlined handle" style="cursor: move">
+            drag_indicator
+            </span>
+            <input type="hidden" name="users" value="{{ rank.pk }}">
+            {{ rank.user.username }} {% if rank.team %}(team: {{ rank.team }}){% endif %}
+        </li>
+    {% endfor %}
+    {% if not game.ranked %}
+    <li>LOSERS</li>
+    {% endif %}
+</ol>

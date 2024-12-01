@@ -1,4 +1,5 @@
 # Create your views here.
+from django import http
 from django.contrib.auth import mixins
 from django.views import generic
 
@@ -34,3 +35,14 @@ class FixtureCreateView(mixins.LoginRequiredMixin, generic.CreateView):
     model = models.Fixture
     form_class = forms.FixtureCreateForm
     template_name = "games/fixture_create.html"
+
+
+class FixtureUpdateView(mixins.LoginRequiredMixin, generic.UpdateView):
+    model = models.Fixture
+    template_name = "games/fixture_update.html"
+    form_class = forms.FixtureUpdateForm
+
+    def form_valid(self, form: forms.FixtureUpdateForm) -> http.HttpResponse:
+        response = super().form_valid(form)
+        form.save()
+        return response
