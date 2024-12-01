@@ -2,6 +2,23 @@
   {
     "fields": {
       "decay": 0.6,
+      "estimated_duration": 30,
+      "gameplay": "First Guesser: The most honest player starts as the first \"Guesser.\" The Guesser turns around, facing away from the group.\r\n\r\nChoosing Cards: Without looking at the cards, the other players secretly choose a Truth Card or a Lie Card.\r\n\r\nReading Statements: The Guesser turns back around, and each player reads the statement on their card.\r\n\r\nDeciding: The Guesser decides whether each statement is true or a lie. If they believe a statement is false, they place a Finger Card in front of that player1.\r\n\r\nRotating Turns: The role of the Guesser rotates clockwise around the table.\r\n\r\nWinning Finger Cards: If the Guesser correctly identifies a Lie Card, they take a Finger Card from the center pile. If they incorrectly identify a Truth Card as a Lie, they must return a Finger Card to the center pile1.\r\n\r\nEnd of Game: The game ends when all Finger Cards are used up. The player with the most Finger Cards wins the game1.",
+      "maximum_players": null,
+      "minimum_players": 3,
+      "name": "You are a Liar",
+      "objective": "The goal is to be the player with the most Finger Cards at the end of the game.",
+      "randomness": 0.0,
+      "ranked": true,
+      "setup": "up\r\nPlayers: 3 or more players.\r\n\r\nCards: Sort the cards into three piles: Truth Cards, Lie Cards, and Finger Cards. Place the Truth Cards and Lie Cards face down in the center, and place the Finger Cards next to them1.\r\n\r\nStarting Finger Card: Each player is given one Finger Card to start.",
+      "tips_and_strategies": "Pay Attention: Listen carefully to the statements and try to detect inconsistencies.\r\n\r\nBluff Wisely: Mix truthful plays with lies to keep other players guessing.\r\n\r\nStay Calm: Keep a straight face and don't give away your intentions."
+    },
+    "model": "games.game",
+    "pk": "0a845f19-6268-43a7-b919-3eb76c7d6866"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
       "estimated_duration": 15,
       "gameplay": "Host's Turn: The host secretly writes a five-letter word on their secret word board and flips it over.\r\n\r\nGuessing: Each player secretly writes a guess on their board.\r\n\r\nClue Marking: The host marks each guess with green chips for correct letters in the correct position, yellow chips for correct letters in the wrong position, and leaves letters not in the word unmarked.\r\n\r\nAnnouncement: The host announces the number of green and yellow chips for each guess but does not reveal specific letters.\r\n\r\nAdditional Guesses: Players can make additional guesses based on the clues given.\r\n\r\nWinning: The first player to correctly guess the word wins the round.\r\n\r\nPoints: Players earn 1 point for each guess they make.\r\n\r\nWinning: The player with the fewest points at the end of the game wins.",
       "maximum_players": 4,
@@ -36,6 +53,23 @@
   {
     "fields": {
       "decay": 0.6,
+      "estimated_duration": 30,
+      "gameplay": "Face-Off: The host reads a question, and one player from each team tries to guess the most popular answer. The player who guesses the highest-ranked answer wins control of the round for their team.\r\n\r\nTeam Play: The team that wins the face-off takes turns guessing the remaining answers on the board. If they guess incorrectly three times, control passes to the other team.\r\n\r\nStealing: The other team gets one chance to guess any remaining answers. If they guess correctly, they steal the points for that round.\r\n\r\nScoring: Points are awarded based on the number of people who gave each answer in the survey. The team with the most points at the end of the game wins.",
+      "maximum_players": null,
+      "minimum_players": 2,
+      "name": "Family Feud Card Game",
+      "objective": "The goal is to score the most points by guessing the most popular answers to survey questions.",
+      "randomness": 0.0,
+      "ranked": false,
+      "setup": "Players: Divide into two teams.\r\n\r\nCards: Shuffle the question cards and place them in a stack.\r\n\r\nHost: Choose one player to be the host. The host reads the questions and keeps track of the scores.",
+      "tips_and_strategies": "Fast Money: For a fun twist, play a Fast Money round where two players from the winning team answer five questions each within a time limit.\r\n\r\nHouse Rules: Feel free to add your own rules to make the game more interesting for your group."
+    },
+    "model": "games.game",
+    "pk": "2832842a-bb75-40fc-b3f4-489968b38cf4"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
       "estimated_duration": 50,
       "gameplay": "Taking Turns: Players take turns rolling the dice and moving their tokens around the board. You can move horizontally or vertically but not diagonally.\r\n\r\nMaking Suggestions: When you enter a room, you can make a suggestion to determine the suspect, weapon, and room. For example, \"I suggest it was Mr. Green in the Library with the Candlestick.\" Move the suspect and weapon tokens into that room.\r\n\r\nDisproving Suggestions: Other players must try to disprove the suggestion by showing you one of the cards you mentioned if they have it. This helps you eliminate possibilities.\r\n\r\nMaking Accusations: When you're confident you know the solution, you can make an accusation. State your guess about the suspect, weapon, and room. Then, secretly look at the cards in the case file envelope.\r\n\r\nWinning the Game: If your accusation is correct, you win the game. If it's incorrect, you're out of the game, but you must continue disproving other players' suggestions.",
       "maximum_players": 6,
@@ -49,6 +83,74 @@
     },
     "model": "games.game",
     "pk": "4bdeaaea-e0cc-4173-9822-3651b44fa4bd"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
+      "estimated_duration": 30,
+      "gameplay": "Starting Player: The oldest player goes first and becomes the Reader.\r\n\r\nRolling the Category Die: The Reader rolls the category die to determine the category of the first question (Blue is What Am I?, Green is Where Am I?, Orange is Who Am I?, and Red is Hard Ass).\r\n\r\nSelecting a Question Card: The Reader selects a question card from the chosen category and reads the first clue aloud.\r\n\r\nAnswering: Any player can shout out an answer at any time after a clue is read. Each player gets only one try per question.\r\n\r\nCorrect Answer: If a player answers correctly, they roll the movement die and move their playing piece forward the number of spaces shown.\r\n\r\nIncorrect Answer: If a player answers incorrectly, they are out of that round and cannot try again.\r\n\r\nContinuing Clues: The Reader continues to read clues until a player answers correctly or all clues are read.\r\n\r\nWinning the Round: If no player answers correctly after all clues are read, the Reader wins the round and moves their piece forward.\r\n\r\nNext Player: Play passes to the left, and the next player becomes the Reader.\r\n\r\nSpecial Spaces: The game board has special spaces:\r\n\r\nDumb Ass Space: The player landing here is silenced for the next round.\r\n\r\nHard Ass Space: The Reader selects a bonus question from the Hard Ass category for the player landing here. If answered correctly, the player rolls again for a bonus move.\r\n\r\nKick Ass Space: The player landing here moves back three spaces.\r\n\r\nThe first player to reach \"The End\" of the Smart Ass's rear end wins the game.",
+      "maximum_players": null,
+      "minimum_players": 2,
+      "name": "Smart Ass",
+      "objective": "The goal is to be the first player to reach the end of the game board by correctly answering trivia questions.",
+      "randomness": 0.0,
+      "ranked": false,
+      "setup": "Game Board: Place the game board on a flat surface.\r\n\r\nQuestion Cards: Sort the question cards into four categories: What Am I?, Where Am I?, Who Am I?, and Hard Ass. Place each deck in its designated spot on the board.\r\n\r\nPlaying Pieces: Each player chooses a playing piece and places it at the \"Start\" space.\r\n\r\nDice: Have the category die and the movement die ready.",
+      "tips_and_strategies": "Quick Thinking: Be ready to shout out answers quickly.\r\n\r\nListen Carefully: Pay attention to the clues to make informed guesses.\r\n\r\nStay Calm: Keep a clear mind and don't rush your answers too much."
+    },
+    "model": "games.game",
+    "pk": "51c2195f-2d58-4f26-b01d-455183d407bc"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
+      "estimated_duration": 1,
+      "gameplay": "Drawing Tiles: The first player draws two letter tiles from the bag and shows them to all players.\r\n\r\nWord Challenge: Either players race to shout out a word that starts with the first letter and ends with the second letter shown on the tiles. For example, if the tiles show \"B\" and \"T,\" players might shout out \"bat,\" \"bit,\" or \"but.\" Or, players write down their words, the one with the most words at the end of 60 seconds wins.\r\n\r\nWinning the Tiles: Either the first player to correctly shout out a valid word wins the tiles or the player with the most words wins.\r\n\r\nTurns: Play passes to the next player, who then draws two new tiles and repeats the process.\r\n\r\nWinning the Game: The game continues until a predetermined number of rounds or until a player collects a set number of tiles. The player with the most tiles at the end of the game wins.",
+      "maximum_players": null,
+      "minimum_players": 2,
+      "name": "Smart Mouth",
+      "objective": "The goal is to collect the most tiles by being the first to shout out a valid word that starts with the first letter and ends with the second letter shown on the tiles.",
+      "randomness": 0.0,
+      "ranked": true,
+      "setup": "Tiles: Place the letter tiles in a bag or container.\r\n\r\nPlayers: 2 or more players.\r\n\r\nStarting Player: Decide who goes first.",
+      "tips_and_strategies": "Quick Thinking: Practice coming up with words quickly to gain an advantage.\r\n\r\nVocabulary: Expand your vocabulary to have more word options available.\r\n\r\nStay Calm: Keep a clear mind and don't rush your answers too much."
+    },
+    "model": "games.game",
+    "pk": "5e49d487-5dfe-42e1-ac0a-d502e04a168d"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
+      "estimated_duration": 45,
+      "gameplay": "Deal Cards: Shuffle the playing cards and deal a hand of cards to each player (the number of cards depends on the number of players).\r\n\r\nPlace Markers: Each player places their marker chips on the corresponding spaces on the board for the two corners of their color.\r\n\r\nTurn Sequence: Players take turns playing cards and placing marker chips on the board.\r\n\r\nPlay a Card: On your turn, play a card from your hand and place one of your marker chips on the corresponding space on the board.\r\n\r\nSpecial Cards: Jack cards allow you to remove an opponent’s marker chip from the board, and Two-Eyed Jack cards allow you to place a marker chip on any open space on the board.\r\n\r\nDraw a Card: After playing a card, draw a new card from the deck to replenish your hand.\r\n\r\nWinning the Game: The game continues until one player successfully creates a sequence of five connected markers on the board. The sequence can be horizontal, vertical, or diagonal1. The first player to do so wins the game.",
+      "maximum_players": 12,
+      "minimum_players": 2,
+      "name": "Sequence",
+      "objective": "The goal is to create rows, columns, or diagonals of five connected markers of your color on the game board.",
+      "randomness": 0.0,
+      "ranked": false,
+      "setup": "Game Board: Place the game board in the center of the table. The board is a 10x10 grid with spaces representing playing cards1.\r\n\r\nPlaying Cards: Use a standard deck of 52 playing cards, excluding the jokers.\r\n\r\nMarker Chips: Each player gets marker chips of a distinct color.\r\n\r\nScore Cards: Use score cards to keep track of the game’s progress.",
+      "tips_and_strategies": "Plan Ahead: Anticipate opponents’ moves and plan your strategy accordingly.\r\n\r\nBlock Opponents: Try to block opponents from creating sequences while building your own.\r\n\r\nUtilize Special Cards: Use Jack and Two-Eyed Jack cards strategically to gain positional advantage."
+    },
+    "model": "games.game",
+    "pk": "6b1de928-81cd-487e-bffe-a3e7b5d919f0"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
+      "estimated_duration": 1,
+      "gameplay": "Starting Player: Choose a starting player. This player makes a \"Never Have I Ever\" statement. For example, \"Never have I ever gone skydiving.\"\r\n\r\nResponses: Players who have done the action mentioned must take a drink (if playing as a drinking game) or put a finger down (if playing with points).\r\n\r\nNext Player: The turn passes clockwise to the next player, who makes a new \"Never Have I Ever\" statement.\r\n\r\nElimination (Optional): If playing with points, players who put down all their fingers are out of the game. The last player remaining wins.",
+      "maximum_players": 12,
+      "minimum_players": 4,
+      "name": "Never Have I Ever Card Game",
+      "objective": "The goal is to have fun and learn interesting facts about the players. The game can be played as a drinking game or with points.",
+      "randomness": 0.0,
+      "ranked": true,
+      "setup": "Players: 4 or more players.\r\n\r\nCards (Optional): If you have a deck of \"Never Have I Ever\" cards, shuffle and place them in the center. If you don't have cards, you can play without them by coming up with statements on the spot.",
+      "tips_and_strategies": "Be Honest: The fun of the game relies on honesty.\r\n\r\nKeep It Fun: Choose a mix of lighthearted and interesting statements.\r\n\r\nSafe Play: If playing as a drinking game, drink responsibly and know your limits."
+    },
+    "model": "games.game",
+    "pk": "7010e0b1-6a94-4032-bc3c-91200dceb242"
   },
   {
     "fields": {
@@ -70,6 +172,23 @@
   {
     "fields": {
       "decay": 0.6,
+      "estimated_duration": 60,
+      "gameplay": "Exploration Phase: Players take turns exploring the house by moving through rooms, discovering new rooms, and collecting items and omens.\r\n\r\nMovement: On their turn, a player can move a number of spaces equal to their current Speed value.\r\n\r\nDiscovering Rooms: When moving into an unexplored area, draw a Room tile from the stack and connect it to the current room.\r\n\r\nDrawing Cards: Some rooms have symbols that indicate drawing a card (Event, Item, or Omen). Follow the instructions on the card1.\r\n\r\nOmen Cards and Haunt Roll: When an Omen card is drawn, the player must make a Haunt roll by rolling six dice. If the result is less than the number of Omen cards drawn so far, the Haunt begins1.\r\n\r\nHaunt Phase: The Haunt scenario is determined based on the room where the Haunt was triggered and the Omen card that triggered it.\r\n\r\nRevealing the Traitor: The Traitor’s Tome is used to determine the Traitor and their objectives. The heroes use the Secrets of Survival book to find their objectives1.\r\n\r\nSeparate Instructions: The Traitor and the heroes follow their respective instructions to complete their objectives.\r\n\r\nThe game ends when one side achieves their victory condition as described in the haunt scenario.",
+      "maximum_players": 6,
+      "minimum_players": 3,
+      "name": "Betrayal at House on the Hill",
+      "objective": "The goal is to explore the haunted mansion, survive the haunt, and achieve the goals set by the haunt scenario, either as heroes or the traitor",
+      "randomness": 0.0,
+      "ranked": false,
+      "setup": "Game Components: Gather all the game components, including room tiles, character cards, event cards, item cards, omen cards, dice, tokens, and the Traitor’s Tome and Secrets of Survival haunt books.\r\n\r\nChoose Characters: Each player selects a character card and the corresponding figure. There are six character cards, each with two characters to choose from (front and back of the card).\r\n\r\nSet Starting Traits: Adjust the plastic clips on the character card to the starting values for Speed, Might, Sanity, and Knowledge.\r\n\r\nPlace Starting Tiles: Place the Entrance Hall, Foyer, and Grand Staircase tiles in the center of the playing area.\r\n\r\nShuffle Decks: Shuffle the Room tiles, Event cards, Item cards, and Omen cards separately. Place them face down within easy reach of all players.\r\n\r\nDetermine Player Order: Decide who goes first by any agreed-upon method.",
+      "tips_and_strategies": "Teamwork: Work together as heroes to overcome the challenges posed by the haunt.\r\n\r\nCommunication: Keep communication open to strategize and share information.\r\n\r\nAdaptability: Be ready to adapt to the changing dynamics of the game, especially when the haunt begins."
+    },
+    "model": "games.game",
+    "pk": "93d8dbc8-1653-4405-9f3d-293ddbe5a79e"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
       "estimated_duration": 12,
       "gameplay": "Taking Turns: Players take turns drawing a card from the deck.\r\n\r\nDrawing Cards: If you draw a card that is not an Exploding Kitten, you can play any card from your hand or discard it.\r\n\r\nExploding Kittens: If you draw an Exploding Kitten, you must either play a Defuse card to neutralize it or you are out of the game.\r\n\r\nPlaying Cards: Some cards have special actions, such as skipping a turn, forcing another player to draw two cards, or peeking at the top cards of the deck.\r\n\r\nWinning the Game: The last player remaining who hasn't drawn an Exploding Kitten wins the game.",
       "maximum_players": 5,
@@ -83,6 +202,40 @@
     },
     "model": "games.game",
     "pk": "9efa1db1-b323-46a2-9470-8f81e9edeaa4"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
+      "estimated_duration": 45,
+      "gameplay": "Choose a Card Czar: Select one player to be the Card Czar for the round. The Card Czar is responsible for picking and reading the black card.\r\n\r\nDrawing a Black Card: The Card Czar draws a black card and reads the question or fill-in-the-blank statement aloud to the group.\r\n\r\nPlaying White Cards: The other players choose one (or more, depending on the black card's instructions) of their white cards that they think best completes the statement or answers the question. They pass their chosen white card(s) face down to the Card Czar.\r\n\r\nShuffling and Reading: The Card Czar shuffles the submitted white cards and reads them aloud, ensuring anonymity.\r\n\r\nChoosing a Winner: The Card Czar selects the white card they find funniest or most fitting. The player who submitted the chosen card wins the round and keeps the black card as a point.\r\n\r\nNext Round: A new player becomes the Card Czar, and the process repeats. Each player draws back up to ten white cards at the end of their turn.\r\n\r\nThe game continues until a player reaches a predetermined number of black cards (usually 5 or 7), signifying they've won the game.",
+      "maximum_players": 25,
+      "minimum_players": 4,
+      "name": "Cards Against Humanity",
+      "objective": "The goal is to be the first player to win a predetermined number of rounds by playing the funniest or most outrageous answers.",
+      "randomness": 0.0,
+      "ranked": true,
+      "setup": "Players: 4 or more players (the more, the merrier).\r\n\r\nCards: There are two types of cards: black cards and white cards.\r\n\r\nBlack Cards: These cards contain questions or fill-in-the-blank statements.\r\n\r\nWhite Cards: These cards contain various phrases or words.\r\n\r\nDealing: Each player draws ten white cards.",
+      "tips_and_strategies": "House Rules: Feel free to introduce your own house rules to make the game more interesting or better suited to your group’s sense of humor.\r\n\r\nExpansions: Cards Against Humanity has many expansion packs that add new cards and themes to the game."
+    },
+    "model": "games.game",
+    "pk": "a3b33b48-759f-4d20-90b5-893abae1bae9"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
+      "estimated_duration": 10,
+      "gameplay": "How to play the boardgame chess\r\nChess is a classic two-player strategy game that's played on an 8x8 grid board. Here’s a quick guide on how to play:\r\n\r\nObjective\r\nThe goal is to checkmate your opponent's king, meaning the king is in a position to be captured (\"in check\") and there is no legal move to remove the threat.\r\n\r\nSetup\r\nBoard: Place the board so that each player has a white (or light) square on their right-hand side.\r\n\r\nPieces: Each player has 16 pieces: 1 King, 1 Queen, 2 Rooks, 2 Knights, 2 Bishops, and 8 Pawns.\r\n\r\nSetup: Arrange the pieces on the two rows closest to each player. From left to right on the first row: Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook. Place the pawns on the row in front of the other pieces.\r\n\r\nBasic Moves\r\nKing: Moves one square in any direction.\r\n\r\nQueen: Moves any number of squares in any direction.\r\n\r\nRook: Moves any number of squares horizontally or vertically.\r\n\r\nBishop: Moves any number of squares diagonally.\r\n\r\nKnight: Moves in an \"L\" shape: two squares in one direction and then one square perpendicular. Knights can jump over other pieces.\r\n\r\nPawn: Moves forward one square, or two squares on its first move. Pawns capture diagonally.\r\n\r\nSpecial Moves\r\nCastling: A special move involving the king and a rook. The king moves two squares towards the rook, and the rook moves next to the king. Conditions apply: neither piece can have moved before, there must be no pieces between them, and the king cannot be in check or move through check.\r\n\r\nEn Passant: If a pawn moves two squares forward from its starting position and lands beside an opponent's pawn, the opponent's pawn can capture it as if it had moved only one square forward.\r\n\r\nPawn Promotion: When a pawn reaches the opponent's back row, it can be promoted to any other piece (except a king), usually a queen.\r\n\r\nWinning the Game\r\nCheckmate: The game ends when a player's king is checkmated.\r\n\r\nStalemate: A draw occurs when a player has no legal moves and their king is not in check.\r\n\r\nOther Draws: The game can also end in a draw by mutual agreement, threefold repetition, fifty-move rule, or insufficient material to checkmate.",
+      "maximum_players": 2,
+      "minimum_players": 2,
+      "name": "Chess",
+      "objective": "The goal is to checkmate your opponent's king, meaning the king is in a position to be captured (\"in check\") and there is no legal move to remove the threat.",
+      "randomness": 0.0,
+      "ranked": false,
+      "setup": "Board: Place the board so that each player has a white (or light) square on their right-hand side.\r\n\r\nPieces: Each player has 16 pieces: 1 King, 1 Queen, 2 Rooks, 2 Knights, 2 Bishops, and 8 Pawns.\r\n\r\nSetup: Arrange the pieces on the two rows closest to each player. From left to right on the first row: Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook. Place the pawns on the row in front of the other pieces.",
+      "tips_and_strategies": "Control the Center: Dominating the center of the board allows greater mobility for your pieces.\r\n\r\nProtect Your King: Always be mindful of threats to your king.\r\n\r\nDevelop Pieces Early: Bring your knights and bishops into the game early for better control and flexibility.\r\n\r\nThink Ahead: Always consider your opponent's potential moves and plan accordingly."
+    },
+    "model": "games.game",
+    "pk": "aa874bd1-e71d-417a-a3e4-0f1459763091"
   },
   {
     "fields": {
@@ -138,6 +291,23 @@
   {
     "fields": {
       "decay": 0.6,
+      "estimated_duration": 20,
+      "gameplay": "Starting the Game: The player with the Ace of Spades (or any predetermined card) starts the game by placing one or more cards face down in the center and declaring them as a specific rank (e.g., \"one Ace\").\r\n\r\nTaking Turns: Players take turns in a clockwise direction. On your turn, you must play one or more cards face down and declare them as the next rank in sequence (e.g., if the previous player declared Aces, you must declare Twos, then Threes, and so on).\r\n\r\nCalling Bullshit: If you think a player is lying about the cards they played, you can call \"Bullshit!\" The player must then reveal the cards they played:\r\n\r\nIf they were lying, they must pick up all the cards in the center.\r\n\r\nIf they were telling the truth, the player who called Bullshit must pick up all the cards in the center.\r\n\r\nWinning the Game: The first player to get rid of all their cards wins the game. If a player is caught lying or falsely accuses another player, they must pick up the cards and continue playing.",
+      "maximum_players": 10,
+      "minimum_players": 3,
+      "name": "Bullshit",
+      "objective": "The goal is to be the first player to get rid of all your cards by playing them face down and convincing others that you're telling the truth about what you played.",
+      "randomness": 0.1,
+      "ranked": false,
+      "setup": "Deck: Use a standard 52-card deck. If there are more than 4 players, you might want to use two decks.\r\n\r\nPlayers: 3 or more players.\r\n\r\nDealing: Deal all the cards evenly among the players. Some players might have one more card than others.",
+      "tips_and_strategies": "Bluff Wisely: Mix truthful plays with bluffs to keep other players guessing.\r\n\r\nPay Attention: Keep track of the cards that have been played to make informed decisions about when to call Bullshit.\r\n\r\nTiming: Choose the right moments to call Bullshit to maximize your chances of catching a lie."
+    },
+    "model": "games.game",
+    "pk": "d851cf99-3a6b-4d5e-b130-f7b708b4abef"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
       "estimated_duration": 30,
       "gameplay": "Turn Phases: Each turn consists of three phases: Action, Buy, and Clean-up.\r\n\r\nAction Phase: Play Action cards from your hand. These cards allow you to draw more cards, gain coins, attack other players, or manipulate your deck.\r\n\r\nBuy Phase: Use Treasure cards to buy cards from the Supply piles. You can only buy one card per turn1.\r\n\r\nClean-up Phase: Discard your hand and draw 5 new cards.\r\n\r\nWinning the Game: The game ends when either the Provinces pile is empty or three Supply piles (including Treasure or Victory piles) are empty. Count your victory points from the cards in your deck, and the player with the most points wins1.",
       "maximum_players": 6,
@@ -168,5 +338,39 @@
     },
     "model": "games.game",
     "pk": "ddebbeee-ecef-4ad1-b9c4-a301889a9387"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
+      "estimated_duration": 30,
+      "gameplay": "Rolling the Dice: Players take turns rolling the dice and moving their pawns the corresponding number of spaces.\r\n\r\nSpecial Spaces: As you move around the board, you'll land on different spaces that have various actions:\r\n\r\nDrink: Take a sip of your drink.\r\n\r\nChallenge: Perform a silly dare or answer a question.\r\n\r\nCall Out: Call out another player to perform a task or answer a question.\r\n\r\nConfession: Share something about yourself or answer a personal question.\r\n\r\nMini Competition: Engage in a quick game or challenge with another player.\r\n\r\nWinning the Game",
+      "maximum_players": 8,
+      "minimum_players": 2,
+      "name": "Tipsy Land",
+      "objective": "The goal is to be the first player to reach the end of the board by rolling the dice and moving your pawn.",
+      "randomness": 0.5,
+      "ranked": true,
+      "setup": "Board: Place the game board in the center of the table.\r\n\r\nPawns: Each player chooses a pawn and places it at the start of the board.\r\n\r\nDrinks: Have drinks ready for each player. The game can be played with alcoholic or non-alcoholic beverages.",
+      "tips_and_strategies": "Have Fun: The game is meant to be lighthearted and fun, so embrace the silliness and enjoy the interactions with your friends.\r\n\r\nBe Creative: Feel free to come up with your own dares, challenges, and questions to keep the game interesting.\r\n\r\nStay Safe: If you're playing with alcoholic drinks, make sure to drink responsibly and know your limits."
+    },
+    "model": "games.game",
+    "pk": "e7f3cd0e-8b80-4ae9-8fae-448b61873498"
+  },
+  {
+    "fields": {
+      "decay": 0.6,
+      "estimated_duration": 60,
+      "gameplay": "Turn Order: Players roll two dice to determine turn order. The highest roll goes first.\r\n\r\nRolling Dice: On your turn, roll the dice and move your token the number of spaces shown.\r\n\r\nBuying Properties: If you land on an unowned property, you can buy it from the bank. If you decline, the banker auctions it off to the highest bidder.\r\n\r\nPaying Rent: If you land on a property owned by another player, you must pay rent to that player according to the property's rent card.\r\n\r\nBuilding: Once you own all the properties of a color group, you can build houses and hotels, increasing rent.\r\n\r\nDrawing Cards: If you land on Chance or Community Chest, draw a card and follow its instructions.\r\n\r\nJail: You can go to jail by landing on the \"Go to Jail\" space, drawing a card that sends you to jail, or rolling doubles three times in a row. You can get out by rolling doubles, using a \"Get Out of Jail Free\" card, or paying $50.\r\n\r\nBankruptcy: If you owe more money than you can pay, you must declare bankruptcy and are eliminated from the game. The last player remaining wins.",
+      "maximum_players": 6,
+      "minimum_players": 2,
+      "name": "Monopoly",
+      "objective": "The goal is to be the last player remaining with money after all others have gone bankrupt.",
+      "randomness": 0.0,
+      "ranked": true,
+      "setup": "Board: Place the Monopoly board on a flat surface.\r\n\r\nMoney: Each player starts with $1,500 in various denominations.\r\n\r\nPlayer Tokens: Each player chooses a token and places it on the \"GO\" space.\r\n\r\nCards: Shuffle the Chance and Community Chest cards and place them face down on their designated spots.\r\n\r\nBanker: Choose a player to be the banker, responsible for handling money, property titles, houses, and hotels.",
+      "tips_and_strategies": "To speed up the game, consider these variations:\r\n\r\nShorter Game Play: Only play until a pre-determined time limit (e.g., 1 hour). The player with the most assets at the end wins.\r\n\r\nSpeed Die: Use the optional Speed Die for faster movement around the board.\r\n\r\nFree Parking Bonus: Players receive $500 when they land on Free Parking.\r\n\r\nInitial Property Distribution: Deal three random properties to each player at the start of the game.\r\n\r\nDouble Rent on Unmortgaged Properties: Whenever a player lands on an unmortgaged property that is owned by another player, they pay double the rent if the property is already developed with houses or hotels."
+    },
+    "model": "games.game",
+    "pk": "ef74997d-30b0-475d-bc2a-560ee1a17ab4"
   }
 ]
