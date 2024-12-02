@@ -1,4 +1,4 @@
-"""URL configuration for olympics project.
+"""URL configuration for gamenight project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
@@ -23,5 +23,5 @@ from django.urls import path
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", urls.include("django.contrib.auth.urls")),
-    path("", urls.include("olympics.games.urls")),
+    path("", urls.include("gamenight.games.urls")),
 ]

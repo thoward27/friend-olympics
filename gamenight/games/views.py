@@ -1,5 +1,6 @@
 # Create your views here.
 import logging
+
 from cryptography import fernet
 from django import http
 from django.conf import settings
@@ -7,11 +8,11 @@ from django.contrib import auth
 from django.contrib.auth import mixins
 from django.views import generic
 
-from olympics.games import forms, models, tables
+from gamenight.games import forms, models, tables
 
 
 def login(request: http.HttpRequest, username: str, encrypted_password: str) -> http.HttpResponse:
-    """Login to the olympics portal.
+    """Login to the gamenight portal.
 
     This is an insane way to do this, but it allows users to login by scanning their QR code.
     """

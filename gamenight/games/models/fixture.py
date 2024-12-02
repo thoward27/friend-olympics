@@ -10,9 +10,9 @@ from django import urls
 from django.db import models
 
 if TYPE_CHECKING:
-    from olympics.games.models.game import Game
-    from olympics.games.models.rank import Rank
-    from olympics.games.models.user import User
+    from gamenight.games.models.game import Game
+    from gamenight.games.models.rank import Rank
+    from gamenight.games.models.user import User
 
 
 class Fixture(models.Model):

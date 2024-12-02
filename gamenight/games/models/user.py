@@ -6,12 +6,12 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 
-from olympics.games import broadcaster
+from gamenight.games import broadcaster
 
 if TYPE_CHECKING:
     from django.db.models.query import QuerySet
 
-    from olympics.games.models.fixture import Fixture
+    from gamenight.games.models.fixture import Fixture
 
 
 class AvailableManager(models.Manager):

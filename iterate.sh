@@ -5,7 +5,7 @@ set -e
 uv run python manage.py check
 
 # Reset the Database.
-rm -f olympics/games/migrations/0001_initial.py
+rm -f gamenight/games/migrations/0001_initial.py
 rm -f db.sqlite3
 
 # Generate and run migrations.
@@ -17,7 +17,7 @@ uv run ruff format
 uv run ruff check --fix --ignore T
 uv run ruff format
 uv run pytest
-uv run mypy -p olympics
+uv run mypy -p gamenight
 
 # Load fixture data.
 uv run python manage.py loaddata fixtures/users.json

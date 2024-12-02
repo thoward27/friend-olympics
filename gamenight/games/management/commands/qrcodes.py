@@ -6,7 +6,7 @@ from cryptography import fernet
 from django.conf import settings
 from django.core.management import base
 
-from olympics.games import models
+from gamenight.games import models
 
 
 class Command(base.BaseCommand):

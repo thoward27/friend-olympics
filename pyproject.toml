@@ -1,5 +1,5 @@
 [project]
-name = "friend-olympics"
+name = "gamenight"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -30,7 +30,7 @@ dev = [
 ]
 
 [tool.pytest_env]
-DJANGO_SETTINGS_MODULE = "olympics.settings"
+DJANGO_SETTINGS_MODULE = "gamenight.settings"
 
 [tool.ruff]
 line-length = 100
@@ -64,4 +64,4 @@ ignore = [
 plugins = ["mypy_django_plugin.main"]
 
 [tool.django-stubs]
-django_settings_module = "olympics.settings"
+django_settings_module = "gamenight.settings"

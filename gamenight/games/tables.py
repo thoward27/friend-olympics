@@ -4,7 +4,7 @@ from django_tables2 import (  # type: ignore[import]
     views,
 )
 
-from olympics.games import models
+from gamenight.games import models
 
 
 class UserTable(tables.Table):

@@ -6,7 +6,7 @@ from django.http import QueryDict
 from django.template import loader
 from django.utils import safestring
 
-from olympics.games import models
+from gamenight.games import models
 
 
 class FixtureCreateForm(forms.ModelForm):

@@ -1,4 +1,4 @@
-"""ASGI config for olympics project.
+"""ASGI config for gamenight project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -16,10 +16,10 @@ from channels import (  # type: ignore[import]
 from channels.security import websocket  # type: ignore[import]
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "olympics.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gamenight.settings")
 django.setup()
 
-from olympics.games import urls  # noqa: E402
+from gamenight.games import urls  # noqa: E402
 
 django_asgi_app = get_asgi_application()
 

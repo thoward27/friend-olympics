@@ -1,7 +1,7 @@
 from django import urls
 from django.views import generic
 
-from olympics.games import consumers, tables, views
+from gamenight.games import consumers, tables, views
 
 fixture_patterns = [
     urls.path("", views.FixtureTableView.as_view(), name="all"),

@@ -13,13 +13,13 @@
     <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/htmx-ext-ws@2.0.1/ws.js"></script>
     <script src="https://unpkg.com/hyperscript.org@0.9.13"></script>
-    <title>Friend Olympics</title>
+    <title>Gamenight</title>
 </head>
 <body>
     <main class="container">
         <nav>
             <ul>
-                <li><strong>Friend Olympics</strong></li>
+                <li><strong>Gamenight</strong></li>
             </ul>
             <ul>
                 <li><a href="{% url 'users:table' %}" class="{% if request.resolver_match.view_name == 'users:table' %}contrast{% endif %}">Leaderboard</a></li>

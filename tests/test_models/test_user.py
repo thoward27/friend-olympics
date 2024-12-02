@@ -1,4 +1,4 @@
-from olympics.games.models import User
+from gamenight.games.models import User
 from tests import base
 
 

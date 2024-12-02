@@ -1,8 +1,8 @@
 from django.conf import settings
 
-from olympics.games.models.fixture import Fixture
-from olympics.games.models.game import Game
-from olympics.games.models.user import User
+from gamenight.games.models.fixture import Fixture
+from gamenight.games.models.game import Game
+from gamenight.games.models.user import User
 
 
 def play(game: Game, players: list[User]) -> Fixture:

@@ -2,7 +2,7 @@
 
 set -e
 
-export DJANGO_SETTINGS_MODULE=olympics.settings
+export DJANGO_SETTINGS_MODULE=gamenight.settings
 
 # Ensure we can run the Django management commands.
 uv run python manage.py check
@@ -18,5 +18,5 @@ uv run python manage.py loaddata fixtures/fixtures.json
 uv run python manage.py loaddata fixtures/ranks.json
 
 # Run the command from the user.
-# uv run daphne -b 0.0.0.0 -p 8000 olympics.asgi:application "$@"
+# uv run daphne -b 0.0.0.0 -p 8000 gamenight.asgi:application "$@"
 exec "$@"

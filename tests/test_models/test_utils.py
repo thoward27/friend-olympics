@@ -1,4 +1,4 @@
-from olympics.games.models import utils
+from gamenight.games.models import utils
 from tests import base
 
 

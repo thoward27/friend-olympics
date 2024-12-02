@@ -2,7 +2,7 @@ import logging
 
 from channels.generic import websocket  # type: ignore[import]
 
-from olympics.games import models
+from gamenight.games import models
 
 
 class UserScoreConsumer(websocket.AsyncWebsocketConsumer):

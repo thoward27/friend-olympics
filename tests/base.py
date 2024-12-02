@@ -1,7 +1,7 @@
 from django import test
 from model_bakery import baker
 
-from olympics.games.models import Fixture, Game, User
+from gamenight.games.models import Fixture, Game, User
 
 
 class ModelsMixin:

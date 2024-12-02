@@ -15,14 +15,14 @@ RUN uv sync
 build:
     ARG --required EARTHLY_GIT_BRANCH
     ARG --required EARTHLY_GIT_HASH
-    COPY --dir fixtures olympics tests entrypoint.sh manage.py README.md ./
+    COPY --dir fixtures gamenight tests entrypoint.sh manage.py README.md ./
     ENTRYPOINT ["./entrypoint.sh"]
-    CMD ["uv", "run", "daphne", "--bind=0.0.0.0", "--port=8000", "olympics.asgi:application"]
+    CMD ["uv", "run", "daphne", "--bind=0.0.0.0", "--port=8000", "gamenight.asgi:application"]
     EXPOSE 8000
     SAVE IMAGE --push \
-        thoward27/friend-olympics:latest \
-        thoward27/taylormade:$EARTHLY_GIT_HASH \
-        thoward27/taylormade:$EARTHLY_GIT_BRANCH
+        thoward27/gamenight:latest \
+        thoward27/gamenight:$EARTHLY_GIT_HASH \
+        thoward27/gamenight:$EARTHLY_GIT_BRANCH
 
 build-all-platforms:
     BUILD --platform=linux/amd64 --platform=linux/arm64 +build
@@ -33,4 +33,4 @@ test:
         && uv run python manage.py check \
         && uv run python manage.py makemigrations --check \
         && uv run python manage.py test \
-        && uv run mypy -p olympics
+        && uv run mypy -p gamenight
