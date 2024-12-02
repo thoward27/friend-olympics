@@ -12,3 +12,4 @@ wheels/
 db.sqlite3
 .env
 qrcodes/
+staticfiles

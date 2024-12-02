@@ -17,7 +17,7 @@ build:
     ARG --required EARTHLY_GIT_HASH
     COPY --dir fixtures olympics tests entrypoint.sh manage.py README.md ./
     ENTRYPOINT ["./entrypoint.sh"]
-    CMD ["runserver", "--noreload", "0.0.0.0:8000"]
+    CMD ["uv", "run", "daphne", "--bind=0.0.0.0", "--port=8000", "olympics.asgi:application"]
     EXPOSE 8000
     SAVE IMAGE --push \
         thoward27/friend-olympics:latest \

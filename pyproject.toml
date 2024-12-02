@@ -17,6 +17,7 @@ dependencies = [
     "channels[daphne]>=4.2.0",
     "iommi>=7.7.2",
     "qrcode[pil]>=8.0",
+    "whitenoise[brotli]>=6.8.2",
 ]
 
 [dependency-groups]

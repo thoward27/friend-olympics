@@ -1,4 +1,5 @@
 # Create your views here.
+import logging
 from cryptography import fernet
 from django import http
 from django.conf import settings
@@ -18,6 +19,8 @@ def login(request: http.HttpRequest, username: str, encrypted_password: str) -> 
     password = fernet.Fernet(settings.FERNET_KEY).decrypt(encrypted_password.encode())
     if user.check_password(password.decode()):
         auth.login(request, user)
+    else:
+        logging.error("Failed to login user %s %s", username, password)
     return http.HttpResponseRedirect("/")
 
 

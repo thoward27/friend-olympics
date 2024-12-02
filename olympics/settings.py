@@ -14,7 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-HOST = os.environ.get("HOST", "http://localhost:8000")
+SCHEMA, HOST = os.environ.get("HOST", "http://localhost").split("://", 1)
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,7 +27,10 @@ FERNET_KEY = os.environ.get("FERNET_KEY", "fffffffffffffffffffffffffffffffffffff
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS: list[str] = []
+ALLOWED_HOSTS: list[str] = [
+    HOST,
+]
+CSRF_TRUSTED_ORIGINS = [f"{SCHEMA}://{host}" for host in ALLOWED_HOSTS]
 
 
 # Application definition
@@ -49,6 +52,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "iommi.live_edit.Middleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -131,6 +135,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

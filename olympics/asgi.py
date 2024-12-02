@@ -8,6 +8,7 @@ https://docs.djangoproject.com/en/5.1/howto/deployment/asgi/
 
 import os
 
+import django
 from channels import (  # type: ignore[import]
     auth,
     routing,
@@ -15,9 +16,10 @@ from channels import (  # type: ignore[import]
 from channels.security import websocket  # type: ignore[import]
 from django.core.asgi import get_asgi_application
 
-from olympics.games import urls
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "olympics.settings")
+django.setup()
+
+from olympics.games import urls  # noqa: E402
 
 django_asgi_app = get_asgi_application()
 
