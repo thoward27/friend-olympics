@@ -49,6 +49,6 @@ class User(AbstractUser):
 class UserBroadcaster(broadcaster.BaseBroadcaster):
     async def send_score(self, username: str, score: int) -> None:
         await self.layer.group_send(
-            username,
+            username[:99],
             {"type": "user.score", "score": score},
         )
