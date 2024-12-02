@@ -10,3 +10,5 @@ wheels/
 .venv
 .vscode/
 db.sqlite3
+.env
+qrcodes/

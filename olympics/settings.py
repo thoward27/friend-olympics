@@ -14,6 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+HOST = os.environ.get("HOST", "http://localhost:8000")
 
 
 # Quick-start development settings - unsuitable for production
@@ -21,6 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY", "insecure-keys")
+FERNET_KEY = os.environ.get("FERNET_KEY", "fffffffffffffffffffffffffffffffffffffffffff=")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -41,9 +43,11 @@ INSTALLED_APPS = [
     "olympics.games",
     "django_tables2",
     "django_filters",
+    "iommi",
 ]
 
 MIDDLEWARE = [
+    "iommi.live_edit.Middleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -51,6 +55,9 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "iommi.sql_trace.Middleware",
+    "iommi.profiling.Middleware",
+    "iommi.middleware",
 ]
 
 ROOT_URLCONF = "olympics.urls"

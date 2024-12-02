@@ -38,6 +38,7 @@ htmx_patterns = [
 
 urlpatterns = [
     urls.path("", generic.RedirectView.as_view(url="/users/")),
+    urls.path("auth/login/<str:username>/<str:encrypted_password>", views.login, name="qr-login"),
     urls.path("users/", urls.include((user_patterns, "users"))),
     urls.path("games/", urls.include((game_patterns, "games"))),
     urls.path("fixtures/", urls.include((fixture_patterns, "fixtures"))),
