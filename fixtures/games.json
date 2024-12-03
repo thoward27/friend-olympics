@@ -11,7 +11,8 @@
       "randomness": 0.0,
       "ranked": true,
       "setup": "up\r\nPlayers: 3 or more players.\r\n\r\nCards: Sort the cards into three piles: Truth Cards, Lie Cards, and Finger Cards. Place the Truth Cards and Lie Cards face down in the center, and place the Finger Cards next to them1.\r\n\r\nStarting Finger Card: Each player is given one Finger Card to start.",
-      "tips_and_strategies": "Pay Attention: Listen carefully to the statements and try to detect inconsistencies.\r\n\r\nBluff Wisely: Mix truthful plays with lies to keep other players guessing.\r\n\r\nStay Calm: Keep a straight face and don't give away your intentions."
+      "tips_and_strategies": "Pay Attention: Listen carefully to the statements and try to detect inconsistencies.\r\n\r\nBluff Wisely: Mix truthful plays with lies to keep other players guessing.\r\n\r\nStay Calm: Keep a straight face and don't give away your intentions.",
+      "slug": "you-are-a-liar"
     },
     "model": "games.game",
     "pk": "0a845f19-6268-43a7-b919-3eb76c7d6866"
@@ -28,7 +29,8 @@
       "randomness": 0.0,
       "ranked": true,
       "setup": "Players: Gather 3 or more players.\r\n\r\nMaterials: Each player needs a board, a dry-erase marker, and a shield to hide their guesses from other players.\r\n\r\nHost: Choose one player to be the host for the first round.",
-      "tips_and_strategies": "Time Limit: You can add a time limit for each guess to speed up the game.\r\n\r\nFast Mode: Players race to solve the word first, with the first correct guess earning 1 point and others earning 0 points."
+      "tips_and_strategies": "Time Limit: You can add a time limit for each guess to speed up the game.\r\n\r\nFast Mode: Players race to solve the word first, with the first correct guess earning 1 point and others earning 0 points.",
+      "slug": "wordle"
     },
     "model": "games.game",
     "pk": "10016005-dd83-4692-81b3-56e6359c702a"
@@ -45,13 +47,15 @@
       "randomness": 0.0,
       "ranked": false,
       "setup": "Game Board: The board is a vertical grid with 6 rows and 7 columns.\r\n\r\nDiscs: Each player has a set of colored discs (traditionally red and yellow).",
-      "tips_and_strategies": "Block Your Opponent: Always be on the lookout for potential winning moves your opponent might make and block them.\r\n\r\nCreate Multiple Opportunities: Try to create multiple ways to connect four, forcing your opponent to block in two places at once.\r\n\r\nControl the Center: Dominating the center column gives you more opportunities to create connecting lines."
+      "tips_and_strategies": "Block Your Opponent: Always be on the lookout for potential winning moves your opponent might make and block them.\r\n\r\nCreate Multiple Opportunities: Try to create multiple ways to connect four, forcing your opponent to block in two places at once.\r\n\r\nControl the Center: Dominating the center column gives you more opportunities to create connecting lines.",
+      "slug": "connect-four"
     },
     "model": "games.game",
     "pk": "1f7bf6cf-460e-4ef6-8b77-bb92f0acaa5b"
   },
   {
     "fields": {
+      "slug": "family-feud-card-game",
       "decay": 0.6,
       "estimated_duration": 30,
       "gameplay": "Face-Off: The host reads a question, and one player from each team tries to guess the most popular answer. The player who guesses the highest-ranked answer wins control of the round for their team.\r\n\r\nTeam Play: The team that wins the face-off takes turns guessing the remaining answers on the board. If they guess incorrectly three times, control passes to the other team.\r\n\r\nStealing: The other team gets one chance to guess any remaining answers. If they guess correctly, they steal the points for that round.\r\n\r\nScoring: Points are awarded based on the number of people who gave each answer in the survey. The team with the most points at the end of the game wins.",
@@ -69,6 +73,7 @@
   },
   {
     "fields": {
+      "slug": "parcheesi",
       "decay": 0.6,
       "estimated_duration": 20,
       "gameplay": "Rolling the Dice: Players take turns rolling the dice. To move a pawn from the starting area onto the board, a player must roll a 5 (either a single die showing 5 or the sum of both dice showing 5).\r\n\r\nMoving Pawns: On each turn, players roll the dice and move their pawns according to the numbers rolled. A player can move one pawn the total number of both dice or split the dice to move two pawns. For example, if a player rolls a 4 and a 3, they can move one pawn 7 spaces or one pawn 4 spaces and another pawn 3 spaces.\r\n\r\nCapturing Pawns: If a player’s pawn lands on a space occupied by an opponent's pawn, the opponent’s pawn is sent back to its starting area, and the capturing player earns a bonus move.\r\n\r\nSafe Spaces: The board has some safe spaces where pawns cannot be captured. These are usually marked with a circle or specific color.\r\n\r\nEntering Home: To enter the home area, a player must move a pawn to the exact count of spaces needed to reach home. Once all four pawns are in the home area, that player wins the game.\r\n\r\nBlockades: If two pawns of the same color occupy the same space, they form a blockade, which other pawns cannot pass.\r\n\r\nBonus Moves: Capturing an opponent’s pawn or moving all four pawns into the home area may result in bonus moves, often governed by the specific rules of the game edition.\r\n\r\nThe first player to get all four pawns into their home area wins the game.",
@@ -86,6 +91,7 @@
   },
   {
     "fields": {
+      "slug": "chinese-checkers",
       "decay": 0.6,
       "estimated_duration": 10,
       "gameplay": "Turn Order: Decide who goes first. Players take turns moving one marble per turn.\r\n\r\nMoving Marbles: On your turn, you can move one of your marbles in the following ways:\r\n\r\nSingle Step: Move one marble to an adjacent empty space.\r\n\r\nJump: Move one marble by jumping over an adjacent marble (of any color) into an empty space directly on the other side. You can chain multiple jumps in a single turn if there are consecutive empty spaces and marbles to jump over.\r\n\r\nGoal: Move your marbles into the triangle directly opposite your starting position.\r\n\r\nRules\r\nNo Capture: Unlike some games, you do not remove marbles from the board.\r\n\r\nOccupying Points: Multiple marbles can occupy the points along the sides of the triangles.\r\n\r\nFinishing: When all 10 of your marbles reach the target triangle, you have completed the game.\r\n\r\nWinning the Game\r\nThe first player to move all their marbles into the opposite triangle wins the game.",
@@ -103,6 +109,7 @@
   },
   {
     "fields": {
+      "slug": "clue",
       "decay": 0.6,
       "estimated_duration": 50,
       "gameplay": "Taking Turns: Players take turns rolling the dice and moving their tokens around the board. You can move horizontally or vertically but not diagonally.\r\n\r\nMaking Suggestions: When you enter a room, you can make a suggestion to determine the suspect, weapon, and room. For example, \"I suggest it was Mr. Green in the Library with the Candlestick.\" Move the suspect and weapon tokens into that room.\r\n\r\nDisproving Suggestions: Other players must try to disprove the suggestion by showing you one of the cards you mentioned if they have it. This helps you eliminate possibilities.\r\n\r\nMaking Accusations: When you're confident you know the solution, you can make an accusation. State your guess about the suspect, weapon, and room. Then, secretly look at the cards in the case file envelope.\r\n\r\nWinning the Game: If your accusation is correct, you win the game. If it's incorrect, you're out of the game, but you must continue disproving other players' suggestions.",
@@ -120,6 +127,7 @@
   },
   {
     "fields": {
+      "slug": "mancala",
       "decay": 0.6,
       "estimated_duration": 10,
       "gameplay": "Starting the Game: Choose who goes first. On your turn, pick up all the seeds from one of your pits.\r\n\r\nSowing: Moving counterclockwise, place one seed in each pit, including your own mancala but skipping your opponent's mancala.\r\n\r\nCapture: If the last seed you place lands in an empty pit on your side, and the opposite pit (on your opponent's side) has seeds, you capture those seeds and the last seed placed. Move them to your mancala.\r\n\r\nFree Turn: If your last seed lands in your mancala, you get another turn.\r\n\r\nTurn Alternation: Play alternates between players.\r\n\r\nThe game ends when one player's side of the board is empty. The other player then moves all remaining seeds from their side to their mancala. The player with the most seeds in their mancala wins.",
@@ -137,6 +145,7 @@
   },
   {
     "fields": {
+      "slug": "backgammon",
       "decay": 0.6,
       "estimated_duration": 10,
       "gameplay": "Rolling Dice: On each turn, a player rolls both dice and moves their checkers according to the numbers rolled. For example, if you roll a 3 and a 5, you can move one checker 3 spaces and another checker 5 spaces, or move one checker 8 spaces.\r\n\r\nLegal Moves: You can only move a checker to an open point, which is a point not occupied by two or more of your opponent’s checkers.\r\n\r\nHitting: If you move a checker to a point occupied by a single opponent’s checker (a blot), you hit and remove that checker from the board. The opponent must re-enter the checker on their next turn.\r\n\r\nRe-entering: To re-enter a checker, the opponent must roll a number corresponding to an open point in your home board.\r\n\r\nBearing Off: Once all your checkers are in your home board, you can start bearing them off. You remove checkers from the board according to the numbers rolled on the dice.\r\n\r\nThe first player to bear off all their checkers wins the game.",
@@ -154,6 +163,7 @@
   },
   {
     "fields": {
+      "slug": "smart-ass",
       "decay": 0.6,
       "estimated_duration": 30,
       "gameplay": "Starting Player: The oldest player goes first and becomes the Reader.\r\n\r\nRolling the Category Die: The Reader rolls the category die to determine the category of the first question (Blue is What Am I?, Green is Where Am I?, Orange is Who Am I?, and Red is Hard Ass).\r\n\r\nSelecting a Question Card: The Reader selects a question card from the chosen category and reads the first clue aloud.\r\n\r\nAnswering: Any player can shout out an answer at any time after a clue is read. Each player gets only one try per question.\r\n\r\nCorrect Answer: If a player answers correctly, they roll the movement die and move their playing piece forward the number of spaces shown.\r\n\r\nIncorrect Answer: If a player answers incorrectly, they are out of that round and cannot try again.\r\n\r\nContinuing Clues: The Reader continues to read clues until a player answers correctly or all clues are read.\r\n\r\nWinning the Round: If no player answers correctly after all clues are read, the Reader wins the round and moves their piece forward.\r\n\r\nNext Player: Play passes to the left, and the next player becomes the Reader.\r\n\r\nSpecial Spaces: The game board has special spaces:\r\n\r\nDumb Ass Space: The player landing here is silenced for the next round.\r\n\r\nHard Ass Space: The Reader selects a bonus question from the Hard Ass category for the player landing here. If answered correctly, the player rolls again for a bonus move.\r\n\r\nKick Ass Space: The player landing here moves back three spaces.\r\n\r\nThe first player to reach \"The End\" of the Smart Ass's rear end wins the game.",
@@ -171,6 +181,7 @@
   },
   {
     "fields": {
+      "slug": "smart-mouth",
       "decay": 0.6,
       "estimated_duration": 20,
       "gameplay": "Drawing Tiles: The first player draws two letter tiles from the bag and shows them to all players.\r\n\r\nWord Challenge: Either players race to shout out a word that starts with the first letter and ends with the second letter shown on the tiles. For example, if the tiles show \"B\" and \"T,\" players might shout out \"bat,\" \"bit,\" or \"but.\" Or, players write down their words, the one with the most words at the end of 60 seconds wins.\r\n\r\nWinning the Tiles: Either the first player to correctly shout out a valid word wins the tiles or the player with the most words wins.\r\n\r\nTurns: Play passes to the next player, who then draws two new tiles and repeats the process.\r\n\r\nWinning the Game: The game continues until a predetermined number of rounds or until a player collects a set number of tiles. The player with the most tiles at the end of the game wins.",
@@ -188,6 +199,7 @@
   },
   {
     "fields": {
+      "slug": "sequence",
       "decay": 0.6,
       "estimated_duration": 45,
       "gameplay": "Deal Cards: Shuffle the playing cards and deal a hand of cards to each player (the number of cards depends on the number of players).\r\n\r\nPlace Markers: Each player places their marker chips on the corresponding spaces on the board for the two corners of their color.\r\n\r\nTurn Sequence: Players take turns playing cards and placing marker chips on the board.\r\n\r\nPlay a Card: On your turn, play a card from your hand and place one of your marker chips on the corresponding space on the board.\r\n\r\nSpecial Cards: Jack cards allow you to remove an opponent’s marker chip from the board, and Two-Eyed Jack cards allow you to place a marker chip on any open space on the board.\r\n\r\nDraw a Card: After playing a card, draw a new card from the deck to replenish your hand.\r\n\r\nWinning the Game: The game continues until one player successfully creates a sequence of five connected markers on the board. The sequence can be horizontal, vertical, or diagonal1. The first player to do so wins the game.",
@@ -205,6 +217,7 @@
   },
   {
     "fields": {
+      "slug": "never-have-i-ever-card-game",
       "decay": 0.6,
       "estimated_duration": 30,
       "gameplay": "Starting Player: Choose a starting player. This player makes a \"Never Have I Ever\" statement. For example, \"Never have I ever gone skydiving.\"\r\n\r\nResponses: Players who have done the action mentioned must take a drink (if playing as a drinking game) or put a finger down (if playing with points).\r\n\r\nNext Player: The turn passes clockwise to the next player, who makes a new \"Never Have I Ever\" statement.\r\n\r\nElimination (Optional): If playing with points, players who put down all their fingers are out of the game. The last player remaining wins.",
@@ -222,6 +235,7 @@
   },
   {
     "fields": {
+      "slug": "block-dominoes",
       "decay": 0.6,
       "estimated_duration": 10,
       "gameplay": "Starting the Game: The player with the highest double (a tile with the same number on both ends, like 6-6) goes first. If no player has a double, the highest tile (like 6-5) goes first.\r\n\r\nPlacing Tiles: The starting player places their tile in the center. Players take turns placing a tile that matches the number of pips on one end of the previously played tile.\r\n\r\nMatching Tiles: Tiles must be placed so that the numbers on adjacent tiles match. For example, if the last tile played is a 6-3, the next tile must have a 6 on one end.\r\n\r\nDrawing from the Boneyard: If a player cannot play a matching tile, they must draw tiles from the boneyard until they draw a playable tile or the boneyard is empty. If no playable tiles are left, the player passes their turn.\r\n\r\nBlocking: The game continues until one player has played all their tiles, or until no player can make a valid move (the game is \"blocked\").\r\n\r\nScoring\r\nWinning a Round: The first player to play all their tiles wins the round and scores points based on the remaining tiles in the opponents' hands.\r\n\r\nBlocked Game: If the game is blocked, the player with the fewest points in their hand scores the total points remaining in the opponents' hands minus the points in their own hand.\r\n\r\nWinning the Game: The game continues with multiple rounds until one player reaches the agreed-upon score, usually 100 or 200 points.",
@@ -239,6 +253,7 @@
   },
   {
     "fields": {
+      "slug": "ticket-to-ride",
       "decay": 0.6,
       "estimated_duration": 45,
       "gameplay": "Turn Phases: Each turn consists of three phases: draw two train cards, claim a route, and draw destination tickets.\r\n\r\nDraw Two Train Cards: You can either take the top card from the face-up cards or draw from the deck. If you take a face-up card, replace it with a new card from the deck.\r\n\r\nClaim a Route: Use your train cards to claim a route between two cities on the board. The number of cards you use must match the number of spaces in the route.\r\n\r\nDraw Destination Tickets: Draw two more destination tickets and keep at least one.\r\n\r\nWinning the Game: The game ends when one player has 2 or fewer train cards left in the deck or when a player has claimed 8 routes. Players then count their points from completed destination tickets and the longest continuous path.",
@@ -256,6 +271,7 @@
   },
   {
     "fields": {
+      "slug": "betrayal-at-house-on-the-hill",
       "decay": 0.6,
       "estimated_duration": 60,
       "gameplay": "Exploration Phase: Players take turns exploring the house by moving through rooms, discovering new rooms, and collecting items and omens.\r\n\r\nMovement: On their turn, a player can move a number of spaces equal to their current Speed value.\r\n\r\nDiscovering Rooms: When moving into an unexplored area, draw a Room tile from the stack and connect it to the current room.\r\n\r\nDrawing Cards: Some rooms have symbols that indicate drawing a card (Event, Item, or Omen). Follow the instructions on the card1.\r\n\r\nOmen Cards and Haunt Roll: When an Omen card is drawn, the player must make a Haunt roll by rolling six dice. If the result is less than the number of Omen cards drawn so far, the Haunt begins1.\r\n\r\nHaunt Phase: The Haunt scenario is determined based on the room where the Haunt was triggered and the Omen card that triggered it.\r\n\r\nRevealing the Traitor: The Traitor’s Tome is used to determine the Traitor and their objectives. The heroes use the Secrets of Survival book to find their objectives1.\r\n\r\nSeparate Instructions: The Traitor and the heroes follow their respective instructions to complete their objectives.\r\n\r\nThe game ends when one side achieves their victory condition as described in the haunt scenario.",
@@ -273,6 +289,7 @@
   },
   {
     "fields": {
+      "slug": "exploding-kittens",
       "decay": 0.6,
       "estimated_duration": 12,
       "gameplay": "Taking Turns: Players take turns drawing a card from the deck.\r\n\r\nDrawing Cards: If you draw a card that is not an Exploding Kitten, you can play any card from your hand or discard it.\r\n\r\nExploding Kittens: If you draw an Exploding Kitten, you must either play a Defuse card to neutralize it or you are out of the game.\r\n\r\nPlaying Cards: Some cards have special actions, such as skipping a turn, forcing another player to draw two cards, or peeking at the top cards of the deck.\r\n\r\nWinning the Game: The last player remaining who hasn't drawn an Exploding Kitten wins the game.",
@@ -290,6 +307,7 @@
   },
   {
     "fields": {
+      "slug": "cards-against-humanity",
       "decay": 0.6,
       "estimated_duration": 45,
       "gameplay": "Choose a Card Czar: Select one player to be the Card Czar for the round. The Card Czar is responsible for picking and reading the black card.\r\n\r\nDrawing a Black Card: The Card Czar draws a black card and reads the question or fill-in-the-blank statement aloud to the group.\r\n\r\nPlaying White Cards: The other players choose one (or more, depending on the black card's instructions) of their white cards that they think best completes the statement or answers the question. They pass their chosen white card(s) face down to the Card Czar.\r\n\r\nShuffling and Reading: The Card Czar shuffles the submitted white cards and reads them aloud, ensuring anonymity.\r\n\r\nChoosing a Winner: The Card Czar selects the white card they find funniest or most fitting. The player who submitted the chosen card wins the round and keeps the black card as a point.\r\n\r\nNext Round: A new player becomes the Card Czar, and the process repeats. Each player draws back up to ten white cards at the end of their turn.\r\n\r\nThe game continues until a player reaches a predetermined number of black cards (usually 5 or 7), signifying they've won the game.",
@@ -307,6 +325,7 @@
   },
   {
     "fields": {
+      "slug": "chess",
       "decay": 0.6,
       "estimated_duration": 10,
       "gameplay": "How to play the boardgame chess\r\nChess is a classic two-player strategy game that's played on an 8x8 grid board. Here’s a quick guide on how to play:\r\n\r\nObjective\r\nThe goal is to checkmate your opponent's king, meaning the king is in a position to be captured (\"in check\") and there is no legal move to remove the threat.\r\n\r\nSetup\r\nBoard: Place the board so that each player has a white (or light) square on their right-hand side.\r\n\r\nPieces: Each player has 16 pieces: 1 King, 1 Queen, 2 Rooks, 2 Knights, 2 Bishops, and 8 Pawns.\r\n\r\nSetup: Arrange the pieces on the two rows closest to each player. From left to right on the first row: Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook. Place the pawns on the row in front of the other pieces.\r\n\r\nBasic Moves\r\nKing: Moves one square in any direction.\r\n\r\nQueen: Moves any number of squares in any direction.\r\n\r\nRook: Moves any number of squares horizontally or vertically.\r\n\r\nBishop: Moves any number of squares diagonally.\r\n\r\nKnight: Moves in an \"L\" shape: two squares in one direction and then one square perpendicular. Knights can jump over other pieces.\r\n\r\nPawn: Moves forward one square, or two squares on its first move. Pawns capture diagonally.\r\n\r\nSpecial Moves\r\nCastling: A special move involving the king and a rook. The king moves two squares towards the rook, and the rook moves next to the king. Conditions apply: neither piece can have moved before, there must be no pieces between them, and the king cannot be in check or move through check.\r\n\r\nEn Passant: If a pawn moves two squares forward from its starting position and lands beside an opponent's pawn, the opponent's pawn can capture it as if it had moved only one square forward.\r\n\r\nPawn Promotion: When a pawn reaches the opponent's back row, it can be promoted to any other piece (except a king), usually a queen.\r\n\r\nWinning the Game\r\nCheckmate: The game ends when a player's king is checkmated.\r\n\r\nStalemate: A draw occurs when a player has no legal moves and their king is not in check.\r\n\r\nOther Draws: The game can also end in a draw by mutual agreement, threefold repetition, fifty-move rule, or insufficient material to checkmate.",
@@ -324,6 +343,7 @@
   },
   {
     "fields": {
+      "slug": "snakes-and-ladders",
       "decay": 0.6,
       "estimated_duration": 20,
       "gameplay": "Turn Order: Decide who goes first by having each player roll the die. The player with the highest roll starts the game. Play proceeds clockwise.\r\n\r\nRolling the Die: On your turn, roll the die and move your token forward the number of squares shown on the die.\r\n\r\nLadders: If you land on a square with the bottom of a ladder, move your token up to the top of the ladder.\r\n\r\nSnakes: If you land on a square with the head of a snake, move your token down to the tail of the snake.\r\n\r\nExact Roll: To win, you must roll the exact number needed to land on the final square (usually square 100). If you roll a number higher than what you need to reach the final square, you remain in your current position and wait for your next turn.\r\n\r\nThe first player to reach the last square on the board wins the game.",
@@ -341,6 +361,7 @@
   },
   {
     "fields": {
+      "slug": "crazy-eights",
       "decay": 0.6,
       "estimated_duration": 25,
       "gameplay": "Starting the Game: The player to the left of the dealer goes first. Players take turns in a clockwise direction.\r\n\r\nPlaying a Card: On your turn, you can play a card from your hand that matches the rank or suit of the top card on the discard pile. For example, if the top card is a 6 of hearts, you can play any 6 or any heart.\r\n\r\nSpecial Card - Crazy Eights: Playing an 8 is special because it allows you to change the current suit to any suit you choose. You do not have to match the rank or suit of the previous card.\r\n\r\nDrawing a Card: If you cannot play a card, you must draw one card from the draw pile. If the drawn card can be played, you can play it immediately. If not, your turn ends.\r\n\r\nWinning the Game: The first player to get rid of all their cards wins the game. If the draw pile is exhausted and no player has won, reshuffle the discard pile to form a new draw pile and continue playing.",
@@ -358,12 +379,13 @@
   },
   {
     "fields": {
+      "slug": "wits-and-wagers",
       "decay": 0.6,
       "estimated_duration": 25,
       "gameplay": "Asking Questions: The Question Reader draws a question card and reads the question aloud.\r\n\r\nWriting Answers: Players write their guesses on their dry-erase boards. Answers are always numerical.\r\n\r\nPlacing Bets: Players place their chips on the betting mat to indicate their confidence in their own answer or someone else's. You can bet on your own answer or on another player's answer.\r\n\r\nRevealing Answers: After the time limit (usually 30 seconds), players reveal their answers.\r\n\r\nSorting Answers: The answers are arranged in order from lowest to highest.\r\n\r\nPayouts: Players who bet on the correct answer win chips based on the odds marked on the betting mat. The player with the most chips at the end of the game wins.",
       "maximum_players": 5,
       "minimum_players": 3,
-      "name": "Witts and Wagers",
+      "name": "Wits and Wagers",
       "objective": "The goal is to earn the most chips by making accurate guesses and placing smart bets.",
       "randomness": 0.0,
       "ranked": true,
@@ -375,6 +397,7 @@
   },
   {
     "fields": {
+      "slug": "beer-pong",
       "decay": 0.6,
       "estimated_duration": 30,
       "gameplay": "Teams: Divide into two teams of two players each. Each team stands behind their row of cups.\r\n\r\nStarting the Game:\r\n\r\nDecide which team goes first. This can be done with a coin toss, rock-paper-scissors, or \"eye-to-eye\" where one player from each team attempts to make eye contact while shooting. The first to sink a cup starts the game.\r\n\r\nShooting:\r\n\r\nPlayers take turns throwing the ping pong ball at the opponent's cups. Each player gets one shot per turn. The aim is to land the ball into one of the opponent’s cups.\r\n\r\nScoring:\r\n\r\nIf the ball lands in a cup, the opposing team must drink the contents of that cup and then remove the cup from the table.\r\n\r\nIf both players on a team make their shots, they get \"balls back\" and take another turn.\r\n\r\nRe-Racking:\r\n\r\nTeams can request to have the cups rearranged into a more compact formation. Typically, each team is allowed to re-rack the cups once per game.\r\n\r\nWinning:\r\n\r\nThe game continues until one team has eliminated all of the opponent's cups. The losing team must then drink the remaining cups on the winning team's side.\r\n\r\nThe winning team has the option of starting the next game as the first shooters.\r\n\r\nHouse Rules\r\nMany variations and house rules can be added to Beer Pong, such as:\r\n\r\nBouncing: If the ball bounces before landing in a cup, it counts as two cups removed, but the opposing team can swat the ball away.\r\n\r\nRedemption: After the last cup is hit, the opposing team gets a chance to shoot until they miss.\r\n\r\nCelebrity Shot: Allowing a guest to take a shot on behalf of a player.",
@@ -392,6 +415,7 @@
   },
   {
     "fields": {
+      "slug": "bullshit",
       "decay": 0.6,
       "estimated_duration": 20,
       "gameplay": "Starting the Game: The player with the Ace of Spades (or any predetermined card) starts the game by placing one or more cards face down in the center and declaring them as a specific rank (e.g., \"one Ace\").\r\n\r\nTaking Turns: Players take turns in a clockwise direction. On your turn, you must play one or more cards face down and declare them as the next rank in sequence (e.g., if the previous player declared Aces, you must declare Twos, then Threes, and so on).\r\n\r\nCalling Bullshit: If you think a player is lying about the cards they played, you can call \"Bullshit!\" The player must then reveal the cards they played:\r\n\r\nIf they were lying, they must pick up all the cards in the center.\r\n\r\nIf they were telling the truth, the player who called Bullshit must pick up all the cards in the center.\r\n\r\nWinning the Game: The first player to get rid of all their cards wins the game. If a player is caught lying or falsely accuses another player, they must pick up the cards and continue playing.",
@@ -409,6 +433,7 @@
   },
   {
     "fields": {
+      "slug": "dominion",
       "decay": 0.6,
       "estimated_duration": 30,
       "gameplay": "Turn Phases: Each turn consists of three phases: Action, Buy, and Clean-up.\r\n\r\nAction Phase: Play Action cards from your hand. These cards allow you to draw more cards, gain coins, attack other players, or manipulate your deck.\r\n\r\nBuy Phase: Use Treasure cards to buy cards from the Supply piles. You can only buy one card per turn1.\r\n\r\nClean-up Phase: Discard your hand and draw 5 new cards.\r\n\r\nWinning the Game: The game ends when either the Provinces pile is empty or three Supply piles (including Treasure or Victory piles) are empty. Count your victory points from the cards in your deck, and the player with the most points wins1.",
@@ -426,6 +451,7 @@
   },
   {
     "fields": {
+      "slug": "battleship",
       "decay": 0.6,
       "estimated_duration": 25,
       "gameplay": "Taking Turns: Players take turns calling out a grid coordinate (e.g., \"B5\") to try and hit their opponent's ships.\r\n\r\nRecording Hits and Misses:\r\n\r\nIf the called coordinate contains a part of an opponent's ship, it's a hit. The opponent says \"hit\" and marks it on their primary grid.\r\n\r\nIf the coordinate does not contain a ship, it's a miss. The opponent says \"miss.\"\r\n\r\nThe attacking player marks the result on their tracking grid.\r\n\r\nSinking Ships: When all the coordinates of a ship have been hit, the opponent announces which ship has been sunk (e.g., \"You sank my battleship!\").\r\n\r\nWinning the Game: The game continues until one player sinks all of the opponent's ships, thus winning the game.",
@@ -443,6 +469,7 @@
   },
   {
     "fields": {
+      "slug": "tipsy-land",
       "decay": 0.6,
       "estimated_duration": 30,
       "gameplay": "Rolling the Dice: Players take turns rolling the dice and moving their pawns the corresponding number of spaces.\r\n\r\nSpecial Spaces: As you move around the board, you'll land on different spaces that have various actions:\r\n\r\nDrink: Take a sip of your drink.\r\n\r\nChallenge: Perform a silly dare or answer a question.\r\n\r\nCall Out: Call out another player to perform a task or answer a question.\r\n\r\nConfession: Share something about yourself or answer a personal question.\r\n\r\nMini Competition: Engage in a quick game or challenge with another player.\r\n\r\nWinning the Game",
@@ -460,6 +487,7 @@
   },
   {
     "fields": {
+      "slug": "monopoly",
       "decay": 0.6,
       "estimated_duration": 60,
       "gameplay": "Turn Order: Players roll two dice to determine turn order. The highest roll goes first.\r\n\r\nRolling Dice: On your turn, roll the dice and move your token the number of spaces shown.\r\n\r\nBuying Properties: If you land on an unowned property, you can buy it from the bank. If you decline, the banker auctions it off to the highest bidder.\r\n\r\nPaying Rent: If you land on a property owned by another player, you must pay rent to that player according to the property's rent card.\r\n\r\nBuilding: Once you own all the properties of a color group, you can build houses and hotels, increasing rent.\r\n\r\nDrawing Cards: If you land on Chance or Community Chest, draw a card and follow its instructions.\r\n\r\nJail: You can go to jail by landing on the \"Go to Jail\" space, drawing a card that sends you to jail, or rolling doubles three times in a row. You can get out by rolling doubles, using a \"Get Out of Jail Free\" card, or paying $50.\r\n\r\nBankruptcy: If you owe more money than you can pay, you must declare bankruptcy and are eliminated from the game. The last player remaining wins.",
