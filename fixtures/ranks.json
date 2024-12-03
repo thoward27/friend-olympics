@@ -82,7 +82,7 @@
   {
     "fields": {
       "fixture": "859d3860-7410-4790-8298-62b264e26ab9",
-      "rank": null,
+      "rank": 0,
       "team": "",
       "user": 1
     },
@@ -92,7 +92,7 @@
   {
     "fields": {
       "fixture": "859d3860-7410-4790-8298-62b264e26ab9",
-      "rank": null,
+      "rank": 0,
       "team": "",
       "user": 2
     },

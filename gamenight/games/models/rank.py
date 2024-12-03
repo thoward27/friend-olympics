@@ -7,9 +7,9 @@ class Rank(models.Model):
     user = models.ForeignKey("games.User", on_delete=models.CASCADE)
     fixture = models.ForeignKey("games.Fixture", on_delete=models.CASCADE)
     rank = models.PositiveSmallIntegerField(
-        null=True,
+        null=False,
         help_text="The rank of the individual player in a fixture.",
-        default=None,
+        default=0,
         blank=True,
     )
     team = models.CharField(

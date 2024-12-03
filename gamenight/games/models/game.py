@@ -1,7 +1,9 @@
 import uuid
 
+from django import urls
 from django.core import validators
 from django.db import models
+from django.utils import text
 
 
 class Game(models.Model):
@@ -13,6 +15,7 @@ class Game(models.Model):
         unique=True,
         help_text="The name of the game.",
     )
+    slug = models.SlugField(unique=True, blank=True, help_text="The slug of the game.")
     ranked = models.BooleanField(
         default=False,
         help_text="Whether this game is ranked or win/lose.",
@@ -88,6 +91,14 @@ class Game(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+    def save(self, *args, **kwargs) -> None:
+        self.slug = self.slug or text.slugify(self.name)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self) -> str:
+        """Get the absolute URL of the game."""
+        return urls.reverse("games:detail", kwargs={"game_slug": self.slug})
 
     @property
     def importance(self) -> int:

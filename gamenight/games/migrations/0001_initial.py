@@ -38,6 +38,10 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
+                    "slug",
+                    models.SlugField(blank=True, help_text="The slug of the game.", unique=True),
+                ),
+                (
                     "ranked",
                     models.BooleanField(
                         default=False,
@@ -275,9 +279,8 @@ class Migration(migrations.Migration):
                     "rank",
                     models.PositiveSmallIntegerField(
                         blank=True,
-                        default=None,
+                        default=0,
                         help_text="The rank of the individual player in a fixture.",
-                        null=True,
                     ),
                 ),
                 (
