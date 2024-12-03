@@ -15,6 +15,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 SCHEMA, HOST = os.environ.get("HOST", "http://localhost").split("://", 1)
+PORT = os.environ.get("PORT", "8000")
 
 
 # Quick-start development settings - unsuitable for production
@@ -57,6 +58,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "gamenight.middleware.LoginRequiredMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "iommi.sql_trace.Middleware",
@@ -150,3 +152,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 DEFAULT_SCORE = 1000
 
 LOGIN_REDIRECT_URL = "/"
+PUBLIC_PATHS = [
+    "/games/",
+    "/login/",
+    "/users/",
+]
+
+
