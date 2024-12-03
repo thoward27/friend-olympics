@@ -10,19 +10,6 @@
 
 {% block scripts %}
     <script>
-        function sortTable() {
-            console.log('Sorting table');
-            const table = document.getElementsByTagName('tbody')[0]; 
-            const rows = Array.from(table.rows);
-
-            rows.sort((a, b) => {
-                const scoreA = parseInt(a.querySelector('.score').innerHTML, 10);
-                const scoreB = parseInt(b.querySelector('.score').innerHTML, 10);
-                return scoreB - scoreA; // Sort in descending order
-            });
-
-            rows.forEach(row => table.appendChild(row));
-        }
         sortTable();
     </script>
 {% endblock %}

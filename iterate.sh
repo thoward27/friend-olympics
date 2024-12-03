@@ -14,7 +14,7 @@ uv run python manage.py migrate
 
 # Test the code.
 uv run ruff format
-uv run ruff check --fix --ignore T
+uv run ruff check --fix --ignore T --ignore ERA
 uv run ruff format
 uv run pytest
 uv run mypy -p gamenight

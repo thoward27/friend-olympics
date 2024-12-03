@@ -36,5 +36,5 @@ class UserScoreConsumer(websocket.AsyncWebsocketConsumer):
             user = await models.User.objects.aget(username=self.username)
             score = user.score
         await self.send(
-            text_data=f'<div id="{self.username}-score" class="score">{score}</div>',
+            text_data=f'<div id="{self.username}-score" class="sort-key">{score}</div>',
         )

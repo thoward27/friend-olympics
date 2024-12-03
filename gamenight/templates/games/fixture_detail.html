@@ -1,24 +1,18 @@
-{% extends "base.html" %}
-
-{% block content %}
-    <nav>
-        <ul>
-            <li>
+<div>
+    <div class="row align-items-center">
+        <div class="col">
                 <h2>{% if fixture.ended %}Played{% else %}Playing{% endif %}: {{ fixture.game.name }}</h2>
-            </li>
-        </ul>
-        <ul>
+        </div>
+        <div class="col-auto">
             {% if not fixture.applied %}
-            <li>
-                <a href="{% url 'fixtures:update' fixture.pk %}">Edit</a>
-            </li>
+            <a class="btn btn-primary" href="{% url 'fixtures:update' fixture.pk %}">Edit</a>
             {% endif %}
-        </ul>
-    </nav>
+        </div>
+    </div>
     <h3>Current Ranks</h3>
     <ul>
         {% for rank in fixture.rank_set.all %}
             <li style="list-style: none;">{{ rank.rank|default:"None" }}. {{ rank.user.username }} {% if rank.team %}(team: {{ rank.team }}){% endif %}</li>
         {% endfor %}
     </ul>
-{% endblock %}
+</div>

@@ -1,40 +1,45 @@
 from django import urls
 from django.views import generic
+from iommi import path
 
-from gamenight.games import consumers, tables, views
+from gamenight.games import consumers, models, tables, views
+
+path.register_path_decoding(
+    game_slug=models.Game.slug,
+    fixture=models.Fixture,
+)
 
 fixture_patterns = [
-    urls.path("", views.FixtureTableView.as_view(), name="all"),
-    urls.path("active/", views.FixtureTableActiveView.as_view(), name="active"),
-    urls.path("ended/", views.FixtureTableEndedView.as_view(), name="ended"),
-    urls.path("create/", views.FixtureCreateView.as_view(), name="create"),
-    urls.path("view/<uuid:pk>/", views.FixtureDetailView.as_view(), name="detail"),
-    urls.path("update/<uuid:pk>/", views.FixtureUpdateView.as_view(), name="update"),
+    urls.path("", views.FixturePage().as_view(), name="table"),
+    urls.path(
+        "active/",
+        tables.FixtureTable(
+            rows=models.Fixture.objects.filter(ended=None).order_by("-started"),
+        ).as_view(),
+        name="active",
+    ),
+    urls.path(
+        "ended/",
+        tables.FixtureTable(
+            rows=models.Fixture.objects.exclude(ended=None).order_by("-started"),
+        ).as_view(),
+        name="ended",
+    ),
+    urls.path("create/", views.FixtureCreatePage().as_view(), name="create"),
+    urls.path("view/<fixture>/", views.FixtureDetailPage().as_view(), name="detail"),
+    urls.path("update/<fixture>/", views.FixtureUpdatePage().as_view(), name="update"),
 ]
 
+
 game_patterns = [
-    urls.path("", views.GameTableView.as_view(), name="table"),
+    urls.path("", views.GamesPage().as_view(), name="table"),
+    urls.path("<game_slug>/", views.GamePage().as_view(), name="detail"),
 ]
 
 user_patterns = [
-    urls.path("", views.UserTableView.as_view(), name="table"),
+    urls.path("", views.UserPage().as_view(), name="table"),
 ]
 
-htmx_patterns = [
-    urls.path("table/user/", tables.UserTableChunk.as_view(), name="table--user"),
-    urls.path("table/game/", tables.GameTableChunk.as_view(), name="table--game"),
-    urls.path("table/fixture/", tables.FixtureTableChunk.as_view(), name="table--fixture"),
-    urls.path(
-        "table/fixture/active",
-        tables.FixtureTableActiveChunk.as_view(),
-        name="table--fixture-active",
-    ),
-    urls.path(
-        "table/fixture/ended",
-        tables.FixtureTableEndedChunk.as_view(),
-        name="table--fixture-ended",
-    ),
-]
 
 urlpatterns = [
     urls.path("", generic.RedirectView.as_view(url="/users/")),
@@ -42,7 +47,6 @@ urlpatterns = [
     urls.path("users/", urls.include((user_patterns, "users"))),
     urls.path("games/", urls.include((game_patterns, "games"))),
     urls.path("fixtures/", urls.include((fixture_patterns, "fixtures"))),
-    urls.path("htmx/", urls.include((htmx_patterns, "htmx"))),
 ]
 
 websocket_urlpatterns = [

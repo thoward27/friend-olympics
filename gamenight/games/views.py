@@ -1,14 +1,16 @@
 # Create your views here.
+import collections
+import dataclasses
 import logging
 
+import iommi  # type: ignore[import]
+import iommi.templates
 from cryptography import fernet
-from django import http
+from django import http, template
 from django.conf import settings
 from django.contrib import auth
-from django.contrib.auth import mixins
-from django.views import generic
 
-from gamenight.games import forms, models, tables
+from gamenight.games import models, tables, forms
 
 
 def login(request: http.HttpRequest, username: str, encrypted_password: str) -> http.HttpResponse:
@@ -25,43 +27,36 @@ def login(request: http.HttpRequest, username: str, encrypted_password: str) -> 
     return http.HttpResponseRedirect("/")
 
 
-class UserTableView(tables.UserTableChunk):
-    template_name = "games/user_table.html"
+class UserPage(iommi.Page):
+    users = tables.UserTable()
 
 
-class GameTableView(tables.GameTableChunk):
-    template_name = "games/game_table.html"
+class GamesPage(iommi.Page):
+    games = tables.GameTable()
 
 
-class FixtureTableView(tables.FixtureTableChunk):
-    template_name = "games/fixture_table.html"
+class GamePage(iommi.Page):
+    body = iommi.Fragment(template="games/game_detail.html")
 
 
-class FixtureTableActiveView(tables.FixtureTableActiveChunk):
-    template_name = "games/fixture_table_active.html"
+class FixturePage(iommi.Page):
+    ongoing = tables.FixtureTable(
+        title="Ongoing",
+        rows=models.Fixture.objects.filter(ended=None).order_by("-started"),
+    )
+    ended = tables.FixtureTable(
+        title="Ended",
+        rows=models.Fixture.objects.exclude(ended=None).order_by("-started"),
+    )
 
 
-class FixtureTableEndedView(tables.FixtureTableEndedChunk):
-    template_name = "games/fixture_table_ended.html"
+class FixtureDetailPage(iommi.Page):
+    body = iommi.Fragment(template="games/fixture_detail.html")
 
 
-class FixtureDetailView(generic.DetailView):
-    model = models.Fixture
-    template_name = "games/fixture_detail.html"
+class FixtureCreatePage(iommi.Page):
+    form = iommi.Form.create(auto__model=models.Fixture)
 
+class FixtureUpdatePage(iommi.Page):
+    form = forms.FixtureUpdateForm()
 
-class FixtureCreateView(mixins.LoginRequiredMixin, generic.CreateView):
-    model = models.Fixture
-    form_class = forms.FixtureCreateForm
-    template_name = "games/fixture_create.html"
-
-
-class FixtureUpdateView(mixins.LoginRequiredMixin, generic.UpdateView):
-    model = models.Fixture
-    template_name = "games/fixture_update.html"
-    form_class = forms.FixtureUpdateForm
-
-    def form_valid(self, form: forms.FixtureUpdateForm) -> http.HttpResponse:
-        response = super().form_valid(form)
-        form.save()
-        return response
