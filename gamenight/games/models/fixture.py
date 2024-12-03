@@ -58,10 +58,10 @@ class Fixture(models.Model):
     def create_url() -> str:
         """Get the URL to create a fixture."""
         return urls.reverse("fixtures:create")
-    
+
     def get_flat_ranks(self) -> "list[dict[str, str | int]]":
         """Get the ranks of the players in the fixture.
-        
+
         This produces a special format that can be used in HTML forms.
         """
         # TODO: Define a typed dictionary for this.
@@ -69,7 +69,9 @@ class Fixture(models.Model):
         for rank in self.rank_set.all():
             ranks[rank.rank].append({"value": rank.user.username, "name": rank.user.username})
         if not self.game.ranked:
-            assert len(ranks.keys()) <= 2, "There should only ever be two ranks in a non-ranked game."  # noqa: PLR2004
+            assert (
+                len(ranks.keys()) <= 2  # noqa: PLR2004
+            ), "There should only ever be two ranks in a non-ranked game."
             return [
                 *ranks[sorted(ranks.keys())[0]],
                 {"value": 1, "name": "Winners"},

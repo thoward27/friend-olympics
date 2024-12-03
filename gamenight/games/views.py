@@ -1,16 +1,14 @@
 # Create your views here.
-import collections
-import dataclasses
 import logging
 
 import iommi  # type: ignore[import]
 import iommi.templates
 from cryptography import fernet
-from django import http, template
+from django import http
 from django.conf import settings
 from django.contrib import auth
 
-from gamenight.games import models, tables, forms
+from gamenight.games import forms, models, tables
 
 
 def login(request: http.HttpRequest, username: str, encrypted_password: str) -> http.HttpResponse:
@@ -57,6 +55,6 @@ class FixtureDetailPage(iommi.Page):
 class FixtureCreatePage(iommi.Page):
     form = iommi.Form.create(auto__model=models.Fixture)
 
+
 class FixtureUpdatePage(iommi.Page):
     form = forms.FixtureUpdateForm()
-

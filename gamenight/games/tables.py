@@ -3,7 +3,6 @@ from django import template
 
 from gamenight.games import models
 
-
 # Some helpful column templates.
 timesince = template.Template("<td>{% if value %}{{ value|timesince }} ago{% endif %}</td>")
 
@@ -41,8 +40,6 @@ class GameTable(iommi.Table):
         rows = models.Game.objects.all()
         title = "Games"
         page_size = 30
-
-
 
 
 class FixtureTable(iommi.Table):

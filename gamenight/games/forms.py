@@ -1,15 +1,8 @@
-import logging
-from typing import Any, cast
-
-from django import forms
-from django.http import QueryDict
-from django.template import loader
-from django.utils import safestring
+import iommi
+from django import http, template
 
 from gamenight.games import models
-import iommi
-from django import template
-from django import http
+
 
 class FixtureUpdateForm(iommi.Form):
     title = iommi.Fragment(template=template.Template("<h1>Update Result</h1>"))
