@@ -46,7 +46,7 @@ class Fixture(models.Model):
     def save(self, *args, **kwargs) -> None:
         """Save the fixture."""
         if self.ended is not None and not self.applied:
-            logging.warning("Finishing fixture, applying ELO updates.")
+            logging.debug("Finishing fixture, applying ELO updates.")
             self.apply_elo_updates()
         super().save(*args, **kwargs)
 
@@ -112,26 +112,28 @@ class Fixture(models.Model):
 
         current_scores = {result.user: result.user.score for result in results}
         updates: dict[User, int] = collections.defaultdict(int)
+        players = [r.user for r in results]
+        pairwise_dict = {q: {p: 0 for p in players} for q in players}
         for rank_one, players_one in ranks.items():
             for rank_two, players_two in ranks.items():
-                if rank_one > rank_two:
-                    continue
                 for player_one in players_one:
                     for player_two in players_two:
                         if player_one == player_two:
                             continue
-                        delta_player_one, delta_player_two = _elo_delta(
+                        delta = _elo_delta(
                             self.game,
                             rank_one,
                             current_scores[player_one],
                             rank_two,
                             current_scores[player_two],
                         )
-                        updates[player_one] += delta_player_one
-                        updates[player_two] += delta_player_two
-            if not self.game.ranked:
-                # If this game is win/lose, then we do not compute the partial updates.
-                break
+                        pairwise_dict[player_one][player_two] = delta
+                        updates[player_one] += delta
+        pairwise_table = [
+            [pairwise_dict[player_one][player_two] for player_two in players]
+            for player_one in players
+        ]
+        _delta_sums = [sum(row) for row in pairwise_table]
         return updates
 
     def apply_elo_updates(self) -> None:
@@ -141,6 +143,8 @@ class Fixture(models.Model):
             return
         updates = self.calculate_elo_updates()
         for player, update in updates.items():
+            if player.score + update < 0:
+                assert player.score + update >= 0, [(p.score, u) for p, u in updates.items()]
             player.score += update
             player.save()
         self.applied = True
@@ -153,27 +157,29 @@ def _elo_delta(
     score_one: float,
     rank_two: int,
     score_two: float,
-) -> tuple[int, int]:
+) -> int:
     """Compute the ELO update for two players."""
-    assert game.ranked or rank_one == 1
-    assert rank_one <= rank_two, f"{rank_one} is not greater than or equal to {rank_two}"
-    prob_one = 1 / (1 + 10 ** ((score_one - score_two) / 400))
-    prob_two = 1 / (1 + 10 ** ((score_two - score_one) / 400))
-    update_one = game.importance * (_win_lose_draw(rank_one, rank_two) - prob_one)
-    update_two = game.importance * (_win_lose_draw(rank_two, rank_one) - prob_two)
-    if (diff := abs(rank_one - rank_two)) > 1:
-        # If the ranks are more than one apart, then the decay rate is applied.
-        update_one *= game.decay**diff
-        update_two *= game.decay**diff
+    q1 = 10 ** (score_one / 400)
+    q2 = 10 ** (score_two / 400)
+    expected_one = q1 / (q1 + q2)
+    expected_two = q2 / (q1 + q2)
+    assert math.isclose(
+        expected_one + expected_two,
+        1,
+        abs_tol=1e-6,
+    ), f"{expected_one=} {expected_two=}"
+    update_one = game.importance * (_win_lose_draw(rank_one, rank_two) - expected_one)
+    update_two = game.importance * (_win_lose_draw(rank_two, rank_one) - expected_two)
+    assert math.isclose(
+        math.fabs(update_one + update_two),
+        0,
+        abs_tol=1e-6,
+    ), f"{update_one=} {update_two=}"
     # A game's weight is reduced if the outcome is based on chance.
     # IE, a coinflip game should have a lower weight than a game of darts.
     if game.randomness:
         update_one *= 1 - game.randomness
-        update_two *= 1 - game.randomness
-    update_one = math.trunc(update_one)
-    update_two = math.trunc(update_two)
-    assert update_one + update_two == 0, f"{update_one=} {update_two=}"
-    return update_one, update_two
+    return math.trunc(update_one)
 
 
 def _win_lose_draw(rank_one: int, rank_two: int) -> float:
