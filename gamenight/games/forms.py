@@ -14,6 +14,8 @@ class FixtureUpdateForm(iommi.Form):
     )
     users = iommi.Field(
         extra_evaluated__ranks=lambda fixture, **_: fixture.get_flat_ranks(),
+        extra_evaluated__max_rank=lambda fixture, **_: fixture.get_max_rank(),
+        extra_evaluated__group_ranks=lambda fixture, **_: fixture.get_grouped_ranks(),
         initial=lambda fixture, **_: fixture.users.count(),
         template="chunk/rank_input.html",
         is_list=True,
@@ -22,10 +24,12 @@ class FixtureUpdateForm(iommi.Form):
     class Meta:
         instance = lambda params, **_: params.fixture  # noqa: E731
         actions__finish = iommi.Action.button(
-            attrs__href="/",
+            attrs__href=".",
+            attrs__access_key="s",
+            attrs__name=lambda action, **_: action.own_target_marker(),
             attrs__class={"btn-danger": True},
             after="submit",
-            post_handler=lambda **_: http.HttpResponseRedirect("/"),
+            post_handler=lambda fixture, **_: http.HttpResponseRedirect(fixture.finish()),
         )
 
         @staticmethod

@@ -9,7 +9,7 @@
             {% endif %}
         </div>
     </div>
-    <h3>Current Ranks</h3>
+    <h3>Ranks</h3>
     <ul>
         {% for rank in fixture.rank_set.all %}
             <li style="list-style: none;">{{ rank.rank|default:"None" }}. {{ rank.user.username }} {% if rank.team %}(team: {{ rank.team }}){% endif %}</li>

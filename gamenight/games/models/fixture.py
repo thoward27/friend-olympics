@@ -59,48 +59,46 @@ class Fixture(models.Model):
         """Get the URL to create a fixture."""
         return urls.reverse("fixtures:create")
 
-    def get_flat_ranks(self) -> "list[dict[str, str | int]]":
+    def get_max_rank(self) -> int:
+        """Get the highest rank allowed in this fixture."""
+        return self.rank_set.count()
+
+    def get_grouped_ranks(self) -> dict[int, list[str]]:
+        """Get the ranks of the players in the fixture, grouped by rank."""
+        ranks = collections.defaultdict(list)
+        for combined in self.get_flat_ranks():
+            rank, username = combined.split("--", 1)
+            rank = int(rank)
+            ranks[rank].append(username)
+        max_rank = self.get_max_rank()
+        if len(ranks.keys()) < max_rank:
+            for i in range(1, max_rank + 1):
+                if i not in ranks:
+                    ranks[i] = []
+        return dict(ranks)
+
+    def get_flat_ranks(self) -> "list[str]":
         """Get the ranks of the players in the fixture.
 
         This produces a special format that can be used in HTML forms.
         """
-        # TODO: Define a typed dictionary for this.
-        ranks: dict[int, list[dict]] = collections.defaultdict(list)
-        for rank in self.rank_set.all():
-            ranks[rank.rank].append({"value": rank.user.username, "name": rank.user.username})
-        if not self.game.ranked:
-            assert (
-                len(ranks.keys()) <= 2  # noqa: PLR2004
-            ), "There should only ever be two ranks in a non-ranked game."
-            return [
-                *ranks[sorted(ranks.keys())[0]],
-                {"value": 1, "name": "Winners"},
-                *(ranks[sorted(ranks.keys())[1]] if len(ranks.keys()) > 1 else []),
-            ]
-        # TODO: Handle ranked games.
-        return ranks[sorted(ranks.keys())[0]]
+        return [f"{rank.rank}--{rank.user.username}" for rank in self.rank_set.all().order_by("rank")]
 
     def set_flat_ranks(self, ranks: list[str]) -> None:
         """Update ranks based on the flat ranks from the HTML form."""
-        # Ranks are something like ["alice", 1, "bob", "charlie", 2, "ned"]
-        # For unranked games, you will get ["alice", "bob", 1, "charlie", "ned"]
-        # Using this information, we want to update the ranks of all players in the fixture.
-        results: dict[int, list[str]] = collections.defaultdict(list)
-        # TODO: Validate that the text sorts are in correct order.
-        markers = [rank for rank in ranks if rank.isdigit()]
-        last_position = 0
-        for marker in markers:
-            position = ranks.index(marker)
-            results[int(marker)] = ranks[last_position:position]
-            last_position = position + 1
-        results[int(last_position) + 1] = ranks[last_position:]
-        for rank, usernames in results.items():
-            self.rank_set.filter(user__username__in=usernames).update(rank=rank)
+        max_rank = self.get_max_rank()
+        for combined in ranks:
+            rank, user = combined.split("--", 1)
+            assert rank.isdigit(), f"{rank=}"
+            assert int(rank) <= max_rank, f"{rank=}"
+            updated = self.rank_set.filter(user__username=user).update(rank=int(rank))
+            assert updated == 1, f"{updated=}"
 
-    def finish(self) -> None:
+    def finish(self) -> str:
         """Finish the fixture."""
         self.ended = datetime.datetime.now(tz=zoneinfo.ZoneInfo("America/New_York"))
         self.save()
+        return self.get_absolute_url()
 
     def calculate_elo_updates(self) -> "dict[User, int]":
         """Compute ELO updates for every player in the fixture."""

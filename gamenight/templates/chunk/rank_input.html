@@ -1,6 +1,9 @@
-<ol class="list-group sortable"
-    id="rank">
-    {% for rank in form.fields.users.extra_evaluated.ranks %}
+{% for rank, users in form.fields.users.extra_evaluated.group_ranks.items %}
+<h2>Rank {{ rank }}</h2>
+<ol class="list-group sortable rank border p-3 mb-3"
+    style="min-height: 50px"
+    id="{{ rank }}">
+    {% for user in users %}
     <li class="list-group-item">
         <span class="material-symbols-outlined handle"
                 style="cursor: move">
@@ -8,11 +11,12 @@
         </span>
         <input type="hidden"
                 name="users"
-                value="{{ rank.value }}">
-        {{ rank.name }} {% if rank.team %}(team: {{ rank.team }}){% endif %}
+                value="{{ rank }}--{{ user }}">
+        {{ user }}
     </li>
     {% endfor %}
 </ol>
+{% endfor %}
 
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
@@ -37,6 +41,7 @@
                 onEnd: function (evt) {
                     // this.option("disabled", true);
                     var inputElement = evt.item.querySelector('input');
+                    inputElement.value = evt.to.id + '--' + inputElement.value.split('--')[1];
                     // if (evt.to.id === 'order') {
                     //     inputElement.name = `user_id`;
                     // } else {
