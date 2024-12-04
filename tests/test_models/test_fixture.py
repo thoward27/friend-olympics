@@ -21,7 +21,7 @@ class TestFixture(base.BaseTestCase):
         users = [self.make_user() for _ in range(5)]
         fixture = self.make_fixture(users=users, game=game)
         for i, user in enumerate(users):
-            fixture.rank_set.filter(user=user).update(rank=i)
+            fixture.rank_set.filter(user=user).update(rank=i + 1)
 
         updates = fixture.calculate_elo_updates()
         self.assertEqual(sum(updates.values()), 0)
@@ -49,7 +49,7 @@ class TestFixture(base.BaseTestCase):
         users = [self.make_user() for _ in range(5)]
         fixture = self.make_fixture(users=users, game=game)
         for i, user in enumerate(users):
-            fixture.rank_set.filter(user=user).update(rank=i)
+            fixture.rank_set.filter(user=user).update(rank=i + 1)
         fixture.finish()
         fixture.apply_elo_updates()
         for user in users:
@@ -68,17 +68,19 @@ class TestFixture(base.BaseTestCase):
 
     def test_check_constraints(self):
         self.assertRaises(IntegrityError, self.make_fixture, applied=True, ended=None)
-    
+
     def test_get_grouped_ranks(self):
         game = self.make_game(ranked=True)
         users = [self.make_user(username=f"user{i}") for i in range(5)]
         fixture = self.make_fixture(users=users, game=game)
         self.assertEqual(
-            fixture.get_grouped_ranks(), {0: ["user0", "user1","user2","user3","user4"], 1: [], 2: [], 3: [], 4: [], 5: []}
+            fixture.get_grouped_ranks(),
+            {0: ["user0", "user1", "user2", "user3", "user4"], 1: [], 2: [], 3: [], 4: [], 5: []},
         )
         fixture.set_flat_ranks(["1--user4", "2--user3", "3--user2", "4--user1", "5--user0"])
         self.assertEqual(
-            fixture.get_grouped_ranks(), {1: ["user4"], 2: ["user3"], 3: ["user2"], 4: ["user1"], 5: ["user0"]}
+            fixture.get_grouped_ranks(),
+            {1: ["user4"], 2: ["user3"], 3: ["user2"], 4: ["user1"], 5: ["user0"]},
         )
 
     def test_flat_ranks__good(self):
@@ -86,18 +88,31 @@ class TestFixture(base.BaseTestCase):
         users = [self.make_user(username=f"user{i}") for i in range(5)]
         fixture = self.make_fixture(users=users, game=game)
         self.assertEqual(
-            fixture.get_flat_ranks(), ["0--user0", "0--user1", "0--user2", "0--user3", "0--user4"]
+            fixture.get_flat_ranks(),
+            ["0--user0", "0--user1", "0--user2", "0--user3", "0--user4"],
         )
         fixture.set_flat_ranks(["1--user4", "2--user3", "3--user2", "4--user1", "5--user0"])
         self.assertEqual(
-            fixture.get_flat_ranks(), ["1--user4", "2--user3", "3--user2", "4--user1", "5--user0"]
+            fixture.get_flat_ranks(),
+            ["1--user4", "2--user3", "3--user2", "4--user1", "5--user0"],
         )
 
     def test_flat_ranks__bad(self):
         game = self.make_game(ranked=True)
         users = [self.make_user(username=f"user{i}") for i in range(3)]
         fixture = self.make_fixture(users=users, game=game)
-        self.assertEqual(
-            fixture.get_flat_ranks(), ["0--user0", "0--user1", "0--user2"]
+        self.assertEqual(fixture.get_flat_ranks(), ["0--user0", "0--user1", "0--user2"])
+        self.assertRaises(
+            AssertionError,
+            fixture.set_flat_ranks,
+            ["4--user0", "0--user1", "0--user2"],
         )
-        self.assertRaises(AssertionError, fixture.set_flat_ranks, ["4--user0", "0--user1", "0--user2"])
+
+    def test_get_max_rank(self):
+        game = self.make_game(ranked=True)
+        users = [self.make_user(username=f"user{i}") for i in range(5)]
+        fixture = self.make_fixture(users=users, game=game)
+        self.assertEqual(fixture.get_max_rank(), 5)
+        game = self.make_game(ranked=False)
+        fixture = self.make_fixture(users=users, game=game)
+        self.assertEqual(fixture.get_max_rank(), 2)

@@ -2,7 +2,7 @@ from django import urls
 from django.views import generic
 from iommi import path
 
-from gamenight.games import consumers, models, tables, views
+from gamenight.games import consumers, forms, models, tables, views
 
 path.register_path_decoding(
     game_slug=models.Game.slug,
@@ -25,7 +25,7 @@ fixture_patterns = [
         ).as_view(),
         name="ended",
     ),
-    urls.path("create/", views.FixtureCreatePage().as_view(), name="create"),
+    urls.path("create/", forms.FixtureCreateForm().as_view(), name="create"),
     urls.path("view/<fixture>/", views.FixtureDetailPage().as_view(), name="detail"),
     urls.path("update/<fixture>/", views.FixtureUpdatePage().as_view(), name="update"),
 ]

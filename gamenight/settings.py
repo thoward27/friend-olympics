@@ -159,10 +159,8 @@ PUBLIC_PATHS = [
 ]
 
 
-import iommi  # noqa: E402
-from iommi import style_bootstrap5  # noqa: E402
-
-IOMMI_DEFAULT_STYLE = iommi.Style(
-    style_bootstrap5.bootstrap5,
-    base_template="base.html",
-)
+IOMMI_DEFAULT_STYLE = "bootstrap5p"  # iommi.Style(
+#     style_bootstrap5.bootstrap5,
+#     base_template="base.html",
+#     root__assets__iommi_js=iommi.Asset.js(attrs__src=static.static("iommi_custom.js")),
+# )

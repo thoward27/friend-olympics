@@ -53,7 +53,8 @@ class FixtureDetailPage(iommi.Page):
 
 
 class FixtureCreatePage(iommi.Page):
-    form = iommi.Form.create(auto__model=models.Fixture)
+    # form = iommi.Form.create(auto__model=models.Fixture, auto__include=["game", "users"])
+    form = forms.FixtureCreateForm()
 
 
 class FixtureUpdatePage(iommi.Page):

@@ -55,26 +55,36 @@ class Fixture(models.Model):
         return urls.reverse("fixtures:detail", kwargs={"fixture": self.pk})
 
     @staticmethod
+    def create(game: "Game", users: "list[User]") -> "Fixture":
+        """Create a fixture."""
+        fixture = Fixture.objects.create(game=game)
+        fixture.users.set(users)
+        return fixture
+
+    @staticmethod
     def create_url() -> str:
         """Get the URL to create a fixture."""
         return urls.reverse("fixtures:create")
 
     def get_max_rank(self) -> int:
         """Get the highest rank allowed in this fixture."""
+        if not self.game.ranked:
+            return 2
         return self.rank_set.count()
 
     def get_grouped_ranks(self) -> dict[int, list[str]]:
         """Get the ranks of the players in the fixture, grouped by rank."""
         ranks = collections.defaultdict(list)
         for combined in self.get_flat_ranks():
-            rank, username = combined.split("--", 1)
-            rank = int(rank)
+            rank_str, username = combined.split("--", 1)
+            rank = int(rank_str)
             ranks[rank].append(username)
         max_rank = self.get_max_rank()
-        if len(ranks.keys()) < max_rank:
+        if max(ranks.keys()) < max_rank:
             for i in range(1, max_rank + 1):
                 if i not in ranks:
                     ranks[i] = []
+        assert len(ranks.keys()) <= max_rank + 1, f"{ranks=}, {len(ranks)}, {max_rank}"
         return dict(ranks)
 
     def get_flat_ranks(self) -> "list[str]":
@@ -82,7 +92,9 @@ class Fixture(models.Model):
 
         This produces a special format that can be used in HTML forms.
         """
-        return [f"{rank.rank}--{rank.user.username}" for rank in self.rank_set.all().order_by("rank")]
+        return [
+            f"{rank.rank}--{rank.user.username}" for rank in self.rank_set.all().order_by("rank")
+        ]
 
     def set_flat_ranks(self, ranks: list[str]) -> None:
         """Update ranks based on the flat ranks from the HTML form."""
@@ -96,6 +108,7 @@ class Fixture(models.Model):
 
     def finish(self) -> str:
         """Finish the fixture."""
+        assert self.rank_set.filter(rank=0).count() == 0, "there are some unranked players!"
         self.ended = datetime.datetime.now(tz=zoneinfo.ZoneInfo("America/New_York"))
         self.save()
         return self.get_absolute_url()
