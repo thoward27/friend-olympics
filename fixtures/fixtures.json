@@ -2,12 +2,42 @@
   {
     "fields": {
       "applied": true,
+      "ended": "2024-12-04T15:49:16.079Z",
+      "game": "ddebbeee-ecef-4ad1-b9c4-a301889a9387",
+      "started": "2024-12-04T15:48:10.620Z"
+    },
+    "model": "games.fixture",
+    "pk": "18a1f256-dd69-40e4-8bdd-20eba91361df"
+  },
+  {
+    "fields": {
+      "applied": true,
+      "ended": "2024-12-04T15:40:50.879Z",
+      "game": "504b97f8-9f9a-413d-8354-410629061f8e",
+      "started": "2024-12-04T15:37:12.442Z"
+    },
+    "model": "games.fixture",
+    "pk": "1a900063-2dd8-45e8-94a2-b1f181f07bc5"
+  },
+  {
+    "fields": {
+      "applied": true,
       "ended": "2024-11-30T03:26:48Z",
       "game": "9efa1db1-b323-46a2-9470-8f81e9edeaa4",
       "started": "2024-11-30T03:26:31.345Z"
     },
     "model": "games.fixture",
     "pk": "3b21f189-70b8-4e2b-a510-4a68779b7328"
+  },
+  {
+    "fields": {
+      "applied": false,
+      "ended": null,
+      "game": "504b97f8-9f9a-413d-8354-410629061f8e",
+      "started": "2024-12-04T15:50:48.803Z"
+    },
+    "model": "games.fixture",
+    "pk": "55b16957-76a4-4ef7-bbb2-e39fffb2998b"
   },
   {
     "fields": {
@@ -21,8 +51,18 @@
   },
   {
     "fields": {
-      "applied": false,
-      "ended": null,
+      "applied": true,
+      "ended": "2024-12-04T15:40:33.588Z",
+      "game": "504b97f8-9f9a-413d-8354-410629061f8e",
+      "started": "2024-12-04T15:39:12.485Z"
+    },
+    "model": "games.fixture",
+    "pk": "675b6db0-448c-4611-a0b2-1295ba5fe49d"
+  },
+  {
+    "fields": {
+      "applied": true,
+      "ended": "2024-12-04T12:33:29.122Z",
       "game": "c7c5aaba-e0d1-4ff1-b26c-22a20c66af17",
       "started": "2024-12-01T15:52:46.371Z"
     },
@@ -42,11 +82,41 @@
   {
     "fields": {
       "applied": true,
+      "ended": "2024-12-04T15:43:54.456Z",
+      "game": "504b97f8-9f9a-413d-8354-410629061f8e",
+      "started": "2024-12-04T15:42:01.643Z"
+    },
+    "model": "games.fixture",
+    "pk": "9eec481f-0faa-4bdf-a6d2-1ef1fc788403"
+  },
+  {
+    "fields": {
+      "applied": true,
       "ended": "2024-12-01T10:17:00Z",
       "game": "92ec86fa-612a-48dd-8edb-47bd608e5277",
       "started": "2024-11-30T03:45:27.231Z"
     },
     "model": "games.fixture",
     "pk": "ce17b0c4-ad23-4b17-baa3-b6e37e61063e"
+  },
+  {
+    "fields": {
+      "applied": true,
+      "ended": "2024-12-04T15:47:45.554Z",
+      "game": "504b97f8-9f9a-413d-8354-410629061f8e",
+      "started": "2024-12-04T15:46:16.763Z"
+    },
+    "model": "games.fixture",
+    "pk": "f4cdd29d-3008-4d3c-87cd-c5048d5e56a6"
+  },
+  {
+    "fields": {
+      "applied": true,
+      "ended": "2024-12-04T15:51:07.835Z",
+      "game": "504b97f8-9f9a-413d-8354-410629061f8e",
+      "started": "2024-12-04T15:51:01.885Z"
+    },
+    "model": "games.fixture",
+    "pk": "f95a00b2-7d10-4107-83e8-8e710cca49e1"
   }
 ]

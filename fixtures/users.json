@@ -1,17 +1,17 @@
 [
   {
     "fields": {
-      "date_joined": "2024-11-29T17:55:57.794Z",
+      "date_joined": "2024-11-29T17:55:57Z",
       "email": "gamenight@tomhoward.codes",
       "first_name": "Tom",
       "groups": [],
       "is_active": true,
       "is_staff": true,
       "is_superuser": true,
-      "last_login": "2024-12-03T15:05:31.841Z",
+      "last_login": "2024-12-04T15:46:01.140Z",
       "last_name": "Howard",
       "password": "pbkdf2_sha256$870000$5rYcP7rR664AyEkfb0iY6s$JKSsntpqFWO7047TwtccTD/kHvQl/Zy2IBeKkcR36j4=",
-      "score": 1013,
+      "score": 897,
       "user_permissions": [],
       "username": "tom"
     },
@@ -30,7 +30,7 @@
       "last_login": "2024-12-02T15:47:17.002Z",
       "last_name": "Howard",
       "password": "pbkdf2_sha256$870000$iSHDQyWbmRTkbVt6MDVRXQ$0c2grTvQHvGoxSv5CkZFU4UYxIOqRZaHxHhiD73yzqE=",
-      "score": 998,
+      "score": 800,
       "user_permissions": [],
       "username": "tay"
     },
