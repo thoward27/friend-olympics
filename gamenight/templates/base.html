@@ -27,7 +27,8 @@
     {% endfor %}
     {% block iommi_head_contents_last %}{% endblock %}
     <title>Gamenight</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
     <style>
     </style>
 </head>
@@ -57,6 +58,10 @@
                                    href="{% url 'users:table' %}">Leaderboard</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link"
+                                   href="{% url 'fixtures:create' %}">Play Now</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link {{ request|is_active:'games' }}"
                                    href="{% url 'games:table' %}">Games</a>
                             </li>
@@ -77,13 +82,31 @@
                                            href="{% url 'fixtures:ended' %}">Completed</a></li>
                                 </ul>
                             </li>
-                            {% if user.is_staff %}
-                            <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">Admin</a></li>
-                            {% endif %}
                             {% if not user.is_authenticated %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'login' %}">Login</a>
+                                <a class="nav-link"
+                                   href="/auth/login/">Login</a>
                             </li>
+                            {% else %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle  {{ request|is_active:'results' }}"
+                                   href="{% url 'users:detail' %}"
+                                   role="button"
+                                   data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    User
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item"
+                                           href="{% url 'users:detail' %}">Profile</a></li>
+                                    <li><a class="dropdown-item"
+                                           href="/auth/logout/">Logout</a></li>
+                                </ul>
+                            </li>
+                            {% endif %}
+                            {% if user.is_staff %}
+                            <li class="nav-item"><a class="nav-link"
+                                   href="{% url 'admin:index' %}">Admin</a></li>
                             {% endif %}
                         </ul>
                         <!-- <form class="d-flex"
@@ -107,7 +130,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script>
         function sortTable() {
-            const table = document.getElementsByTagName('tbody')[0]; 
+            const table = document.getElementsByTagName('tbody')[0];
             const rows = Array.from(table.rows);
 
             rows.sort((a, b) => {
@@ -122,4 +145,5 @@
     {% block scripts %}
     {% endblock %}
 </body>
+
 </html>
