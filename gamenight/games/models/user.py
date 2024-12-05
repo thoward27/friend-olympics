@@ -49,6 +49,11 @@ class User(AbstractUser):
         super().save(*args, **kwargs)
         self.broadcast_score()
 
+    def set_password(self, raw_password: str | None) -> None:
+        super().set_password(raw_password)
+        assert raw_password is not None
+        self.set_qr_code(raw_password)
+
     def broadcast_score(self) -> None:
         try:
             sync.async_to_sync(UserBroadcaster().send_score)(self.username, self.score)

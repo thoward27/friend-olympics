@@ -1,6 +1,10 @@
+from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
+from django.contrib.auth.forms import UserChangeForm as DjangoUserChangeForm
 from django.utils.translation import gettext_lazy as _
+
+from gamenight.games.widgets import Base64ImageWidget
 
 from .models import Fixture, Game, User
 
@@ -31,11 +35,20 @@ class GameAdmin(admin.ModelAdmin):
     )
 
 
+class UserChangeForm(DjangoUserChangeForm):
+    qr_code_img = forms.CharField(widget=Base64ImageWidget)
+
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self.fields["qr_code_img"].initial = self.instance.get_qr_code()
+
+
 @admin.register(User)
 class UserAdmin(DjangoUserAdmin):
+    form = UserChangeForm
     list_display = ("username", "score", "first_name", "last_name", "is_staff")
     fieldsets = (
-        (None, {"fields": ("username", "password", "score")}),
+        (None, {"fields": ("username", "password", "score", "qr_code_img")}),
         (_("Personal info"), {"fields": ("first_name", "last_name", "email")}),
         (
             _("Permissions"),

@@ -18,3 +18,9 @@ class TestUser(base.BaseTestCase):
         self.assertEqual(User.available.all().count(), 3)
         self.make_fixture(users=[users[0]])
         self.assertEqual(User.available.all().count(), 2)
+
+    def test_set_password(self):
+        user = self.make_user()
+        user.set_password("123456")
+        user.save()
+        self.assertNotEqual(user.qr_code, "")
