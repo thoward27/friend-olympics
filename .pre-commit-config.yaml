@@ -1,0 +1,35 @@
+repos:
+- repo: local
+  hooks:
+  # Run the linter.
+  - id: ruff
+    name: ruff
+    entry: ruff
+    types: [python]
+    language: system
+    pass_filenames: false
+    args: ["check", "--fix", "--exit-non-zero-on-fix", "--show-fixes"]
+  # Run the formatter.
+  - id: ruff-format
+    name: ruff-format
+    entry: ruff
+    language: system
+    types: [python]
+    pass_filenames: false
+    args: ["format"]
+  - id: mypy
+    name: mypy
+    entry: mypy
+    language: system
+    types: [python]
+    pass_filenames: false
+    args: ["--show-error-codes", "--package", "gamenight"]
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v5.0.0
+  hooks:
+  - id: end-of-file-fixer
+  - id: check-added-large-files
+  - id: check-merge-conflict
+  - id: check-toml
+  - id: check-yaml
+  - id: debug-statements
