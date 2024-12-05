@@ -4,7 +4,7 @@ import logging
 import iommi  # type: ignore[import]
 import iommi.templates
 from cryptography import fernet
-from django import http, template, urls
+from django import http, urls
 from django.conf import settings
 from django.contrib import auth
 from iommi import html
@@ -34,12 +34,8 @@ class UserDetailPage(iommi.Page):
     title = html.h1("Profile")
     change_password_header = html.h2("Change Password")
     change_password = forms.UserChangePasswordForm()
-    qr_code_header = html.h2("Your Current QR Code")
-    qr_code = iommi.Fragment(
-        template=lambda request, **_: template.Template(
-            f'<img src="data:image/png;base64,{request.user.get_qr_code()}" />',
-        ),
-    )
+    qrcode_header = html.h2("Your Current QR Code")
+    qrcode = iommi.Fragment(template="chunk/qrcode.html")
 
 
 class UsersPage(iommi.Page):

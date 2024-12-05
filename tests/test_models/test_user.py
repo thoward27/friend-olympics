@@ -23,4 +23,4 @@ class TestUser(base.BaseTestCase):
         user = self.make_user()
         user.set_password("123456")
         user.save()
-        self.assertNotEqual(user.qr_code, "")
+        self.assertNotEqual(user.qrcode, "")

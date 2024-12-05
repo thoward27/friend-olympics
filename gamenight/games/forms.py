@@ -134,7 +134,7 @@ class UserChangePasswordForm(iommi.Form):
             assert request.user.is_authenticated
             user = cast(models.User, request.user)
             user.set_password(form.fields.new_password.value)
-            user.set_qr_code(form.fields.new_password.value)
+            user.set_qrcode(form.fields.new_password.value)
             user.save()
             auth.update_session_auth_hash(request, user)
             return http.HttpResponseRedirect(".")

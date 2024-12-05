@@ -1,3 +1,5 @@
+from typing import cast
+
 from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
@@ -36,11 +38,11 @@ class GameAdmin(admin.ModelAdmin):
 
 
 class UserChangeForm(DjangoUserChangeForm):
-    qr_code_img = forms.CharField(widget=Base64ImageWidget)
+    qrcode_img = forms.CharField(widget=Base64ImageWidget)
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
-        self.fields["qr_code_img"].initial = self.instance.get_qr_code()
+        self.fields["qrcode_img"].initial = cast(User, self.instance).get_qrcode()
 
 
 @admin.register(User)
@@ -48,7 +50,7 @@ class UserAdmin(DjangoUserAdmin):
     form = UserChangeForm
     list_display = ("username", "score", "first_name", "last_name", "is_staff")
     fieldsets = (
-        (None, {"fields": ("username", "password", "score", "qr_code_img")}),
+        (None, {"fields": ("username", "password", "score", "qrcode_img")}),
         (_("Personal info"), {"fields": ("first_name", "last_name", "email")}),
         (
             _("Permissions"),

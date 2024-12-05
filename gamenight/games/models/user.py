@@ -35,7 +35,7 @@ class User(AbstractUser):
     DEFAULT_SCORE = 1000
 
     score = models.PositiveIntegerField(default=DEFAULT_SCORE)
-    qr_code = models.URLField(null=False, blank=True, default="")
+    qrcode = models.URLField(null=False, blank=True, default="")
 
     objects = UserManager()  # type: ignore[misc,assignment]
     available: "models.QuerySet[User]" = AvailableManager()  # type: ignore[assignment]
@@ -52,7 +52,7 @@ class User(AbstractUser):
     def set_password(self, raw_password: str | None) -> None:
         super().set_password(raw_password)
         assert raw_password is not None
-        self.set_qr_code(raw_password)
+        self.set_qrcode(raw_password)
 
     def broadcast_score(self) -> None:
         try:
@@ -60,17 +60,17 @@ class User(AbstractUser):
         except Exception:
             logging.exception("Failed to broadcast user score: %s %s", self.username, self.score)
 
-    def set_qr_code(self, password: str) -> None:
+    def set_qrcode(self, password: str) -> None:
         """Set the QR code for the user."""
         password = fernet.Fernet(settings.FERNET_KEY).encrypt(password.encode()).decode()
-        self.qr_code = urls.reverse(
+        self.qrcode = urls.reverse(
             "users:qr",
             kwargs={"username": self.username, "encrypted_password": password},
         )
 
-    def get_qr_code(self) -> str:
+    def get_qrcode(self) -> str:
         """Get the QR code for the user and return as a b64 string."""
-        url = f"{settings.SCHEMA}://{settings.HOST}{self.qr_code}"
+        url = f"{settings.SCHEMA}://{settings.HOST}{self.qrcode}"
         img: PilImage = qrcode.make(url)
         buffer = io.BytesIO()
         img.save(buffer, format="PNG")

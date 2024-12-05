@@ -10,7 +10,7 @@ from gamenight.games import models
 class Command(base.BaseCommand):
     def handle(self, *_, **__) -> None:
         for user in models.User.objects.all():
-            url = user.get_qr_code()
+            url = user.get_qrcode()
             img = qrcode.make(url)
             pathlib.Path(settings.BASE_DIR / "qrcodes").mkdir(exist_ok=True)
             img.save(settings.BASE_DIR / "qrcodes" / f"{user.username}.png")
