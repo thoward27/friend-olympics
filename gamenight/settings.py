@@ -33,15 +33,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SCHEMA, HOST = os.environ.get("HOST", "http://localhost").split("://", 1)
 PORT = os.environ.get("PORT", "8000")
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY", "insecure-keys")
+SECRET_KEY = os.environ.get("SECRET_KEY", "insecure-key")
 FERNET_KEY = os.environ.get("FERNET_KEY", "fffffffffffffffffffffffffffffffffffffffffff=")
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "1") == "1"
 
 ALLOWED_HOSTS: list[str] = [
@@ -49,8 +43,6 @@ ALLOWED_HOSTS: list[str] = [
 ]
 CSRF_TRUSTED_ORIGINS = [f"{SCHEMA}://{host}" for host in ALLOWED_HOSTS]
 
-
-# Application definition
 
 INSTALLED_APPS = [
     "daphne",
@@ -113,6 +105,8 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
+        "CONN_MAX_AGE": None,
+        "CONN_HEALTH_CHECKS": True,
     },
 }
 
@@ -136,6 +130,16 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = "games.User"
+
+LOGIN_URL = "/auth/login/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/users/"
+
+PUBLIC_PATHS = [
+    "/auth/login/",
+    "/games/",
+    "/users/",
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
@@ -165,18 +169,4 @@ STORAGES = {
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-DEFAULT_SCORE = 1000
-
-LOGIN_REDIRECT_URL = "/"
-PUBLIC_PATHS = [
-    "/games/",
-    "/login/",
-    "/users/",
-]
-
-
-IOMMI_DEFAULT_STYLE = "bootstrap5p"  # iommi.Style(
-#     style_bootstrap5.bootstrap5,
-#     base_template="base.html",
-#     root__assets__iommi_js=iommi.Asset.js(attrs__src=static.static("iommi_custom.js")),
-# )
+IOMMI_DEFAULT_STYLE = "bootstrap5p"

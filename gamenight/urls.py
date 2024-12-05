@@ -19,9 +19,10 @@ Including another URLconf
 from django import urls
 from django.contrib import admin
 from django.urls import path
+from iommi import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("accounts/", urls.include("django.contrib.auth.urls")),
+    path("auth/", views.auth_views()),
     path("", urls.include("gamenight.games.urls")),
 ]
