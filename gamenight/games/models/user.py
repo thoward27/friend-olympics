@@ -17,9 +17,8 @@ if TYPE_CHECKING:
 class AvailableManager(models.Manager):
     def get_queryset(self) -> models.QuerySet:
         queryset = super().get_queryset()
-        return queryset.filter(
-            models.Q(fixture__isnull=True) | models.Q(fixture__ended__isnull=False),
-        ).distinct()
+        # Exclude users that are in a fixture that has not ended.
+        return queryset.exclude(models.Q(fixture__isnull=False) & models.Q(fixture__ended__isnull=True))
 
 
 class User(AbstractUser):

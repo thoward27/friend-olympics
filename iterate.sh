@@ -22,8 +22,6 @@ uv run mypy -p gamenight
 # Load fixture data.
 uv run python manage.py loaddata fixtures/users.json
 uv run python manage.py loaddata fixtures/games.json
-uv run python manage.py loaddata fixtures/fixtures.json
-uv run python manage.py loaddata fixtures/ranks.json
 
 # Run the server.
 uv run python manage.py runserver
@@ -33,7 +31,3 @@ GAMES=`uv run python manage.py dumpdata games.Game`
 echo $GAMES | jq --sort-keys > fixtures/games.json
 USERS=`uv run python manage.py dumpdata games.User`
 echo $USERS | jq --sort-keys > fixtures/users.json
-FIXTURES=`uv run python manage.py dumpdata games.Fixture`
-echo $FIXTURES | jq --sort-keys > fixtures/fixtures.json
-RANKS=`uv run python manage.py dumpdata games.Rank`
-echo $RANKS | jq --sort-keys > fixtures/ranks.json
