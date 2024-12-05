@@ -104,3 +104,9 @@ class Game(models.Model):
     def importance(self) -> int:
         """Compute the importance of the game."""
         return min(self.estimated_duration, 45) + 10
+
+    def can_play(self, players: list) -> bool:
+        """Check if the game can be played by the given players."""
+        if self.maximum_players is None:
+            return self.minimum_players <= len(players)
+        return self.minimum_players <= len(players) <= self.maximum_players

@@ -42,7 +42,7 @@ class IommiBase {
         // in extra method, so it can be overridden
         if (event.state && event.state.reloadOnUserAction) {
             if (this.historyStatePushedByUser) {
-                // TODO in the future
+                //  in the future
                 //  it might be better to rewrite this with element.iommi.reload()
                 //  in await Promise.all() / Promise.allSettled() for all .iommi-table-container,
                 //  so it just reloads all tables, not the whole page
@@ -527,7 +527,7 @@ class IommiSelect2 {
     }
 }
 
-// TODO should this be somehow conditioned? so people can create their own extended instance?
+// should this be somehow conditioned? so people can create their own extended instance?
 window.iommi = new IommiBase({
     select2: new IommiSelect2()
 });
