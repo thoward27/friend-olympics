@@ -205,6 +205,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("score", models.PositiveIntegerField(default=1000)),
+                ("qr_code", models.URLField(blank=True, default="")),
                 (
                     "groups",
                     models.ManyToManyField(

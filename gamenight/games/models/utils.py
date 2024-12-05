@@ -1,5 +1,3 @@
-from django.conf import settings
-
 from gamenight.games.models.fixture import Fixture
 from gamenight.games.models.game import Game
 from gamenight.games.models.user import User
@@ -19,7 +17,7 @@ def play(game: Game, players: list[User]) -> Fixture:
 def recompute_all_scores() -> None:
     """Recompute scores for all users."""
     for user in User.objects.all():
-        user.score = settings.DEFAULT_SCORE
+        user.score = User.DEFAULT_SCORE
         user.save()
     for fixture in Fixture.objects.filter(ended__isnull=False).order_by("ended"):
         fixture.apply_elo_updates()

@@ -4,14 +4,19 @@ import logging
 import iommi  # type: ignore[import]
 import iommi.templates
 from cryptography import fernet
-from django import http
+from django import http, template
 from django.conf import settings
 from django.contrib import auth
+from iommi import html
 
 from gamenight.games import forms, models, tables
 
 
-def login(request: http.HttpRequest, username: str, encrypted_password: str) -> http.HttpResponse:
+def qr_login(
+    request: http.HttpRequest,
+    username: str,
+    encrypted_password: str,
+) -> http.HttpResponse:
     """Login to the gamenight portal.
 
     This is an insane way to do this, but it allows users to login by scanning their QR code.
@@ -22,10 +27,22 @@ def login(request: http.HttpRequest, username: str, encrypted_password: str) -> 
         auth.login(request, user)
     else:
         logging.error("Failed to login user %s %s", username, password)
-    return http.HttpResponseRedirect("/")
+    return http.HttpResponseRedirect("/auth/change_password/")
 
 
-class UserPage(iommi.Page):
+class UserDetailPage(iommi.Page):
+    title = html.h1("Profile")
+    change_password_header = html.h2("Change Password")
+    change_password = forms.UserChangePasswordForm()
+    qr_code_header = html.h2("Your Current QR Code")
+    qr_code = iommi.Fragment(
+        template=lambda request, **_: template.Template(
+            f'<img src="data:image/png;base64,{request.user.get_qr_code()}" />',
+        ),
+    )
+
+
+class UsersPage(iommi.Page):
     users = tables.UserTable()
 
 

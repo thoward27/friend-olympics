@@ -111,3 +111,35 @@ class FixtureCreateForm(iommi.Form):
         fixture.users.set(form.fields.users.raw_data)
         fixture.save()
         return http.HttpResponseRedirect(".")
+
+
+class UserChangePasswordForm(iommi.Form):
+    class Meta:
+        @staticmethod
+        def actions__submit__post_handler(
+            form: "UserChangePasswordForm",
+            request: http.HttpRequest,
+            **_,
+        ) -> http.HttpResponse | None:
+            if not form.is_valid():
+                return None
+            assert request.user.is_authenticated
+            user = cast(models.User, request.user)
+            user.set_password(form.fields.new_password.value)
+            user.set_qr_code(form.fields.new_password.value)
+            user.save()
+            auth.update_session_auth_hash(request, user)
+            return http.HttpResponseRedirect(".")
+
+    current_password = iommi.Field.password(
+        is_valid=views.current_password__is_valid,
+        display_name="Current password",
+    )
+    new_password = iommi.Field.password(
+        is_valid=views.new_password__is_valid,
+        display_name="New password",
+    )
+    confirm_password = iommi.Field.password(
+        is_valid=views.confirm_password__is_valid,
+        display_name="Confirm password",
+    )

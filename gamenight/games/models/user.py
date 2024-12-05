@@ -1,7 +1,12 @@
+import base64
+import io
 import logging
 from typing import TYPE_CHECKING
 
+import qrcode
 from asgiref import sync
+from cryptography import fernet
+from django import urls
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
@@ -10,6 +15,7 @@ from gamenight.games import broadcaster
 
 if TYPE_CHECKING:
     from django.db.models.query import QuerySet
+    from qrcode.image.pil import PilImage
 
     from gamenight.games.models.fixture import Fixture
 
@@ -26,7 +32,10 @@ class AvailableManager(models.Manager):
 class User(AbstractUser):
     """A user of the system."""
 
-    score = models.PositiveIntegerField(default=settings.DEFAULT_SCORE)
+    DEFAULT_SCORE = 1000
+
+    score = models.PositiveIntegerField(default=DEFAULT_SCORE)
+    qr_code = models.URLField(null=False, blank=True, default="")
 
     objects = UserManager()  # type: ignore[misc,assignment]
     available: "models.QuerySet[User]" = AvailableManager()  # type: ignore[assignment]
@@ -45,6 +54,22 @@ class User(AbstractUser):
             sync.async_to_sync(UserBroadcaster().send_score)(self.username, self.score)
         except Exception:
             logging.exception("Failed to broadcast user score: %s %s", self.username, self.score)
+
+    def set_qr_code(self, password: str) -> None:
+        """Set the QR code for the user."""
+        password = fernet.Fernet(settings.FERNET_KEY).encrypt(password.encode()).decode()
+        self.qr_code = urls.reverse(
+            "users:qr",
+            kwargs={"username": self.username, "encrypted_password": password},
+        )
+
+    def get_qr_code(self) -> str:
+        """Get the QR code for the user and return as a b64 string."""
+        url = f"{settings.SCHEMA}://{settings.HOST}{self.qr_code}"
+        img: PilImage = qrcode.make(url)
+        buffer = io.BytesIO()
+        img.save(buffer, format="PNG")
+        return base64.b64encode(buffer.getvalue()).decode()
 
 
 class UserBroadcaster(broadcaster.BaseBroadcaster):

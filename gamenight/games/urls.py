@@ -36,14 +36,16 @@ game_patterns = [
     urls.path("<game_slug>/", views.GamePage().as_view(), name="detail"),
 ]
 
+
 user_patterns = [
-    urls.path("", views.UserPage().as_view(), name="table"),
+    urls.path("", views.UsersPage().as_view(), name="table"),
+    urls.path("detail/", views.UserDetailPage().as_view(), name="detail"),
+    urls.path("login/token/<str:username>/<str:encrypted_password>", views.qr_login, name="qr"),
 ]
 
 
 urlpatterns = [
     urls.path("", generic.RedirectView.as_view(url="/users/")),
-    urls.path("auth/login/<str:username>/<str:encrypted_password>", views.login, name="qr-login"),
     urls.path("users/", urls.include((user_patterns, "users"))),
     urls.path("games/", urls.include((game_patterns, "games"))),
     urls.path("fixtures/", urls.include((fixture_patterns, "fixtures"))),
