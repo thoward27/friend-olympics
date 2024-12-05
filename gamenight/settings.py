@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "insecure-keys")
 FERNET_KEY = os.environ.get("FERNET_KEY", "fffffffffffffffffffffffffffffffffffffffffff=")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "1") == "1"
 
 ALLOWED_HOSTS: list[str] = [
     HOST,
