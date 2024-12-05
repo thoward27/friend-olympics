@@ -139,6 +139,7 @@ PUBLIC_PATHS = [
     "/auth/login/",
     "/games/",
     "/users/",
+    "/users/login/token/*",
 ]
 
 # Internationalization
