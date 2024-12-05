@@ -9,7 +9,6 @@ uv run python manage.py check
 
 # Migrate the database
 uv run python manage.py migrate
-uv run python manage.py collectstatic --noinput
 
 # Load fixture data.
 uv run python manage.py loaddata fixtures/users.json

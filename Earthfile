@@ -16,6 +16,7 @@ build:
     ARG --required EARTHLY_GIT_BRANCH
     ARG --required EARTHLY_GIT_HASH
     COPY --dir fixtures gamenight tests entrypoint.sh manage.py README.md ./
+    RUN uv run python manage.py collectstatic --noinput
     ENTRYPOINT ["./entrypoint.sh"]
     CMD ["uv", "run", "daphne", "--bind=0.0.0.0", "--port=8000", "gamenight.asgi:application"]
     EXPOSE 8000
