@@ -20,18 +20,38 @@ class UserTable(iommi.Table):
 
 class GameTable(iommi.Table):
     name = iommi.Column(cell__url=lambda row, **_: row.get_absolute_url())
-    ranked = iommi.Column.boolean(filter__include=True)
+    players = iommi.Column(
+        cell__value=lambda row, **_: f"{row.minimum_players} - {row.maximum_players}",
+        sortable=False,
+        # TODO: How can we filter on someone just saying "I have 2 players?"
+        filter__include=False,
+        cell__attrs__class={"d-md-none": True},
+        header__attrs__class={"d-md-none": True},
+    )
     minimum_players = iommi.Column.number(
         filter__include=True,
         filter__query_operator_for_field=">=",
+        filter__field__call_target__attribute="integer",
+        filter__parse=lambda string_value, **_: int(string_value),
+        display_name="Min players",
+        cell__attrs__class={"d-none": True, "d-md-table-cell": True},
+        header__attrs__class={"d-none": True, "d-md-table-cell": True},
     )
     maximum_players = iommi.Column.number(
         filter__include=True,
         filter__query_operator_for_field="<=",
+        display_name="Max players",
+        cell__attrs__class={"d-none": True, "d-md-table-cell": True},
+        header__attrs__class={"d-none": True, "d-md-table-cell": True},
     )
     estimated_duration = iommi.Column.number(
+        cell__attrs__class={"d-none": True, "d-md-table-cell": True},
+        header__attrs__class={"d-none": True, "d-md-table-cell": True},
+    )
+    ranked = iommi.Column.boolean(
         filter__include=True,
-        filter__query_operator_for_field="<=",
+        cell__attrs__class={"d-none": True, "d-md-table-cell": True},
+        header__attrs__class={"d-none": True, "d-md-table-cell": True},
     )
     # TODO: Play link from each game.
     # play = iommi.Column.link(cell__uddrl=lambda )
