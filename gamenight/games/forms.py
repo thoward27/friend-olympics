@@ -1,5 +1,9 @@
+from typing import cast
+
 import iommi
 from django import http, template, urls
+from django.contrib import auth
+from iommi import html, views
 
 from gamenight.games import models
 
@@ -79,6 +83,8 @@ class FixtureCreateForm(iommi.Form):
         required=False,
         input__attrs__class={"form-select": False, "form-control": False},
         attrs__class={"mb-3": False},
+        label=lambda **_: html.h2(attrs__class={}),
+        display_name="1. Select the players for this game.",
     )
     game = iommi.Field.choice_queryset(
         model=models.Game,
@@ -90,6 +96,8 @@ class FixtureCreateForm(iommi.Form):
             request.method == "GET" or parsed_data.can_play(form.fields.users.raw_data),
             "You do not have the right amount of players for this game!",
         ),
+        label=lambda **_: html.h2(attrs__class={"mt-3": True}),
+        display_name="2. Select the game to play.",
     )
 
     class Meta:
