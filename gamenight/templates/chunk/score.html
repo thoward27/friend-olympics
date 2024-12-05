@@ -1,6 +1,6 @@
 <td>
     <div hx-ext="ws" ws-connect="/ws/users/{{ row.username }}/score">
-        <div ws-send hx-trigger="click" style="cursor: pointer;">
+        <div ws-send hx-trigger="click" class="clickable">
             <div id="{{ row.username }}-score" class="sort-key">{{ row.score }}</div>
         </div>
     </div>

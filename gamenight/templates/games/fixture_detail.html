@@ -1,18 +1,28 @@
 <div>
     <div class="row align-items-center">
         <div class="col">
-                <h2>{% if fixture.ended %}Played{% else %}Playing{% endif %}: {{ fixture.game.name }}</h2>
+            <h2>
+                {% if fixture.ended %}
+                    Played
+                {% else %}
+                    Playing
+                {% endif %}
+                : {{ fixture.game.name }}
+            </h2>
         </div>
         <div class="col-auto">
             {% if not fixture.applied %}
-            <a class="btn btn-primary" href="{% url 'fixtures:update' fixture.pk %}">Edit</a>
+                <a class="btn btn-primary" href="{% url 'fixtures:update' fixture.pk %}">Edit</a>
             {% endif %}
         </div>
     </div>
     <h3>Ranks</h3>
-    <ul>
+    <ul class="list-group">
         {% for rank in fixture.rank_set.all %}
-            <li style="list-style: none;">{{ rank.rank|default:"None" }}. {{ rank.user.username }} {% if rank.team %}(team: {{ rank.team }}){% endif %}</li>
+            <li class="list-group-item">
+                {{ rank.rank|default:"None" }}. {{ rank.user.username }}
+                {% if rank.team %}(team: {{ rank.team }}){% endif %}
+            </li>
         {% endfor %}
     </ul>
 </div>

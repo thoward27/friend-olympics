@@ -1,67 +1,55 @@
 {{ field.errors }}
 {% for rank, users in form.fields.users.extra_evaluated.group_ranks.items %}
-{% if rank == 0 %}
-<h2>Unranked Players</h2>
-{% else %}
-<h2>Rank {{ rank }}</h2>
-{% endif %}
-<ol class="list-group sortable rank border p-3 mb-3"
-    style="min-height: 50px"
-    id="{{ rank }}">
-    {% for user in users %}
-    <li class="list-group-item">
-        <span class="material-symbols-outlined handle"
-                style="cursor: move">
-            drag_indicator
-        </span>
-        <input type="hidden"
-                name="users"
-                value="{{ rank }}--{{ user }}">
-        {{ user }}
-    </li>
-    {% endfor %}
-</ol>
+    {% if rank == 0 %}
+        <h2>Unranked Players</h2>
+    {% else %}
+        <h2>Rank {{ rank }}</h2>
+    {% endif %}
+    <ol class="list-group sortable rank border p-3 mb-3" id="{{ rank }}">
+        {% for user in users %}
+            <li class="list-group-item">
+                <span class="material-symbols-outlined handle">drag_indicator</span>
+                <input type="hidden" name="users" value="{{ rank }}--{{ user }}">
+                {{ user }}
+            </li>
+        {% endfor %}
+    </ol>
 {% endfor %}
-
 {% block scripts %}
-<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-<script>
-    htmx.onLoad(function (content) {
-        var sortables = content.querySelectorAll(".sortable");
-        console.log(sortables);
-        for (var i = 0; i < sortables.length; i++) {
-            var sortable = sortables[i];
-            var sortableInstance = new Sortable(sortable, {
-                animation: 150,
-                group: 'shared',
-                handle: '.handle',
-                disabled: sortable.classList.contains('disabled'),
-                ghostClass: 'blue-background-class',
-                filter: ".no-sort",
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script>
+        htmx.onLoad(function(content) {
+            var sortables = content.querySelectorAll(".sortable");
+            console.log(sortables);
+            for (var i = 0; i < sortables.length; i++) {
+                var sortable = sortables[i];
+                var sortableInstance = new Sortable(sortable, {
+                    animation: 150,
+                    group: 'shared',
+                    handle: '.handle',
+                    disabled: sortable.classList.contains('disabled'),
+                    ghostClass: 'blue-background-class',
+                    filter: ".no-sort",
 
-                onMove: function (evt) {
-                    return evt.related.className.indexOf('no-sort') === -1;
-                },
+                    onMove: function(evt) {
+                        return evt.related.className.indexOf('no-sort') === -1;
+                    },
 
-                onEnd: function (evt) {
-                    // this.option("disabled", true);
-                    var inputElement = evt.item.querySelector('input');
-                    inputElement.value = evt.to.id + '--' + inputElement.value.split('--')[1];
-                    // if (evt.to.id === 'order') {
-                    //     inputElement.name = `user_id`;
-                    // } else {
-                    //     inputElement.name = `bench_user_id`;
-                    // }
-                    evt.item.dispatchEvent(new CustomEvent('sorted', { bubbles: true }));
-                }
-            });
-
-            (function(sortableInstance) {
-                document.addEventListener("htmx:afterSwap", function () {
-                    sortableInstance.option("disabled", false);
+                    onEnd: function(evt) {
+                        var inputElement = evt.item.querySelector('input');
+                        inputElement.value = evt.to.id + '--' + inputElement.value.split('--')[1];
+                        evt.item.dispatchEvent(new CustomEvent('sorted', {
+                            bubbles: true
+                        }));
+                    }
                 });
-            })(sortableInstance);
-        }
-    })
-</script>
+
+                (function(sortableInstance) {
+                    document.addEventListener("htmx:afterSwap", function() {
+                        sortableInstance.option("disabled", false);
+                    });
+                })(sortableInstance);
+            }
+        })
+    </script>
 {% endblock %}

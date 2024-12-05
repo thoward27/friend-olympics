@@ -5,25 +5,48 @@ repos:
   - id: ruff
     name: ruff
     entry: ruff
+    args: ["check", "--fix", "--exit-non-zero-on-fix", "--show-fixes"]
     types: [python]
     language: system
     pass_filenames: false
-    args: ["check", "--fix", "--exit-non-zero-on-fix", "--show-fixes"]
   # Run the formatter.
   - id: ruff-format
     name: ruff-format
     entry: ruff
+    args: ["format"]
     language: system
     types: [python]
     pass_filenames: false
-    args: ["format"]
   - id: mypy
     name: mypy
     entry: mypy
+    args: ["--show-error-codes", "--package", "gamenight"]
     language: system
     types: [python]
     pass_filenames: false
-    args: ["--show-error-codes", "--package", "gamenight"]
+  - id: django-check
+    name: django-check
+    entry: python
+    args: ["manage.py", "check"]
+    language: system
+    pass_filenames: false
+  - id: django-migrations
+    name: django-migrations
+    entry: python
+    args: ["manage.py", "makemigrations", "--check", "--dry-run"]
+    language: system
+    pass_filenames: false
+  - id: pytest
+    name: pytest
+    entry: pytest
+    language: system
+    pass_filenames: false
+  - id: djlint
+    name: djlint
+    entry: djlint
+    args: ["--reformat", "--lint", "--format-css", "--format-js", "gamenight"]
+    language: system
+    pass_filenames: false
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v5.0.0
   hooks:

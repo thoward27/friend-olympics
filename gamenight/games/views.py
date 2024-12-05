@@ -4,11 +4,10 @@ import logging
 import iommi  # type: ignore[import]
 import iommi.templates
 from cryptography import fernet
-from django import http, template
+from django import http, template, urls
 from django.conf import settings
 from django.contrib import auth
 from iommi import html
-from django import urls
 
 from gamenight.games import forms, models, tables
 
@@ -71,7 +70,6 @@ class FixtureDetailPage(iommi.Page):
 
 
 class FixtureCreatePage(iommi.Page):
-    # form = iommi.Form.create(auto__model=models.Fixture, auto__include=["game", "users"])
     form = forms.FixtureCreateForm()
 
 
