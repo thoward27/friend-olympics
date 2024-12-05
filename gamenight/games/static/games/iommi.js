@@ -137,7 +137,9 @@ class IommiBase {
                 globalErrors.classList.add('hidden');
             }
 
-            globalErrors.innerText = global;
+            if (global) {
+                globalErrors.innerText = global;
+            }
 
             if (fields) {
                 let fieldElement;
