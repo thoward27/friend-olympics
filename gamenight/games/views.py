@@ -8,6 +8,7 @@ from django import http, template
 from django.conf import settings
 from django.contrib import auth
 from iommi import html
+from django import urls
 
 from gamenight.games import forms, models, tables
 
@@ -27,7 +28,7 @@ def qr_login(
         auth.login(request, user)
     else:
         logging.error("Failed to login user %s %s", username, password)
-    return http.HttpResponseRedirect("/auth/change_password/")
+    return http.HttpResponseRedirect(urls.reverse("users:detail"))
 
 
 class UserDetailPage(iommi.Page):
