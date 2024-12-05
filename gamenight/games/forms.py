@@ -4,11 +4,23 @@ from django import http, template, urls
 from gamenight.games import models
 
 
+def _fixture_update_form__finish__post_handler(
+    form: "FixtureUpdateForm",
+    fixture: models.Fixture,
+    **_,
+) -> http.HttpResponse | None:
+    if not form.is_valid():
+        return None
+    fixture.set_flat_ranks(form.fields.users.raw_data)
+    fixture.finish()
+    return http.HttpResponseRedirect(fixture.get_absolute_url())
+
+
 class FixtureUpdateForm(iommi.Form):
     title = iommi.Fragment(template=template.Template("<h1>Update Result</h1>"))
     game = iommi.Field.choice(
         choices=lambda fixture, **_: models.Game.objects.filter(
-            minimum_players__gte=fixture.users.count(),
+            minimum_players__lte=fixture.users.count(),
             maximum_players__gte=fixture.users.count(),
         ),
         initial=lambda fixture, **_: fixture.game,
@@ -20,6 +32,10 @@ class FixtureUpdateForm(iommi.Form):
         initial=lambda fixture, **_: fixture.users.count(),
         template="chunk/rank_input.html",
         is_list=True,
+        is_valid=lambda parsed_data, **_: (
+            not parsed_data.startswith("0"),
+            "All players must be ranked",
+        ),
     )
 
     class Meta:
@@ -30,8 +46,7 @@ class FixtureUpdateForm(iommi.Form):
             attrs__name=lambda action, **_: action.own_target_marker(),
             attrs__class={"btn-danger": True},
             after="submit",
-            # TODO: When finish is called, we should save the model before calling fixture.finish
-            post_handler=lambda fixture, **_: http.HttpResponseRedirect(fixture.finish()),
+            post_handler=_fixture_update_form__finish__post_handler,
         )
 
         @staticmethod
@@ -91,18 +106,3 @@ class FixtureCreateForm(iommi.Form):
         fixture.users.set(form.fields.users.raw_data)
         fixture.save()
         return http.HttpResponseRedirect(".")
-
-    # class Meta:
-    #     instance = lambda params, **_: params.fixture
-
-    # @staticmethod
-    # def actions__submit__post_handler(
-    #     form: "FixtureCreateForm",
-    #     fixture: models.Fixture,
-    #     **_,
-    # ) -> http.HttpResponse | None:
-    #     if not form.is_valid():
-    #         return None
-    #     fixture.set_flat_ranks(form.fields.users.raw_data)
-    #     fixture.save()
-    #     return http.HttpResponseRedirect(".")

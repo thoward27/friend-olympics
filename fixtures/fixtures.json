@@ -31,8 +31,8 @@
   },
   {
     "fields": {
-      "applied": false,
-      "ended": null,
+      "applied": true,
+      "ended": "2024-12-05T02:28:05.988Z",
       "game": "504b97f8-9f9a-413d-8354-410629061f8e",
       "started": "2024-12-04T15:50:48.803Z"
     },
