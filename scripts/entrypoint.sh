@@ -11,6 +11,7 @@ uv run python manage.py check
 uv run python manage.py migrate
 
 # Load fixture data.
+# TODO: Remove once we migrate to postgres.
 uv run python manage.py loaddata fixtures/users.json
 uv run python manage.py loaddata fixtures/games.json
 

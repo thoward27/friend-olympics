@@ -12,12 +12,12 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | sh \
 COPY pyproject.toml uv.lock ./
 RUN uv sync
 
-build:
+prepare:
     ARG --required EARTHLY_GIT_BRANCH
     ARG --required EARTHLY_GIT_HASH
-    COPY --dir fixtures gamenight tests entrypoint.sh manage.py README.md ./
+    COPY --dir fixtures gamenight tests scripts manage.py README.md ./
     RUN uv run python manage.py collectstatic --noinput
-    ENTRYPOINT ["./entrypoint.sh"]
+    ENTRYPOINT ["./scripts/entrypoint.sh"]
     CMD ["uv", "run", "daphne", "--bind=0.0.0.0", "--port=8000", "gamenight.asgi:application"]
     EXPOSE 8000
     SAVE IMAGE --push \
@@ -25,8 +25,17 @@ build:
         thoward27/gamenight:$EARTHLY_GIT_HASH \
         thoward27/gamenight:$EARTHLY_GIT_BRANCH
 
-build-all-platforms:
-    BUILD --platform=linux/amd64 --platform=linux/arm64 +build
+build:
+    WAIT
+        BUILD +prepare
+    END
+    LOCALLY
+    WITH DOCKER --load gamenight:earthly=+prepare
+        RUN docker run --rm gamenight:earthly uv run python manage.py check
+    END
+
+publish:
+    BUILD --platform=linux/amd64 --platform=linux/arm64 +prepare
 
 test:
     RUN uv run ruff format --check \

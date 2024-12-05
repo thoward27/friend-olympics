@@ -5,19 +5,13 @@ set -e
 uv run python manage.py check
 
 # Reset the Database.
+# TODO: Remove migration regeneration once we move to postgres.
 rm -f gamenight/games/migrations/0001_initial.py
 rm -f db.sqlite3
 
 # Generate and run migrations.
 uv run python manage.py makemigrations --no-header
 uv run python manage.py migrate
-
-# Test the code.
-uv run ruff format
-uv run ruff check --fix --ignore T --ignore ERA
-uv run ruff format
-uv run pytest
-uv run mypy -p gamenight
 
 # Load fixture data.
 uv run python manage.py loaddata fixtures/users.json
