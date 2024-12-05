@@ -18,6 +18,7 @@ dependencies = [
     "iommi>=7.7.2",
     "qrcode[pil]>=8.0",
     "whitenoise[brotli]>=6.8.2",
+    "sentry-sdk[django]>=2.19.0",
 ]
 
 [dependency-groups]
@@ -72,4 +73,5 @@ django_settings_module = "gamenight.settings"
 ignore_missing_imports = true
 module = [
     "iommi.*",
+    "qrcode.*",
 ]
