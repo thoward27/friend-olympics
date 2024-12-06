@@ -20,6 +20,9 @@ dependencies = [
     "whitenoise[brotli]>=6.8.2",
     "sentry-sdk[django]>=2.19.0",
     "networkx[default]>=3.4.2",
+    "psycopg>=3.2.3",
+    "django-ratelimit>=4.1.0",
+    "django-extensions>=3.2.3",
 ]
 
 [dependency-groups]
