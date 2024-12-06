@@ -90,6 +90,7 @@ class FixtureCreateForm(iommi.Form):
         attrs__class={"mb-3": False},
         label=lambda **_: html.h2(attrs__class={}),
         display_name="1. Select the players for this game.",
+        help_text="You will need at least 2 players to start a game.",
     )
     game = iommi.Field.choice_queryset(
         model=models.Game,
