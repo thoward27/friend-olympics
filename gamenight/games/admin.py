@@ -38,7 +38,7 @@ class GameAdmin(admin.ModelAdmin):
 
 
 class UserChangeForm(DjangoUserChangeForm):
-    qrcode_img = forms.CharField(widget=Base64ImageWidget)
+    qrcode_img = forms.CharField(widget=Base64ImageWidget, required=False)
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
