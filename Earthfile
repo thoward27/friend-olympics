@@ -31,7 +31,7 @@ build:
     END
     LOCALLY
     WITH DOCKER --load gamenight:earthly=+prepare
-        RUN docker run --rm gamenight:earthly uv run python manage.py check
+        RUN docker run --network host --rm gamenight:earthly uv run python manage.py check
     END
 
 publish:
