@@ -485,6 +485,7 @@ dependencies = [
     { name = "psycopg" },
     { name = "psycopg", extra = ["binary"], marker = "sys_platform == 'linux'" },
     { name = "qrcode", extra = ["pil"] },
+    { name = "redis" },
     { name = "sentry-sdk", extra = ["django"] },
     { name = "whitenoise", extra = ["brotli"] },
 ]
@@ -517,6 +518,7 @@ requires-dist = [
     { name = "psycopg", marker = "sys_platform != 'linux'", specifier = ">=3.2.3" },
     { name = "psycopg", extras = ["binary"], marker = "sys_platform == 'linux'", specifier = ">=3.2.3" },
     { name = "qrcode", extras = ["pil"], specifier = ">=8.0" },
+    { name = "redis", specifier = ">=5.2.1" },
     { name = "sentry-sdk", extras = ["django"], specifier = ">=2.19.0" },
     { name = "whitenoise", extras = ["brotli"], specifier = ">=6.8.2" },
 ]
@@ -1151,6 +1153,15 @@ wheels = [
 [package.optional-dependencies]
 pil = [
     { name = "pillow" },
+]
+
+[[package]]
+name = "redis"
+version = "5.2.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/47/da/d283a37303a995cd36f8b92db85135153dc4f7a8e4441aa827721b442cfb/redis-5.2.1.tar.gz", hash = "sha256:16f2e22dff21d5125e8481515e386711a34cbec50f0e44413dd7d9c060a54e0f", size = 4608355 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3c/5f/fa26b9b2672cbe30e07d9a5bdf39cf16e3b80b42916757c5f92bca88e4ba/redis-5.2.1-py3-none-any.whl", hash = "sha256:ee7e1056b9aea0f04c6c2ed59452947f34c4940ee025f5dd83e6a6418b6989e4", size = 261502 },
 ]
 
 [[package]]
