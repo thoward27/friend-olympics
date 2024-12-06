@@ -44,13 +44,6 @@ class Fixture(models.Model):
     def __str__(self) -> str:
         return f"{self.game} with {list(map(str, self.users.all()))}"
 
-    def save(self, *args, **kwargs) -> None:
-        """Save the fixture."""
-        if self.ended is not None and not self.applied:
-            logging.debug("Finishing fixture, applying ELO updates.")
-            self.apply_player_graph()
-        super().save(*args, **kwargs)
-
     def get_absolute_url(self) -> str:
         """Get the absolute URL of the fixture."""
         return urls.reverse("fixtures:detail", kwargs={"fixture": self.pk})
@@ -111,9 +104,20 @@ class Fixture(models.Model):
     def finish(self) -> str:
         """Finish the fixture."""
         assert self.rank_set.filter(rank=0).count() == 0, "there are some unranked players!"
-        self.ended = datetime.datetime.now(tz=zoneinfo.ZoneInfo("America/New_York"))
-        self.save()
+        self.refresh_from_db()
+        if self.ended is None:
+            logging.debug("Finishing fixture: %s", self.pk)
+            self.ended = datetime.datetime.now(tz=zoneinfo.ZoneInfo("America/New_York"))
+            self.save(update_fields=["ended"])
+            self._apply_player_graph()
+            self.save(update_fields=["applied"])
         return self.get_absolute_url()
+
+    def reapply(self) -> None:
+        """Reapply the ELO updates."""
+        self.applied = False
+        self._apply_player_graph()
+        self.refresh_from_db()
 
     def _build_player_graph(self) -> nx.DiGraph:
         """Build the graph of the players in the fixture.
@@ -158,7 +162,7 @@ class Fixture(models.Model):
                 )
         return graph
 
-    def apply_player_graph(self) -> None:
+    def _apply_player_graph(self) -> None:
         """Apply the deltas from the players graph."""
         if self.applied:
             logging.info("ELO updates already applied.")

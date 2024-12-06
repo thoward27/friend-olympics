@@ -1,4 +1,5 @@
 import datetime
+from unittest import mock
 
 from django.db import IntegrityError
 
@@ -6,14 +7,13 @@ from tests import base
 
 
 class TestFixture(base.BaseTestCase):
-    def test_apply_elo_updates(self):
+    def test_apply_score_updates(self):
         game = self.make_game(ranked=True)
         users = [self.make_user() for _ in range(5)]
         fixture = self.make_fixture(users=users, game=game)
         for i, user in enumerate(users):
             fixture.rank_set.filter(user=user).update(rank=i + 1)
         fixture.finish()
-        fixture.apply_player_graph()
         for user in users:
             user.refresh_from_db()
         scores = {user: user.score for user in users}
@@ -21,12 +21,17 @@ class TestFixture(base.BaseTestCase):
         self.assertLess(scores[users[-1]], 1000)
         self.assertEqual(sum(scores.values()), 5000)
 
-    def test_finish(self):
+    @mock.patch("gamenight.games.models.fixture.logging.debug", autospec=True)
+    def test_finish(self, debug_mock):
         fixture = self.make_fixture(users=[self.make_user() for _ in range(4)], rank_users=True)
         self.assertIsNone(fixture.ended)
         fixture.finish()
         self.assertIsNotNone(fixture.ended)
         self.assertIsInstance(fixture.ended, datetime.datetime)
+        debug_mock.assert_has_calls([mock.call("Finishing fixture: %s", fixture.pk)])
+        ended = fixture.ended
+        fixture.finish()
+        self.assertEqual(fixture.ended, ended)
 
     def test_check_constraints(self):
         self.assertRaises(IntegrityError, self.make_fixture, applied=True, ended=None)

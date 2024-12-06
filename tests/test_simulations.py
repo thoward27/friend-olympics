@@ -32,7 +32,7 @@ class TestSimulations(base.BaseTestCase):
         true_scores = {user.username: round(random.normalvariate(1000, 500)) for user in users}
         errors = [self.compute_error(true_scores)]
         games = self.load_game_fixtures()
-        for _ in range(20):
+        for _ in range(30):
             fixtures = self.build_fixtures(games.copy(), users.copy())
             for fixture in fixtures:
                 fixture.finish()
