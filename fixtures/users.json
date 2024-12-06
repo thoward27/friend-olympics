@@ -11,7 +11,6 @@
       "last_login": "2024-12-06T15:01:33.599Z",
       "last_name": "Howard",
       "password": "pbkdf2_sha256$870000$zk9PhaPW8wzqD5cwKLHrvd$idt/oTt9GJtEdn/6mAGm8B2R6pJG+gCoudN+wo04qg8=",
-      "qrcode": "",
       "score": 1000,
       "user_permissions": [],
       "username": "tom"
@@ -31,7 +30,6 @@
       "last_login": "2024-12-02T15:47:17.002Z",
       "last_name": "Howard",
       "password": "pbkdf2_sha256$870000$iSHDQyWbmRTkbVt6MDVRXQ$0c2grTvQHvGoxSv5CkZFU4UYxIOqRZaHxHhiD73yzqE=",
-      "qrcode": "",
       "score": 1000,
       "user_permissions": [],
       "username": "tay"
