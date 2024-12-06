@@ -42,6 +42,12 @@ repos:
     args: ["--reformat", "--lint", "--format-css", "--format-js", "gamenight"]
     language: system
     pass_filenames: false
+  - id: django-static
+    name: django-static
+    entry: python
+    args: ["manage.py", "collectstatic", "--no-input"]
+    language: system
+    pass_filenames: false
   - id: pytest
     name: pytest
     entry: pytest

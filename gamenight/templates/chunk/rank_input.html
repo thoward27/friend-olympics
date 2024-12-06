@@ -10,7 +10,7 @@
             <li class="list-group-item">
                 <div class="row align-items-center">
                     <div class="col-auto p-0">
-                        <span class="material-symbols-outlined handle">drag_indicator</span>
+                        <span class="material-symbols-outlined handle align-bottom">drag_indicator</span>
                     </div>
                     <div class="col">
                         <div class="row align-items-center justify-content-between">
@@ -32,6 +32,7 @@
                                                type="text"
                                                _="on keyup call updateTeam(`{{ user.username }}`, my.value)"
                                                value="{{ user.team }}"
+                                               list="teams"
                                                placeholder="Add this player to a team">
                                     </div>
                                 </div>
@@ -46,59 +47,3 @@
 <datalist id="teams"
           _="on load or keyup from .team-selection call updateTeamDatalist()">
 </datalist>
-{% block scripts %}
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-    <script>
-        function updateTeamDatalist() {
-            var teams = document.querySelectorAll(".team-selection");
-            var datalist = document.getElementById('teams');
-            datalist.innerHTML = '';
-            for (team of teams) {
-                var option = document.createElement('option');
-                option.value = team.value;
-                datalist.appendChild(option);
-            }
-        }
-
-        function updateTeam(username, team_name) {
-            var inputElement = document.getElementById('user-' + username);
-            var [r, u, t] = inputElement.value.split('--');
-            inputElement.value = r + '--' + u + '--' + team_name;
-        }
-        htmx.onLoad(function(content) {
-            var sortables = content.querySelectorAll(".sortable");
-            console.log(sortables);
-            for (var i = 0; i < sortables.length; i++) {
-                var sortable = sortables[i];
-                var sortableInstance = new Sortable(sortable, {
-                    animation: 150,
-                    group: 'shared',
-                    handle: '.handle',
-                    disabled: sortable.classList.contains('disabled'),
-                    ghostClass: 'blue-background-class',
-                    filter: ".no-sort",
-
-                    onMove: function(evt) {
-                        return evt.related.className.indexOf('no-sort') === -1;
-                    },
-
-                    onEnd: function(evt) {
-                        // Update the rank in the input value, (RANK--USERNAME--TEAM)
-                        var inputElement = evt.item.querySelector('input');
-                        const regex = /\d+/;
-                        inputElement.value = inputElement.value.replace(regex, evt.to.id);
-                        evt.item.dispatchEvent(new CustomEvent('sorted', {
-                            bubbles: true
-                        }));
-                    }
-                });
-
-                (function(sortableInstance) {
-                    document.addEventListener("htmx:afterSwap", function() {
-                        sortableInstance.option("disabled", false);
-                    });
-                })(sortableInstance);
-            }
-        })
-    </script>
-{% endblock %}

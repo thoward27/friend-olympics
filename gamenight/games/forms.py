@@ -3,6 +3,7 @@ from typing import cast
 import iommi
 from django import http, template, urls
 from django.contrib import auth
+from django.templatetags import static
 from iommi import html, views
 
 from gamenight.games import models
@@ -39,6 +40,10 @@ class FixtureUpdateForm(iommi.Form):
         initial=lambda fixture, **_: fixture.users.count(),
         template="chunk/rank_input.html",
         is_list=True,
+        assets__rank_input=iommi.Asset.js(attrs__src=static.static("games/rank_input.js")),
+        assets__sortable=iommi.Asset.js(
+            attrs__src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js",
+        ),
     )
 
     class Meta:
