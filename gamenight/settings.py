@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "django_tables2",
     "django_filters",
     "iommi",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
@@ -104,15 +105,26 @@ CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
+DATABASES = {  # type: ignore[var-annotated]
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
         "CONN_MAX_AGE": None,
         "CONN_HEALTH_CHECKS": True,
+        "NAME": os.environ.get("PGDATABASE", "gamenight"),
+        "USER": os.environ.get("PGUSER", "gamenight"),
+        "PASSWORD": os.environ.get("PGPASSWORD", "gamenight"),
+        "PORT": os.environ.get("PGPORT", "5432"),
+        "HOST": os.environ.get("PGHOST", "localhost"),
+        "OPTIONS": {},
     },
 }
 
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+    },
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

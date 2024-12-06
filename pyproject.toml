@@ -81,4 +81,5 @@ module = [
     "iommi.*",
     "qrcode.*",
     "networkx.*",
+    "django_ratelimit.*",
 ]

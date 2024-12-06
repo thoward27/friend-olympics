@@ -94,7 +94,8 @@ class Fixture(models.Model):
         This produces a special format that can be used in HTML forms.
         """
         return [
-            f"{rank.rank}--{rank.user.username}" for rank in self.rank_set.all().order_by("rank")
+            f"{rank.rank}--{rank.user.username}"
+            for rank in self.rank_set.all().order_by("rank", "user__username")
         ]
 
     def set_flat_ranks(self, ranks: list[str]) -> None:
@@ -162,8 +163,6 @@ class Fixture(models.Model):
         if self.applied:
             logging.info("ELO updates already applied.")
             return
-        self.applied = True
-        self.save()
         graph = self._build_player_graph()
         deltas: dict[Rank, int] = collections.defaultdict(int)
         for gainer, loser, data in graph.edges(data=True):
@@ -175,6 +174,7 @@ class Fixture(models.Model):
         for rank, delta in deltas.items():
             rank.user.score += delta
             rank.user.save()
+        self.applied = True
 
 
 def _elo_delta(

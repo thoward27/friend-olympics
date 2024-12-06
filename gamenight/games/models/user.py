@@ -35,7 +35,7 @@ class User(AbstractUser):
     DEFAULT_SCORE = 1000
 
     score = models.PositiveIntegerField(default=DEFAULT_SCORE)
-    qrcode = models.URLField(null=False, blank=True, default="")
+    qrcode = models.URLField(null=False, blank=True, default="", max_length=600)
 
     objects = UserManager()  # type: ignore[misc,assignment]
     available: "models.QuerySet[User]" = AvailableManager()  # type: ignore[assignment]

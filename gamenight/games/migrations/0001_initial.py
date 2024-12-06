@@ -31,11 +31,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "name",
-                    models.CharField(
-                        help_text="The name of the game.",
-                        max_length=100,
-                        unique=True,
-                    ),
+                    models.CharField(help_text="The name of the game.", max_length=50, unique=True),
                 ),
                 (
                     "slug",
@@ -205,7 +201,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("score", models.PositiveIntegerField(default=1000)),
-                ("qrcode", models.URLField(blank=True, default="")),
+                ("qrcode", models.URLField(blank=True, default="", max_length=600)),
                 (
                     "groups",
                     models.ManyToManyField(

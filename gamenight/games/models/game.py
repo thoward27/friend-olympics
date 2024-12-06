@@ -11,11 +11,16 @@ class Game(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(
-        max_length=100,
+        max_length=50,
         unique=True,
         help_text="The name of the game.",
     )
-    slug = models.SlugField(unique=True, blank=True, help_text="The slug of the game.")
+    slug = models.SlugField(
+        unique=True,
+        blank=True,
+        help_text="The slug of the game.",
+        max_length=50,
+    )
     ranked = models.BooleanField(
         default=False,
         help_text="Whether this game is ranked or win/lose.",

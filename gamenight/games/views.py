@@ -7,11 +7,14 @@ from cryptography import fernet
 from django import http, urls
 from django.conf import settings
 from django.contrib import auth
+from django_ratelimit import decorators
 from iommi import html
 
 from gamenight.games import forms, models, tables
 
 
+# TODO: Change to use GET params, then rate limit on the USER get param.
+@decorators.ratelimit(key="ip", rate="5/h", block=True)
 def qr_login(
     request: http.HttpRequest,
     username: str,
