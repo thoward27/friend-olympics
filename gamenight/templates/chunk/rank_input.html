@@ -1,9 +1,10 @@
+{% load games_extras %}
 {{ field.errors }}
 {% for rank, users in form.fields.users.extra_evaluated.group_ranks.items %}
     {% if rank == 0 %}
         <h2>Unranked Players</h2>
     {% else %}
-        <h2>Rank {{ rank }}</h2>
+        <h2>{{ rank|ordinal }}</h2>
     {% endif %}
     <ol class="list-group sortable rank border p-3 mb-3" id="{{ rank }}">
         {% for user in users %}
