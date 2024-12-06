@@ -6,44 +6,6 @@ from tests import base
 
 
 class TestFixture(base.BaseTestCase):
-    def test_elo_updates__win_lose(self):
-        game = self.make_game(ranked=False)
-        users = [self.make_user() for _ in range(4)]
-        fixture = self.make_fixture(users=users, game=game)
-        fixture.rank_set.all().update(rank=2)
-        fixture.rank_set.filter(user=users[0]).update(rank=1)
-        updates = fixture.calculate_elo_updates()
-        self.assertEqual(sum(updates.values()), 0)
-        self.assertGreater(updates[users[0]], 0)
-
-    def test_elo_updates__ranked(self):
-        game = self.make_game(ranked=True)
-        users = [self.make_user() for _ in range(5)]
-        fixture = self.make_fixture(users=users, game=game)
-        for i, user in enumerate(users):
-            fixture.rank_set.filter(user=user).update(rank=i + 1)
-
-        updates = fixture.calculate_elo_updates()
-        self.assertEqual(sum(updates.values()), 0)
-        self.assertGreater(updates[users[0]], 0)
-        self.assertLess(updates[users[-1]], 0)
-
-    def test_elo_updates__tie__same_score(self):
-        users = [self.make_user() for _ in range(4)]
-        fixture = self.make_fixture(users=users)
-        fixture.rank_set.update(rank=1)
-        updates = fixture.calculate_elo_updates()
-        for update in updates.values():
-            self.assertEqual(update, 0)
-
-    def test_elo_updates__tie__different_score(self):
-        users = [self.make_user(score=i * 1000) for i in range(4)]
-        fixture = self.make_fixture(users=users)
-        fixture.rank_set.update(rank=1)
-        updates = fixture.calculate_elo_updates()
-        self.assertEqual(sum(updates.values()), 0)
-        self.assertNotEqual(updates[users[0]], 0)
-
     def test_apply_elo_updates(self):
         game = self.make_game(ranked=True)
         users = [self.make_user() for _ in range(5)]
@@ -51,7 +13,7 @@ class TestFixture(base.BaseTestCase):
         for i, user in enumerate(users):
             fixture.rank_set.filter(user=user).update(rank=i + 1)
         fixture.finish()
-        fixture.apply_elo_updates()
+        fixture.apply_player_graph()
         for user in users:
             user.refresh_from_db()
         scores = {user: user.score for user in users}
@@ -60,7 +22,7 @@ class TestFixture(base.BaseTestCase):
         self.assertEqual(sum(scores.values()), 5000)
 
     def test_finish(self):
-        fixture = self.make_fixture()
+        fixture = self.make_fixture(users=[self.make_user() for _ in range(4)], rank_users=True)
         self.assertIsNone(fixture.ended)
         fixture.finish()
         self.assertIsNotNone(fixture.ended)
@@ -116,3 +78,46 @@ class TestFixture(base.BaseTestCase):
         game = self.make_game(ranked=False)
         fixture = self.make_fixture(users=users, game=game)
         self.assertEqual(fixture.get_max_rank(), 2)
+
+    def test_build_graph__ranked__no_ties(self):
+        # For this test, we have 5 users, each with their own rank.
+        users = [self.make_user(username=f"user{i}") for i in range(5)]
+        fixture = self.make_fixture(users=users, game=self.make_game(ranked=True))
+        for i, user in enumerate(users):
+            fixture.rank_set.filter(user=user).update(rank=i + 1)
+        graph = fixture._build_player_graph()
+        self.assertEqual(graph.number_of_edges(), 10)
+        self.assertEqual(graph.number_of_nodes(), 5)
+        self.assertTrue(all(gainer.rank < loser.rank for gainer, loser in graph.edges()))
+        self.assertTrue(all(data["delta"] > 0 for _, _, data in graph.edges(data=True)))
+        # If we move two players to a team, then the rest to another, we should have 6 edges.
+        fixture.rank_set.filter(rank__in=[1, 2]).update(team="team1")
+        fixture.rank_set.filter(rank__in=[3, 4, 5]).update(team="team2")
+        graph = fixture._build_player_graph()
+        self.assertEqual(graph.number_of_edges(), 6)
+        self.assertEqual(graph.number_of_nodes(), 5)
+
+    def test_build_graph__ranked__tied(self):
+        # For this test, we have 5 users, each with their own unique score, one player with 0.
+        users = [self.make_user(username=f"user{i}", score=1000 * i) for i in range(5)]
+        fixture = self.make_fixture(users=users, game=self.make_game(ranked=True))
+        # And, they all tie, somehow.
+        fixture.rank_set.update(rank=1)
+        graph = fixture._build_player_graph()
+        # This should make a fully-connected graph.
+        self.assertEqual(graph.number_of_edges(), 5 * (5 - 1) / 2)
+
+    def test_build_graph__ranked__no_ties__teams(self):
+        users = [self.make_user(username=f"user{i}") for i in range(5)]
+        fixture = self.make_fixture(users=users)
+        for i, user in enumerate(users):
+            fixture.rank_set.filter(user=user).update(rank=i + 1, team="odd" if i % 2 else "even")
+        graph = fixture._build_player_graph()
+        self.assertEqual(graph.number_of_edges(), 6)
+        self.assertEqual(graph.number_of_nodes(), 5)
+        last_delta = None
+        for gainer, loser, data in graph.edges(data=True):
+            self.assertLess(gainer.rank, loser.rank)
+            self.assertGreater(data["delta"], 0)
+            if last_delta is not None:
+                self.assertEqual(data["delta"], last_delta)

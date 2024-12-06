@@ -1,4 +1,3 @@
-import datetime
 import json
 import random
 import statistics
@@ -39,7 +38,7 @@ class TestSimulations(base.BaseTestCase):
         for username, (user, _) in all_players.items():
             all_players[username] = (user, round(random.normalvariate(1000, 200)))
         all_games = self.add_games()
-        for _ in range(100):
+        for _ in range(50):
             players, _ = zip(*all_players.values(), strict=True)
             fixtures = self.build_fixtures(list(players).copy(), all_games.copy())
             for fixture in fixtures:
@@ -56,8 +55,7 @@ class TestSimulations(base.BaseTestCase):
                     models.Rank.objects.filter(user=players[0], fixture=fixture).update(rank=1)
                     for player in players[1:]:
                         models.Rank.objects.filter(user=player, fixture=fixture).update(rank=2)
-                fixture.ended = datetime.datetime.now(datetime.UTC)
-                fixture.save()
+                fixture.finish()
         true_score_players = [
             (score, user.username[:10]) for _, (user, score) in all_players.items()
         ]

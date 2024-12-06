@@ -6,6 +6,7 @@ import uuid
 import zoneinfo
 from typing import TYPE_CHECKING
 
+import networkx as nx
 from django import urls
 from django.db import models
 
@@ -47,7 +48,7 @@ class Fixture(models.Model):
         """Save the fixture."""
         if self.ended is not None and not self.applied:
             logging.debug("Finishing fixture, applying ELO updates.")
-            self.apply_elo_updates()
+            self.apply_player_graph()
         super().save(*args, **kwargs)
 
     def get_absolute_url(self) -> str:
@@ -113,53 +114,67 @@ class Fixture(models.Model):
         self.save()
         return self.get_absolute_url()
 
-    def calculate_elo_updates(self) -> "dict[User, int]":
-        """Compute ELO updates for every player in the fixture."""
-        results = self.rank_set.order_by("rank")
-        ranks = collections.defaultdict(list)
-        for result in results:
-            assert result.rank is not None, f"{result=}"
-            ranks[result.rank].append(result.user)
+    def _build_player_graph(self) -> nx.DiGraph:
+        """Build the graph of the players in the fixture.
 
-        current_scores = {result.user: result.user.score for result in results}
-        updates: dict[User, int] = collections.defaultdict(int)
-        players = [r.user for r in results]
-        pairwise_dict = {q: {p: 0 for p in players} for q in players}
-        for rank_one, players_one in ranks.items():
-            for rank_two, players_two in ranks.items():
-                for player_one in players_one:
-                    for player_two in players_two:
-                        if player_one == player_two:
-                            continue
-                        delta = _elo_delta(
-                            self.game,
-                            rank_one,
-                            current_scores[player_one],
-                            rank_two,
-                            current_scores[player_two],
-                        )
-                        pairwise_dict[player_one][player_two] = delta
-                        updates[player_one] += delta
-        pairwise_table = [
-            [pairwise_dict[player_one][player_two] for player_two in players]
-            for player_one in players
-        ]
-        _delta_sums = [sum(row) for row in pairwise_table]
-        return updates
+        For every edge (m, n) in the resultant DAG, n gives a non-zero sumo of points to m.
+        """
+        assert self.rank_set.count() > 1, "Cannot build a graph with less than two players."
+        assert not self.rank_set.filter(rank=0).exists(), "Cannot rank unset players."
+        graph = nx.DiGraph()
+        # Gainers are those gaining points, where losers are ones giving up points.
+        for gainer in self.rank_set.all().order_by("rank", "user__score"):
+            losers = (
+                # We exclude ourself.
+                self.rank_set.exclude(pk=gainer.pk)
+                # As well as any players we have drawn with of *lower or equal* score.
+                # If we draw with a player of a lower score, we give *them* points.
+                .exclude(
+                    models.Q(rank=gainer.rank) & models.Q(user__score__lte=gainer.user.score),
+                )
+                # Find all the players we have beaten.
+                .filter(rank__gte=gainer.rank)
+            )
+            # Lastly, remove players on the same team (they don't trade points).
+            if gainer.team:
+                losers = losers.exclude(team=gainer.team)
+            for loser in losers:
+                assert gainer.rank <= loser.rank, f"{gainer.rank=} {loser.rank=}"
+                delta = _elo_delta(
+                    self.game,
+                    gainer.rank,
+                    gainer.user.score,
+                    loser.rank,
+                    loser.user.score,
+                )
+                if delta == 0:
+                    continue
+                assert delta > 0, f"{delta=}, {gainer=}, {loser=}"
+                graph.add_edge(
+                    gainer,
+                    loser,
+                    delta=delta,
+                )
+        return graph
 
-    def apply_elo_updates(self) -> None:
-        """Apply the ELO updates to the scores of the players."""
-        assert self.ended is not None
+    def apply_player_graph(self) -> None:
+        """Apply the deltas from the players graph."""
         if self.applied:
+            logging.info("ELO updates already applied.")
             return
-        updates = self.calculate_elo_updates()
-        for player, update in updates.items():
-            if player.score + update < 0:
-                assert player.score + update >= 0, [(p.score, u) for p, u in updates.items()]
-            player.score += update
-            player.save()
         self.applied = True
         self.save()
+        graph = self._build_player_graph()
+        deltas: dict[Rank, int] = collections.defaultdict(int)
+        for gainer, loser, data in graph.edges(data=True):
+            delta = data["delta"]
+            assert gainer != loser
+            assert delta > 0
+            deltas[gainer] += delta
+            deltas[loser] -= delta
+        for rank, delta in deltas.items():
+            rank.user.score += delta
+            rank.user.save()
 
 
 def _elo_delta(
@@ -189,7 +204,7 @@ def _elo_delta(
     # A game's weight is reduced if the outcome is based on chance.
     # IE, a coinflip game should have a lower weight than a game of darts.
     if game.randomness:
-        update_one *= 1 - game.randomness
+        update_one *= 1 - game.randomness / 2
     return math.trunc(update_one)
 
 

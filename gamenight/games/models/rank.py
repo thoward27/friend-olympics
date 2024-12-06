@@ -25,4 +25,4 @@ class Rank(models.Model):
         ordering = ("rank",)
 
     def __str__(self) -> str:
-        return f"{self.user} is ranked {self.rank} in {self.fixture}"
+        return f"{self.user.username[:5]} ({self.user.score}) {self.rank}"

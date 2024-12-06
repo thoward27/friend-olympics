@@ -19,6 +19,7 @@ dependencies = [
     "qrcode[pil]>=8.0",
     "whitenoise[brotli]>=6.8.2",
     "sentry-sdk[django]>=2.19.0",
+    "networkx[default]>=3.4.2",
 ]
 
 [dependency-groups]
@@ -62,7 +63,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*" = ["D", "ANN"]
+"tests/*" = ["D", "ANN", "SLF"]
 "**/migrations/*" = ["E", "RUF", "D"]
 
 [tool.mypy]
@@ -76,4 +77,5 @@ ignore_missing_imports = true
 module = [
     "iommi.*",
     "qrcode.*",
+    "networkx.*",
 ]

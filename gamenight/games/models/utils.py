@@ -20,4 +20,5 @@ def recompute_all_scores() -> None:
         user.score = User.DEFAULT_SCORE
         user.save()
     for fixture in Fixture.objects.filter(ended__isnull=False).order_by("ended"):
-        fixture.apply_elo_updates()
+        fixture.applied = False
+        fixture.apply_player_graph()
