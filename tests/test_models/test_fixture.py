@@ -42,12 +42,33 @@ class TestFixture(base.BaseTestCase):
         fixture = self.make_fixture(users=users, game=game)
         self.assertEqual(
             fixture.get_grouped_ranks(),
-            {0: ["user0", "user1", "user2", "user3", "user4"], 1: [], 2: [], 3: [], 4: [], 5: []},
+            {
+                0: [
+                    {"username": "user0", "team": ""},
+                    {"username": "user1", "team": ""},
+                    {"username": "user2", "team": ""},
+                    {"username": "user3", "team": ""},
+                    {"username": "user4", "team": ""},
+                ],
+                1: [],
+                2: [],
+                3: [],
+                4: [],
+                5: [],
+            },
         )
-        fixture.set_flat_ranks(["1--user4", "2--user3", "3--user2", "4--user1", "5--user0"])
+        fixture.set_flat_ranks(
+            ["1--user4--", "2--user3--", "3--user2--", "4--user1--", "5--user0--"],
+        )
         self.assertEqual(
             fixture.get_grouped_ranks(),
-            {1: ["user4"], 2: ["user3"], 3: ["user2"], 4: ["user1"], 5: ["user0"]},
+            {
+                1: [{"username": "user4", "team": ""}],
+                2: [{"username": "user3", "team": ""}],
+                3: [{"username": "user2", "team": ""}],
+                4: [{"username": "user1", "team": ""}],
+                5: [{"username": "user0", "team": ""}],
+            },
         )
 
     def test_flat_ranks__good(self):
@@ -56,23 +77,25 @@ class TestFixture(base.BaseTestCase):
         fixture = self.make_fixture(users=users, game=game)
         self.assertEqual(
             fixture.get_flat_ranks(),
-            ["0--user0", "0--user1", "0--user2", "0--user3", "0--user4"],
+            ["0--user0--", "0--user1--", "0--user2--", "0--user3--", "0--user4--"],
         )
-        fixture.set_flat_ranks(["1--user4", "2--user3", "3--user2", "4--user1", "5--user0"])
+        fixture.set_flat_ranks(
+            ["1--user4--", "2--user3--", "3--user2--", "4--user1--", "5--user0--"],
+        )
         self.assertEqual(
             fixture.get_flat_ranks(),
-            ["1--user4", "2--user3", "3--user2", "4--user1", "5--user0"],
+            ["1--user4--", "2--user3--", "3--user2--", "4--user1--", "5--user0--"],
         )
 
     def test_flat_ranks__bad(self):
         game = self.make_game(ranked=True)
         users = [self.make_user(username=f"user{i}") for i in range(3)]
         fixture = self.make_fixture(users=users, game=game)
-        self.assertEqual(fixture.get_flat_ranks(), ["0--user0", "0--user1", "0--user2"])
+        self.assertEqual(fixture.get_flat_ranks(), ["0--user0--", "0--user1--", "0--user2--"])
         self.assertRaises(
             AssertionError,
             fixture.set_flat_ranks,
-            ["4--user0", "0--user1", "0--user2"],
+            ["4--user0--", "0--user1--", "0--user2--"],
         )
 
     def test_get_max_rank(self):

@@ -12,6 +12,9 @@ uv run python manage.py reset_db
 # Generate and run migrations.
 uv run python manage.py makemigrations --no-header
 uv run python manage.py migrate
+uv run ruff lint --fix
+uv run ruff format
+uv run ruff lint --fix
 
 # Load fixture data.
 uv run python manage.py loaddata fixtures/users.json

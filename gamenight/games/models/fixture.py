@@ -66,13 +66,13 @@ class Fixture(models.Model):
             return 2
         return self.rank_set.count()
 
-    def get_grouped_ranks(self) -> dict[int, list[str]]:
+    def get_grouped_ranks(self) -> dict[int, list[dict[str, str]]]:
         """Get the ranks of the players in the fixture, grouped by rank."""
         ranks = collections.defaultdict(list)
         for combined in self.get_flat_ranks():
-            rank_str, username = combined.split("--", 1)
+            rank_str, username, team = combined.split("--", 2)
             rank = int(rank_str)
-            ranks[rank].append(username)
+            ranks[rank].append({"username": username, "team": team})
         max_rank = self.get_max_rank()
         if max(ranks.keys()) < max_rank:
             for i in range(1, max_rank + 1):
@@ -87,7 +87,7 @@ class Fixture(models.Model):
         This produces a special format that can be used in HTML forms.
         """
         return [
-            f"{rank.rank}--{rank.user.username}"
+            f"{rank.rank}--{rank.user.username}--{rank.team}"
             for rank in self.rank_set.all().order_by("rank", "user__username")
         ]
 
@@ -95,10 +95,10 @@ class Fixture(models.Model):
         """Update ranks based on the flat ranks from the HTML form."""
         max_rank = self.get_max_rank()
         for combined in ranks:
-            rank, user = combined.split("--", 1)
+            rank, user, team = combined.split("--", 2)
             assert rank.isdigit(), f"{rank=}"
             assert int(rank) <= max_rank, f"{rank=}"
-            updated = self.rank_set.filter(user__username=user).update(rank=int(rank))
+            updated = self.rank_set.filter(user__username=user).update(rank=int(rank), team=team)
             assert updated == 1, f"{updated=}"
 
     def finish(self) -> str:

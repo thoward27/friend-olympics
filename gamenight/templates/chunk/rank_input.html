@@ -8,16 +8,63 @@
     <ol class="list-group sortable rank border p-3 mb-3" id="{{ rank }}">
         {% for user in users %}
             <li class="list-group-item">
-                <span class="material-symbols-outlined handle">drag_indicator</span>
-                <input type="hidden" name="users" value="{{ rank }}--{{ user }}">
-                {{ user }}
+                <div class="row align-items-center">
+                    <div class="col-auto p-0">
+                        <span class="material-symbols-outlined handle">drag_indicator</span>
+                    </div>
+                    <div class="col">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+                                <input id="user-{{ user.username }}"
+                                       type="hidden"
+                                       name="users"
+                                       value="{{ rank }}--{{ user.username }}--{{ user.team }}">
+                                {{ user.username }}
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="row justify-content-sm-end">
+                                    <div class="col-auto pe-0">
+                                        <label for="team-{{ user.username }}" class="col-form-label">Team:</label>
+                                    </div>
+                                    <div class="col">
+                                        <input class="team-selection form-control"
+                                               id="team-{{ user.username }}"
+                                               type="text"
+                                               _="on keyup call updateTeam(`{{ user.username }}`, my.value)"
+                                               value="{{ user.team }}"
+                                               placeholder="Add this player to a team">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </li>
         {% endfor %}
     </ol>
 {% endfor %}
+<datalist id="teams"
+          _="on load or keyup from .team-selection call updateTeamDatalist()">
+</datalist>
 {% block scripts %}
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script>
+        function updateTeamDatalist() {
+            var teams = document.querySelectorAll(".team-selection");
+            var datalist = document.getElementById('teams');
+            datalist.innerHTML = '';
+            for (team of teams) {
+                var option = document.createElement('option');
+                option.value = team.value;
+                datalist.appendChild(option);
+            }
+        }
+
+        function updateTeam(username, team_name) {
+            var inputElement = document.getElementById('user-' + username);
+            var [r, u, t] = inputElement.value.split('--');
+            inputElement.value = r + '--' + u + '--' + team_name;
+        }
         htmx.onLoad(function(content) {
             var sortables = content.querySelectorAll(".sortable");
             console.log(sortables);
@@ -36,8 +83,10 @@
                     },
 
                     onEnd: function(evt) {
+                        // Update the rank in the input value, (RANK--USERNAME--TEAM)
                         var inputElement = evt.item.querySelector('input');
-                        inputElement.value = evt.to.id + '--' + inputElement.value.split('--')[1];
+                        const regex = /\d+/;
+                        inputElement.value = inputElement.value.replace(regex, evt.to.id);
                         evt.item.dispatchEvent(new CustomEvent('sorted', {
                             bubbles: true
                         }));

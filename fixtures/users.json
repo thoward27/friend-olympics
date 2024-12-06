@@ -11,7 +11,7 @@
       "last_login": "2024-12-05T14:11:14.780Z",
       "last_name": "Howard",
       "password": "pbkdf2_sha256$870000$6KjP8YODTCYYT54NiVbcLe$Mm4H/4XE99/fQgiR+hiBMxC6a9RzXj6XSld+QzIyJVM=",
-      "qr_code": "/users/login/token/tom/gAAAAABnUbSHjayt0WeuGrlU87ZhrL1v6qBl63Ly6BI5t-w8Hveh8M8ADNS_2G4LqEPPbeBEwK_XhiOZmzNFyebgaqLyNifbk1EyUKzdJCxxQAPWbvzfbpGHJolV9yk8JTXe_dFraUB_",
+      "qrcode": "/users/login/token/tom/gAAAAABnUbSHjayt0WeuGrlU87ZhrL1v6qBl63Ly6BI5t-w8Hveh8M8ADNS_2G4LqEPPbeBEwK_XhiOZmzNFyebgaqLyNifbk1EyUKzdJCxxQAPWbvzfbpGHJolV9yk8JTXe_dFraUB_",
       "score": 994,
       "user_permissions": [],
       "username": "tom"
@@ -31,7 +31,7 @@
       "last_login": "2024-12-02T15:47:17.002Z",
       "last_name": "Howard",
       "password": "pbkdf2_sha256$870000$iSHDQyWbmRTkbVt6MDVRXQ$0c2grTvQHvGoxSv5CkZFU4UYxIOqRZaHxHhiD73yzqE=",
-      "qr_code": "",
+      "qrcode": "",
       "score": 1006,
       "user_permissions": [],
       "username": "tay"
