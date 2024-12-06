@@ -9,12 +9,15 @@ uv run python manage.py check
 rm -f gamenight/games/migrations/0001_initial.py
 uv run python manage.py reset_db 
 
-# Generate and run migrations.
+# Generate and format migrations
 uv run python manage.py makemigrations --no-header
-uv run python manage.py migrate
-uv run ruff lint --fix
+uv run ruff check --fix
 uv run ruff format
-uv run ruff lint --fix
+uv run ruff check --fix
+uv run ruff format
+
+# Run migrations.
+uv run python manage.py migrate
 
 # Load fixture data.
 uv run python manage.py loaddata fixtures/users.json
@@ -26,5 +29,3 @@ uv run python manage.py runserver
 # Persist data we care to save.
 GAMES=`uv run python manage.py dumpdata games.Game`
 echo $GAMES | jq --sort-keys > fixtures/games.json
-USERS=`uv run python manage.py dumpdata games.User`
-echo $USERS | jq --sort-keys > fixtures/users.json
