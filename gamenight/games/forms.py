@@ -83,8 +83,8 @@ def create_fixture(form: "FixtureCreateForm", **_) -> http.HttpResponse | None:
 
 class FixtureCreateForm(iommi.Form):
     title = iommi.Fragment(template=template.Template("<h1>Play a Game</h1>"))
-    users = iommi.Field.checkboxes(
-        choices=models.User.available.all(),
+    users = iommi.Field.multi_choice(
+        choices=models.User.available.all().order_by("username"),
         required=False,
         input__attrs__class={"form-select": False, "form-control": False},
         attrs__class={"mb-3": False},
