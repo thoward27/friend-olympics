@@ -16,6 +16,9 @@ def _fixture_update_form__finish__post_handler(
     if not form.is_valid():
         return None
     fixture.set_flat_ranks(form.fields.users.raw_data)
+    if fixture.rank_set.filter(rank=0).exists():
+        form.add_error("All players must be ranked")
+        return None
     fixture.finish()
     return http.HttpResponseRedirect(fixture.get_absolute_url())
 
@@ -36,10 +39,6 @@ class FixtureUpdateForm(iommi.Form):
         initial=lambda fixture, **_: fixture.users.count(),
         template="chunk/rank_input.html",
         is_list=True,
-        is_valid=lambda parsed_data, **_: (
-            not parsed_data.startswith("0"),
-            "All players must be ranked",
-        ),
     )
 
     class Meta:
@@ -52,6 +51,7 @@ class FixtureUpdateForm(iommi.Form):
             after="submit",
             post_handler=_fixture_update_form__finish__post_handler,
         )
+        actions__submit__display_name = "Save"
 
         @staticmethod
         def actions__submit__post_handler(
@@ -103,6 +103,8 @@ class FixtureCreateForm(iommi.Form):
     class Meta:
         actions__submit = iommi.Action.submit(
             post_handler=create_fixture,
+            display_name="Play",
+            attrs__class={"btn-success": True},
         )
         extra__is_create = True
 
