@@ -30,7 +30,7 @@ def qr_login(
         auth.login(request, user)
     else:
         logging.error("Failed to login user %s %s", username, password)
-    return http.HttpResponseRedirect(urls.reverse("users:detail"))
+    return http.HttpResponseRedirect(urls.reverse("users:table"))
 
 
 class UserDetailPage(iommi.Page):
