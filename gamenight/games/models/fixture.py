@@ -128,36 +128,36 @@ class Fixture(models.Model):
         assert not self.rank_set.filter(rank=0).exists(), "Cannot rank unset players."
         graph = nx.DiGraph()
         # Gainers are those gaining points, where losers are ones giving up points.
-        for gainer in self.rank_set.all().order_by("rank", "user__score"):
-            losers = (
+        for target in self.rank_set.all().order_by("rank", "user__score"):
+            sources = (
                 # We exclude ourself.
-                self.rank_set.exclude(pk=gainer.pk)
+                self.rank_set.exclude(pk=target.pk)
                 # As well as any players we have drawn with of *lower or equal* score.
                 # If we draw with a player of a lower score, we give *them* points.
                 .exclude(
-                    models.Q(rank=gainer.rank) & models.Q(user__score__lte=gainer.user.score),
+                    models.Q(rank=target.rank) & models.Q(user__score__lte=target.user.score),
                 )
                 # Find all the players we have beaten.
-                .filter(rank__gte=gainer.rank)
+                .filter(rank__gte=target.rank)
             )
             # Lastly, remove players on the same team (they don't trade points).
-            if gainer.team:
-                losers = losers.exclude(team=gainer.team)
-            for loser in losers:
-                assert gainer.rank <= loser.rank, f"{gainer.rank=} {loser.rank=}"
+            if target.team:
+                sources = sources.exclude(team=target.team)
+            for source in sources:
+                assert target.rank <= source.rank, f"{target.rank=} {source.rank=}"
                 delta = _elo_delta(
                     self.game,
-                    gainer.rank,
-                    gainer.user.score,
-                    loser.rank,
-                    loser.user.score,
+                    source.rank,
+                    source.user.score,
+                    target.rank,
+                    target.user.score,
                 )
                 if delta == 0:
                     continue
-                assert delta > 0, f"{delta=}, {gainer=}, {loser=}"
+                assert delta > 0, f"{delta=}, {target=}, {source=}"
                 graph.add_edge(
-                    gainer,
-                    loser,
+                    source,
+                    target,
                     delta=delta,
                 )
         return graph
@@ -183,33 +183,27 @@ class Fixture(models.Model):
 
 def _elo_delta(
     game: "Game",
-    rank_one: int,
-    score_one: float,
-    rank_two: int,
-    score_two: float,
+    source_rank: int,
+    source_score: float,
+    target_rank: int,
+    target_score: float,
 ) -> int:
     """Compute the ELO update for two players."""
-    q1 = 10 ** (score_one / 400)
-    q2 = 10 ** (score_two / 400)
-    expected_one = q1 / (q1 + q2)
-    expected_two = q2 / (q1 + q2)
+    target_q = 10 ** (target_score / 400)
+    source_q = 10 ** (source_score / 400)
+    target_expected = target_q / (target_q + source_q)
+    source_expected = source_q / (target_q + source_q)
     assert math.isclose(
-        expected_one + expected_two,
+        target_expected + source_expected,
         1,
         abs_tol=1e-6,
-    ), f"{expected_one=} {expected_two=}"
-    update_one = game.importance * (_win_lose_draw(rank_one, rank_two) - expected_one)
-    update_two = game.importance * (_win_lose_draw(rank_two, rank_one) - expected_two)
-    assert math.isclose(
-        math.fabs(update_one + update_two),
-        0,
-        abs_tol=1e-6,
-    ), f"{update_one=} {update_two=}"
+    ), f"{target_expected=} {source_expected=}"
+    delta = game.importance * (_win_lose_draw(target_rank, source_rank) - target_expected)
     # A game's weight is reduced if the outcome is based on chance.
     # IE, a coinflip game should have a lower weight than a game of darts.
     if game.randomness:
-        update_one *= 1 - game.randomness / 2
-    return math.trunc(update_one)
+        delta *= 1 - game.randomness / 2
+    return math.trunc(delta)
 
 
 def _win_lose_draw(rank_one: int, rank_two: int) -> float:

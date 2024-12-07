@@ -116,7 +116,7 @@ class TestFixture(base.BaseTestCase):
         graph = fixture._build_player_graph()
         self.assertEqual(graph.number_of_edges(), 10)
         self.assertEqual(graph.number_of_nodes(), 5)
-        self.assertTrue(all(gainer.rank < loser.rank for gainer, loser in graph.edges()))
+        self.assertTrue(all(source.rank > target.rank for source, target in graph.edges()))
         self.assertTrue(all(data["delta"] > 0 for _, _, data in graph.edges(data=True)))
         # If we move two players to a team, then the rest to another, we should have 6 edges.
         fixture.rank_set.filter(rank__in=[1, 2]).update(team="team1")
@@ -144,8 +144,8 @@ class TestFixture(base.BaseTestCase):
         self.assertEqual(graph.number_of_edges(), 6)
         self.assertEqual(graph.number_of_nodes(), 5)
         last_delta = None
-        for gainer, loser, data in graph.edges(data=True):
-            self.assertLess(gainer.rank, loser.rank)
+        for source, target, data in graph.edges(data=True):
+            self.assertLess(target.rank, source.rank)
             self.assertGreater(data["delta"], 0)
             if last_delta is not None:
                 self.assertEqual(data["delta"], last_delta)
