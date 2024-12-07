@@ -240,7 +240,7 @@ def _elo_delta(
     # A game's weight is reduced if the outcome is based on chance.
     # IE, a coinflip game should have a lower weight than a game of darts.
     if game.randomness:
-        delta *= 1 - game.randomness / 2
+        delta *= 1 - game.randomness
     return math.trunc(delta)
 
 
