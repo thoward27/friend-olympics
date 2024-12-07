@@ -108,7 +108,7 @@ CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}
 DATABASES = {  # type: ignore[var-annotated]
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "CONN_MAX_AGE": None,
+        "CONN_MAX_AGE": 5,
         "CONN_HEALTH_CHECKS": True,
         "NAME": os.environ.get("PGDATABASE", "gamenight"),
         "USER": os.environ.get("PGUSER", "gamenight"),
