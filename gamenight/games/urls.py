@@ -53,7 +53,7 @@ urlpatterns = [
 
 websocket_urlpatterns = [
     urls.re_path(
-        r"ws/users/(?P<username>\w+)/score$",
+        r"ws/users/(?P<username>[\w-]+)/score$",
         consumers.UserScoreConsumer.as_asgi(),
         name="ws--user-score",
     ),
