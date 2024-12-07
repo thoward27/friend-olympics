@@ -105,6 +105,13 @@ class Game(models.Model):
         """Get the absolute URL of the game."""
         return urls.reverse("games:detail", kwargs={"game_slug": self.slug})
 
+    @staticmethod
+    def for_players(players: list) -> "models.QuerySet[Game]":
+        """Get games that can be played by the given players."""
+        return Game.objects.filter(minimum_players__lte=len(players)).filter(
+            models.Q(maximum_players__gte=len(players)) | models.Q(maximum_players=None),
+        )
+
     @property
     def importance(self) -> int:
         """Compute the importance of the game."""

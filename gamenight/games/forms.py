@@ -93,10 +93,7 @@ class FixtureCreateForm(iommi.Form):
     )
     game = iommi.Field.choice_queryset(
         model=models.Game,
-        choices=lambda form, **_: models.Game.objects.filter(
-            minimum_players__lte=len(form.fields.users.raw_data or [])
-            or models.User.objects.count(),
-        ),
+        choices=lambda form, **_: models.Game.for_players(form.fields.users.raw_data or []),
         is_valid=lambda form, parsed_data, request, **_: (
             request.method == "GET" or parsed_data.can_play(form.fields.users.raw_data),
             "You do not have the right amount of players for this game!",
