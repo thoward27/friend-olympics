@@ -4,16 +4,11 @@ set -e
 
 uv run python manage.py check
 
-# Reset the Database.
-# TODO: Remove migration regeneration once we move to postgres.
-rm -f gamenight/games/migrations/0001_initial.py
-uv run python manage.py reset_db 
-
 # Generate and format migrations
 uv run python manage.py makemigrations --no-header
-uv run ruff check --fix
+uv run ruff check --fix --ignore T
 uv run ruff format
-uv run ruff check --fix
+uv run ruff check --fix --ignore T
 uv run ruff format
 
 # Run migrations.

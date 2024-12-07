@@ -1,5 +1,6 @@
 import collections
 import datetime
+import json
 import logging
 import math
 import uuid
@@ -25,6 +26,12 @@ class Fixture(models.Model):
     started = models.DateTimeField(auto_now_add=True)
     ended = models.DateTimeField(null=True, blank=True)
 
+    graph = models.JSONField(
+        editable=False,
+        null=True,
+        help_text="The graph of the players in the fixture.",
+    )
+
     applied = models.BooleanField(
         default=False,
         editable=False,
@@ -43,6 +50,16 @@ class Fixture(models.Model):
 
     def __str__(self) -> str:
         return f"{self.game} with {list(map(str, self.users.all()))}"
+
+    def save(self, *args, **kwargs) -> None:
+        super().save(*args, **kwargs)
+        if self.graph:
+            ranks = {r.pk: r for r in self.rank_set.all()}
+            self.rank_set.update(delta=0)
+            for edge in json.loads(self.graph):
+                ranks[edge["source"]].delta -= edge["delta"]
+                ranks[edge["target"]].delta += edge["delta"]
+                self.rank_set.bulk_update(ranks.values(), ["delta"])
 
     def get_absolute_url(self) -> str:
         """Get the absolute URL of the fixture."""
@@ -94,12 +111,21 @@ class Fixture(models.Model):
     def set_flat_ranks(self, ranks: list[str]) -> None:
         """Update ranks based on the flat ranks from the HTML form."""
         max_rank = self.get_max_rank()
+        team_ranks: dict[str, str] = {}
         for combined in ranks:
             rank, user, team = combined.split("--", 2)
             assert rank.isdigit(), f"{rank=}"
             assert int(rank) <= max_rank, f"{rank=}"
+            # Guarantee team players are ranked together.
+            if team:
+                if team not in team_ranks:
+                    team_ranks[team] = rank
+                else:
+                    assert team_ranks[team] == rank, f"{team_ranks=}"
             updated = self.rank_set.filter(user__username=user).update(rank=int(rank), team=team)
             assert updated == 1, f"{updated=}"
+        if not self.rank_set.filter(rank=0).exists():
+            self._build_player_graph()
 
     def finish(self) -> str:
         """Finish the fixture."""
@@ -160,6 +186,18 @@ class Fixture(models.Model):
                     target,
                     delta=delta,
                 )
+        for node in graph.nodes:
+            arcs = graph.edges(node, data=True)
+            if len(arcs) > 0:
+                for _arc in arcs:
+                    # TODO: Reduce payout by a factor of the number of arcs.
+                    pass
+        self.graph = json.dumps(
+            [
+                {"source": source.pk, "target": target.pk, "delta": data["delta"]}
+                for source, target, data in graph.edges(data=True)
+            ],
+        )
         return graph
 
     def _apply_player_graph(self) -> None:
@@ -169,12 +207,12 @@ class Fixture(models.Model):
             return
         graph = self._build_player_graph()
         deltas: dict[Rank, int] = collections.defaultdict(int)
-        for gainer, loser, data in graph.edges(data=True):
+        for source, target, data in graph.edges(data=True):
             delta = data["delta"]
-            assert gainer != loser
+            assert source != target
             assert delta > 0
-            deltas[gainer] += delta
-            deltas[loser] -= delta
+            deltas[source] -= delta
+            deltas[target] += delta
         for rank, delta in deltas.items():
             rank.user.score += delta
             rank.user.save()

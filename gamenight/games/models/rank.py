@@ -19,6 +19,11 @@ class Rank(models.Model):
         blank=True,
         default="",
     )
+    delta = models.IntegerField(
+        default=0,
+        editable=False,
+        help_text="The change in score for the player, computed via the fixture graph.",
+    )
 
     class Meta:
         constraints = (models.UniqueConstraint(fields=["user", "fixture"], name="unique_rank"),)

@@ -22,6 +22,9 @@
             <li class="list-group-item">
                 {{ rank.rank|default:"None" }}. {{ rank.user.username }}
                 {% if rank.team %}(team: {{ rank.team }}){% endif %}
+                <span class="badge rounded-pill text-bg-{% if rank.delta >= 0 %}success{% else %}danger{% endif %}">
+                    {% if rank.delta > 0 %}+{% endif %}
+                {{ rank.delta }}</span>
             </li>
         {% endfor %}
     </ul>

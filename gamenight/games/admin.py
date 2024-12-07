@@ -21,6 +21,7 @@ class FixtureAdmin(admin.ModelAdmin):
     list_display = ("game", "started", "ended", "applied")
     list_filter = ["game__name", ("ended", admin.EmptyFieldListFilter), "applied", "users"]
     ordering = ("-started",)
+    readonly_fields = ("graph",)
 
 
 @admin.register(Game)
