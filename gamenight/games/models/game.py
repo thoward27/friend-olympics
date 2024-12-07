@@ -1,4 +1,5 @@
 import uuid
+from collections.abc import Sized
 
 from django import urls
 from django.core import validators
@@ -106,7 +107,7 @@ class Game(models.Model):
         return urls.reverse("games:detail", kwargs={"game_slug": self.slug})
 
     @staticmethod
-    def for_players(players: list) -> "models.QuerySet[Game]":
+    def for_players(players: Sized) -> "models.QuerySet[Game]":
         """Get games that can be played by the given players."""
         return Game.objects.filter(minimum_players__lte=len(players)).filter(
             models.Q(maximum_players__gte=len(players)) | models.Q(maximum_players=None),
@@ -117,7 +118,7 @@ class Game(models.Model):
         """Compute the importance of the game."""
         return min(self.estimated_duration, 45) + 10
 
-    def can_play(self, players: list) -> bool:
+    def can_play(self, players: Sized) -> bool:
         """Check if the game can be played by the given players."""
         if self.maximum_players is None:
             return self.minimum_players <= len(players)

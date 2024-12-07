@@ -2,18 +2,22 @@
     <h1 class="border-bottom">{{ game.name }}</h1>
     <div id="objective">
         <h2>Objective</h2>
-        {{ game.objective }}
+        {{ game.objective|linebreaks }}
     </div>
-    <div id="setup">
-        <h2>Setup</h2>
-        {{ game.setup }}
+    <div class="row">
+        <div id="setup" class="col col-md-5">
+            <h2>Setup</h2>
+            {{ game.setup|linebreaks }}
+        </div>
+        <div id="gameplay" class="col col-md-7">
+            <h2>Gameplay</h2>
+            {{ game.gameplay|linebreaks }}
+        </div>
     </div>
-    <div id="gameplay">
-        <h2>Gameplay</h2>
-        {{ game.gameplay }}
-    </div>
-    <div id="tips">
-        <h2>Tips, Strategies, etc</h2>
-        {{ game.tips_and_strategies }}
-    </div>
+    {% if game.tips_and_strategies %}
+        <div id="tips">
+            <h2>Tips, Strategies, etc</h2>
+            {{ game.tips_and_strategies|linebreaks }}
+        </div>
+    {% endif %}
 </div>

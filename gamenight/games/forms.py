@@ -4,6 +4,7 @@ import iommi
 from django import http, template, urls
 from django.contrib import auth
 from django.templatetags import static
+from django.utils import safestring
 from iommi import html, views
 
 from gamenight.games import models
@@ -24,13 +25,15 @@ def _fixture_update_form__finish__post_handler(
     return http.HttpResponseRedirect(fixture.get_absolute_url())
 
 
+def _fixture_update_form_title(fixture: models.Fixture, **_) -> safestring.SafeString:
+    return safestring.mark_safe(  # noqa: S308
+        f'<h1>Playing <a href="{fixture.game.get_absolute_url()}">{fixture.game.name}</a></h1>',
+    )
+
+
 class FixtureUpdateForm(iommi.Form):
-    title = iommi.Fragment(template=template.Template("<h1>Update Result</h1>"))
     game = iommi.Field.choice(
-        choices=lambda fixture, **_: models.Game.objects.filter(
-            minimum_players__lte=fixture.users.count(),
-            maximum_players__gte=fixture.users.count(),
-        ),
+        choices=lambda fixture, **_: models.Game.for_players(fixture.users.all()),
         initial=lambda fixture, **_: fixture.game,
     )
     users = iommi.Field(
@@ -46,6 +49,7 @@ class FixtureUpdateForm(iommi.Form):
     )
 
     class Meta:
+        title = _fixture_update_form_title
         instance = lambda params, **_: params.fixture  # noqa: E731
         actions__finish = iommi.Action.button(
             attrs__href=".",
@@ -88,18 +92,21 @@ class FixtureCreateForm(iommi.Form):
         input__attrs__class={"form-select": False, "form-control": False},
         attrs__class={"mb-3": False},
         label=lambda **_: html.h2(attrs__class={}),
-        display_name="1. Select the players for this game.",
-        help_text="You will need at least 2 players to start a game.",
+        display_name="1. Pick your players.",
+        help_text="You need at least 2 available players to start a game.",
     )
     game = iommi.Field.choice_queryset(
         model=models.Game,
-        choices=lambda form, **_: models.Game.for_players(form.fields.users.raw_data or []),
+        choices=lambda form, **_: models.Game.for_players(form.fields.users.raw_data or []),  # type: ignore[assignment]
         is_valid=lambda form, parsed_data, request, **_: (
             request.method == "GET" or parsed_data.can_play(form.fields.users.raw_data),
             "You do not have the right amount of players for this game!",
         ),
         label=lambda **_: html.h2(attrs__class={"mt-3": True}),
-        display_name="2. Select the game to play.",
+        display_name="2. Select the game.",
+        choice_display_name_formatter=lambda choice,
+        **_: f"{choice.name} (~{choice.estimated_duration}m)",
+        help_text="Shows games you can play with your selected players.",
     )
 
     class Meta:
