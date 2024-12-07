@@ -188,10 +188,9 @@ class Fixture(models.Model):
                 )
         for node in graph.nodes:
             arcs = graph.edges(node, data=True)
-            if len(arcs) > 0:
-                for _arc in arcs:
-                    # TODO: Reduce payout by a factor of the number of arcs.
-                    pass
+            if len(arcs) > 1:
+                for arc in arcs:
+                    graph[arc[0]][arc[1]]["delta"] = max(arc[2]["delta"] // len(arcs), 5)
         self.graph = json.dumps(
             [
                 {"source": source.pk, "target": target.pk, "delta": data["delta"]}
@@ -210,7 +209,7 @@ class Fixture(models.Model):
         for source, target, data in graph.edges(data=True):
             delta = data["delta"]
             assert source != target
-            assert delta > 0
+            assert delta > 0, f"{delta=}"
             deltas[source] -= delta
             deltas[target] += delta
         for rank, delta in deltas.items():
@@ -240,7 +239,7 @@ def _elo_delta(
     # A game's weight is reduced if the outcome is based on chance.
     # IE, a coinflip game should have a lower weight than a game of darts.
     if game.randomness:
-        delta *= 1 - game.randomness
+        delta *= 1 - (game.randomness / 2)
     return math.trunc(delta)
 
 
