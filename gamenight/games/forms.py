@@ -34,9 +34,8 @@ class FixtureUpdateForm(iommi.Form):
         initial=lambda fixture, **_: fixture.game,
     )
     users = iommi.Field(
-        extra_evaluated__ranks=lambda fixture, **_: fixture.get_flat_ranks(),
-        extra_evaluated__max_rank=lambda fixture, **_: fixture.get_max_rank(),
         extra_evaluated__group_ranks=lambda fixture, **_: fixture.get_grouped_ranks(),
+        extra_evaluated__num_users=lambda fixture, **_: fixture.users.count(),
         initial=lambda fixture, **_: fixture.users.count(),
         template="chunk/rank_input.html",
         is_list=True,
