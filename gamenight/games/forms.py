@@ -21,6 +21,12 @@ def _fixture_update_form__finish__post_handler(
     if fixture.rank_set.filter(rank=0).exists():
         form.add_error("All players must be ranked")
         return None
+    if (
+        fixture.rank_set.exclude(team="").values("team").distinct().count()
+        == fixture.rank_set.count()
+    ):
+        form.add_error("If playing with teams, all players cannot be on the same team.")
+        return None
     fixture.finish()
     return http.HttpResponseRedirect(fixture.get_absolute_url())
 
@@ -68,6 +74,10 @@ class FixtureUpdateForm(iommi.Form):
             **_,
         ) -> http.HttpResponse | None:
             if not form.is_valid():
+                return None
+            teams = {u.split("--")[-1] for u in form.fields.users.raw_data}
+            if teams != {""} and len(teams) == 1:
+                form.add_error("All players cannot be on the same team.")
                 return None
             fixture.set_flat_ranks(form.fields.users.raw_data)
             fixture.save()
