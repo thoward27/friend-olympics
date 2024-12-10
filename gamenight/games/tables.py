@@ -1,5 +1,6 @@
 import iommi
 from django import template
+from django.templatetags import static
 
 from gamenight.games import models
 
@@ -12,6 +13,9 @@ class UserTable(iommi.Table):
     score = iommi.Column.number(cell__template="chunk/score.html")
 
     class Meta:
+        assets__leaderboard_css = iommi.Asset.css(
+            attrs__href=static.static("games/leaderboard.css"),
+        )
         rows = models.User.objects.all().order_by("-score")
         title = "Leaderboard"
         page_size = 30
