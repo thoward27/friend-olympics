@@ -1,51 +1,57 @@
 {% load games_extras %}
 {{ field.errors }}
 {% for rank, users in form.fields.users.extra_evaluated.group_ranks.items %}
-    {% if rank == 0 %}
-        <h2>Unranked Players</h2>
-    {% else %}
-        <h2>{{ rank|ordinal }}</h2>
-    {% endif %}
-    <ol class="list-group sortable rank border p-3 mb-3" id="{{ rank }}">
-        {% for user in users %}
-            <li class="list-group-item">
-                <div class="row align-items-center">
-                    <div class="col-auto p-0">
-                        <span class="material-symbols-outlined handle align-bottom">drag_indicator</span>
-                    </div>
-                    <div class="col">
-                        <div class="row align-items-center justify-content-between">
-                            <div class="col-auto">
-                                <input id="user-{{ user.username }}"
-                                       type="hidden"
-                                       name="users"
-                                       value="{{ rank }}--{{ user.username }}--{{ user.team }}">
-                                {{ user.username }}
+    <div class="row align-items-center">
+        {% if rank == 0 %}
+            <h2>Unranked Players</h2>
+        {% else %}
+            <div class="col-auto pe-0 font-monospace">
+                <h2>{{ rank|ordinal }}</h2>
+            </div>
+        {% endif %}
+        <div class="col">
+            <ol class="list-group sortable rank border p-3 mb-2" id="{{ rank }}">
+                {% for user in users %}
+                    <li class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col-auto p-0">
+                                <span class="material-symbols-outlined handle align-bottom">drag_indicator</span>
                             </div>
-                            {% if form.fields.users.extra_evaluated.num_users > 2 %}
-                                <div class="col-sm-9">
-                                    <div class="row justify-content-sm-end">
-                                        <div class="col-auto pe-0">
-                                            <label for="team-{{ user.username }}" class="col-form-label">Team:</label>
-                                        </div>
-                                        <div class="col">
-                                            <input class="team-selection form-control"
-                                                   id="team-{{ user.username }}"
-                                                   type="text"
-                                                   _="on keyup call updateTeam(`{{ user.username }}`, my.value)"
-                                                   value="{{ user.team }}"
-                                                   list="teams"
-                                                   placeholder="Add this player to a team">
-                                        </div>
+                            <div class="col">
+                                <div class="row align-items-center justify-content-between">
+                                    <div class="col-auto">
+                                        <input id="user-{{ user.username }}"
+                                               type="hidden"
+                                               name="users"
+                                               value="{{ rank }}--{{ user.username }}--{{ user.team }}">
+                                        {{ user.username }}
                                     </div>
+                                    {% if form.fields.users.extra_evaluated.num_users > 2 %}
+                                        <div class="col-sm-9">
+                                            <div class="row justify-content-sm-end">
+                                                <div class="col-auto pe-0">
+                                                    <label for="team-{{ user.username }}" class="col-form-label">Team:</label>
+                                                </div>
+                                                <div class="col">
+                                                    <input class="team-selection form-control"
+                                                           id="team-{{ user.username }}"
+                                                           type="text"
+                                                           _="on keyup call updateTeam(`{{ user.username }}`, my.value)"
+                                                           value="{{ user.team }}"
+                                                           list="teams"
+                                                           placeholder="Add this player to a team">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
                                 </div>
-                            {% endif %}
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </li>
-        {% endfor %}
-    </ol>
+                    </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
 {% endfor %}
 <datalist id="teams"
           _="on load or keyup from .team-selection call updateTeamDatalist()">
